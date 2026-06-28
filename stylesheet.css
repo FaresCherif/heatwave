@@ -20,8 +20,21 @@ body {
     z-index: 0;
 }
 
-.room .bureau {
+.room .bureau,
+.room .joueur,
+.room .computer {
     position: absolute;
+}
+
+.room .bureau img,
+.room .joueur img,
+.room .computer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.room .bureau{
     left: 24%;
     top: 60%;
     height: 30%;  /* Adapter selon votre besoin */
@@ -30,23 +43,23 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.room .bureau img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.room .joueur {
-    position: absolute;
-    left: 14%;
-    bottom: 25%;
-    width: 20%;
+.room .joueur, 
+.room .computer{
     height: 40%;
     z-index: 2;
 }
 
-.room .joueur img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.room .joueur{
+    left: 14%;
+    bottom: 25%;
+    width: 20%;
 }
+
+.room .computer{
+    left: 14%;
+    bottom: 28%;
+    width: 20%;
+}
+
+
+
