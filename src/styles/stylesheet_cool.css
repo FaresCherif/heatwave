@@ -1,0 +1,22 @@
+#alternateIndicator {
+    font-size: 150%;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    text-align: center;
+    display: none;
+}
+
+#alternateIndicator.active {
+    opacity: 1;
+    color: #fff;
+    display: block;
+}
+
+#alternateIndicator.left {
+    color: #00ffff;
+}
+
+#alternateIndicator.right {
+    color: #ffff00;
+}
