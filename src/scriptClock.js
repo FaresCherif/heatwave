@@ -3,6 +3,7 @@ let currentMinute = 0;
 let workLevel = 100;      // Commence à 100%
 let heatLevel = 0;        // Commence à 0%
 let gameOver = false;  // ← Ajouter cette ligne
+let currentMode = 'idle';  // ← Remplacer workMode par une string
 
 function updateClock() {
     if (gameOver) return;
@@ -43,6 +44,6 @@ function updateClock() {
 
 document.addEventListener('DOMContentLoaded', function() {
     // Met à jour toutes les 2 secondes (adapter la durée selon vos besoins)
-    setInterval(updateClock, 2000);
+    setInterval(updateClock, 1000);
     updateClock(); // Affiche l'heure initiale
 });

@@ -1,0 +1,33 @@
+#workModeIndicator {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 0, 0, 0);
+    color: #fff;
+    padding: 1% 3%;
+    border-radius: 10px;
+    font-size: 2%;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease, background 0.3s ease;
+    z-index: 11;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#workModeIndicator.active {
+    opacity: 1;
+}
+
+#workModeIndicator.active[data-mode='work'] {
+    background: rgba(255, 0, 0, 0.7);
+}
+
+#workModeIndicator.active[data-mode='rest'] {
+    background: rgba(0, 100, 255, 0.7);
+}
+
+.room .bureau,
+.room .joueur {
+    cursor: pointer;
+}
