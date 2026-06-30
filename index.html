@@ -1,13 +1,23 @@
 <head>
     <link rel="stylesheet" href="src/styles/stylesheet.css">
     <link rel="stylesheet" href="src/styles/stylesheet_bars.css">
+    <link rel="stylesheet" href="src/styles/stylesheet_gameover.css">
 
     <script src="src/scrpitBar.js"></script>
     <script src="src/scriptClock.js"></script>
+    <script src="src/scriptGame.js"></script>
 </head>
 <body>
     <div class="room">
         <div class="background">
+
+            <div class="game-over-screen" id="gameOverScreen">
+                <div class="game-over-content">
+                    <h1>GAME OVER</h1>
+                    <p id="gameOverReason"></p>
+                    <button onclick="location.reload()">Recommencer</button>
+                </div>
+            </div>
 
             <div class="bars-container">
                 <div class="stat-bar-vertical">

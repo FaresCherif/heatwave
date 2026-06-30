@@ -2,9 +2,11 @@ let currentHour = 8;
 let currentMinute = 0;
 let workLevel = 100;      // Commence à 100%
 let heatLevel = 0;        // Commence à 0%
-
+let gameOver = false;  // ← Ajouter cette ligne
 
 function updateClock() {
+    if (gameOver) return;
+
     const clock = document.querySelector('.clock');
     const time = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
     clock.textContent = time;
@@ -22,6 +24,8 @@ function updateClock() {
     // Mise à jour des barres
     updateBars();
 
+    // Vérifier le game over    
+    if (checkGameOver()) return;
 
     // Avance de 5 minutes
     currentMinute += 5;
