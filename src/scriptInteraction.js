@@ -1,10 +1,45 @@
-document.addEventListener('DOMContentLoaded', function() {
+let lastArrowKey = null;  // Tracker la dernière flèche pressée
+
+function updateModeIndicator() {
+    const indicator = document.getElementById('workModeIndicator');
+    
+    if (currentMode === 'idle') {
+        indicator.innerHTML = `MODE REPOS<div id="alternateIndicator"></div>`;
+        indicator.classList.add('active');
+        indicator.setAttribute('data-mode', currentMode);
+        document.getElementById('alternateIndicator').classList.remove('active');
+    } else {
+        indicator.innerHTML = `MODE ${currentMode.toUpperCase()}<div id="alternateIndicator"></div>`;
+        indicator.classList.add('active');
+        indicator.setAttribute('data-mode', currentMode);
+        const alternateIndicator = document.getElementById('alternateIndicator');
+
+        if (currentMode === 'cool') {
+            alternateIndicator.classList.add('active');
+            alternateIndicator.textContent = 'Alterne ← →';
+        } else {
+            alternateIndicator.classList.remove('active');
+        }
+    }
+}
+
+function updateAlternateIndicator(direction) {
+    const indicator = document.getElementById('alternateIndicator');
+    if (direction === 'left') {
+        indicator.textContent = 'Prochain: →';
+        indicator.classList.remove('right');
+        indicator.classList.add('left');
+    } else {
+        indicator.textContent = 'Prochain: ←';
+        indicator.classList.remove('left');
+        indicator.classList.add('right');
+    }
+}
+
+function initializeGameEvents() {
     const bureau = document.querySelector('.bureau');
     const joueur = document.querySelector('.joueur');
     const handfan = document.querySelector('.handfan');
-
-    let lastArrowKey = null;  // Tracker la dernière flèche pressée
-
     const alternateIndicator = document.getElementById('alternateIndicator');
 
     // Zones cliquables avec leurs modes
@@ -17,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentMode = 'work';
         updateModeIndicator();
     });
-
 
     handfan.addEventListener('click', function() {
         currentMode = 'cool';
@@ -32,44 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
             updateModeIndicator();
         }
     });
-
-    function updateModeIndicator() {
-        const indicator = document.getElementById('workModeIndicator');
-        
-        if (currentMode === 'idle') {
-            indicator.innerHTML = `MODE REPOS`;
-            indicator.classList.add('active');
-            indicator.setAttribute('data-mode', currentMode);
-            alternateIndicator.classList.remove('active');
-        } else {
-            indicator.innerHTML = `MODE ${currentMode.toUpperCase()}`;
-            indicator.classList.add('active');
-            indicator.setAttribute('data-mode', currentMode);
-            workModeIndicator.appendChild(alternateIndicator);
-
-            if (currentMode === 'cool') {
-                alternateIndicator.classList.add('active');
-                alternateIndicator.textContent = 'Alterne ← →';
-            } else {
-                alternateIndicator.classList.remove('active');
-            }
-        }
-    }
-
-    function updateAlternateIndicator(direction) {
-        const indicator = document.getElementById('alternateIndicator');
-        if (direction === 'left') {
-            indicator.textContent = 'Prochain: →';
-            indicator.classList.remove('right');
-            indicator.classList.add('left');
-        } else {
-            indicator.textContent = 'Prochain: ←';
-            indicator.classList.remove('left');
-            indicator.classList.add('right');
-        }
-    }
-
-
 
     // Contrôle clavier
     document.addEventListener('keydown', function(e) { 
@@ -109,4 +105,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateBars();
     });
-});
+}

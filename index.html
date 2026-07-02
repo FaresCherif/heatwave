@@ -6,11 +6,13 @@
     <link rel="stylesheet" href="src/styles/stylesheet_gameover.css">
     <link rel="stylesheet" href="src/styles/stylesheet_work.css">
     <link rel="stylesheet" href="src/styles/stylesheet_cool.css">
+    <link rel="stylesheet" href="src/styles/stylesheet_menu.css">
 
     <script src="src/scrpitBar.js"></script>
     <script src="src/scriptClock.js"></script>
     <script src="src/scriptGame.js"></script>
     <script src="src/scriptInteraction.js"></script>
+    <script src="src/scriptMenu.js"></script>
 
 </head>
 <body>
@@ -21,6 +23,14 @@
 
     <div class="room">
         <div class="background">
+
+            <div class="start-menu" id="startMenu">
+                <div class="menu-content">
+                    <h1>HEATWAVE</h1>
+                    <p>Gérez votre température et votre productivité</p>
+                    <button onclick="startGame()">DÉMARRER</button>
+                </div>
+            </div>
 
             <div class="game-over-screen" id="gameOverScreen">
                 <div class="game-over-content">

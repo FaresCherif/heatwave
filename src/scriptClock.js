@@ -6,7 +6,7 @@ let gameOver = false;  // ← Ajouter cette ligne
 let currentMode = 'idle';  // ← Remplacer workMode par une string
 
 function updateClock() {
-    if (gameOver) return;
+    if (gameOver || !gameStarted) return;
 
     const clock = document.querySelector('.clock');
     const time = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
