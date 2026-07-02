@@ -3,10 +3,11 @@ let currentMinute = 0;
 let workLevel = 100;      // Commence à 100%
 let heatLevel = 0;        // Commence à 0%
 let gameOver = false;  // ← Ajouter cette ligne
+let gamePaused = false;
 let currentMode = 'idle';  // ← Remplacer workMode par une string
 
 function updateClock() {
-    if (gameOver || !gameStarted) return;
+    if (gameOver || !gameStarted || gamePaused) return;
 
     const clock = document.querySelector('.clock');
     const time = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;

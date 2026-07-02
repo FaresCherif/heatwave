@@ -1,5 +1,24 @@
 let lastArrowKey = null;  // Tracker la dernière flèche pressée
 
+function togglePause() {
+    if (!gameStarted || gameOver) return;
+
+    gamePaused = !gamePaused;
+    const pauseMenu = document.getElementById('pauseMenu');
+
+    if (gamePaused) {
+        pauseMenu.classList.remove('hidden');
+    } else {
+        pauseMenu.classList.add('hidden');
+    }
+}
+
+function resumeGame() {
+    if (gamePaused) {
+        togglePause();
+    }
+}
+
 function updateModeIndicator() {
     const indicator = document.getElementById('workModeIndicator');
     
@@ -40,7 +59,14 @@ function initializeGameEvents() {
     const bureau = document.querySelector('.bureau');
     const joueur = document.querySelector('.joueur');
     const handfan = document.querySelector('.handfan');
+    const pauseMenu = document.getElementById('pauseMenu');
     const alternateIndicator = document.getElementById('alternateIndicator');
+
+    if (pauseMenu) {
+        pauseMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
 
     // Zones cliquables avec leurs modes
     bureau.addEventListener('click', function() {
@@ -69,7 +95,15 @@ function initializeGameEvents() {
 
     // Contrôle clavier
     document.addEventListener('keydown', function(e) { 
-        if(gameOver) return;
+        if (!gameStarted || gameOver) return;
+
+        if (e.code === 'Escape') {
+            e.preventDefault();
+            togglePause();
+            return;
+        }
+
+        if (gamePaused) return;
         e.preventDefault();
 
         if (currentMode === 'work') {
