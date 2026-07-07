@@ -1,4 +1,5 @@
 let lastArrowKey = null;  // Tracker la dernière flèche pressée
+let gameEventsInitialized = false;
 
 function togglePause() {
     if (!gameStarted || gameOver) return;
@@ -56,6 +57,9 @@ function updateAlternateIndicator(direction) {
 }
 
 function initializeGameEvents() {
+    if (gameEventsInitialized) return;
+    gameEventsInitialized = true;
+
     const bureau = document.querySelector('.bureau');
     const joueur = document.querySelector('.joueur');
     const handfan = document.querySelector('.handfan');

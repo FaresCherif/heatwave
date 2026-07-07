@@ -5,13 +5,23 @@ let heatLevel = 0;        // Commence à 0%
 let gameOver = false;  // ← Ajouter cette ligne
 let gamePaused = false;
 let currentMode = 'idle';  // ← Remplacer workMode par une string
+let clockIntervalId = null;
 
-function updateClock() {
-    if (gameOver || !gameStarted || gamePaused) return;
-
+function renderClock() {
     const clock = document.querySelector('.clock');
+    if (!clock) return;
+
     const time = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
     clock.textContent = time;
+}
+
+function updateClock() {
+    if (gameOver || !gameStarted || gamePaused) {
+        renderClock();
+        return;
+    }
+
+    renderClock();
 
     // Travail augmente graduellement (0 à 100% de 8h à 18h)
     workLevel = Math.min(100, workLevel - 5);
@@ -43,8 +53,22 @@ function updateClock() {
     }
 }
 
+function startClock() {
+    if (clockIntervalId !== null) {
+        clearInterval(clockIntervalId);
+    }
+
+    clockIntervalId = setInterval(updateClock, 1000);
+    updateClock();
+}
+
+function stopClock() {
+    if (clockIntervalId !== null) {
+        clearInterval(clockIntervalId);
+        clockIntervalId = null;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Met à jour toutes les 2 secondes (adapter la durée selon vos besoins)
-    setInterval(updateClock, 1000);
-    updateClock(); // Affiche l'heure initiale
+    startClock();
 });
