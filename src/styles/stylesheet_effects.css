@@ -1,0 +1,144 @@
+/* Zones interactives : halo qui pulse pour montrer qu'on peut cliquer.
+   Une seule animation sur le décor fait varier --zone-glow, dont héritent toutes les zones :
+   les halos restent synchronisés même quand une zone a été utilisée. */
+@property --zone-glow {
+    syntax: '<length>';
+    inherits: true;
+    initial-value: 2px;
+}
+
+.room .background {
+    animation: zone-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes zone-pulse {
+    0%, 100% { --zone-glow: 2px; }
+    50%      { --zone-glow: 10px; }
+}
+
+.room .bureau img,
+.room .joueur img,
+.room .handfan img {
+    filter: drop-shadow(0 0 calc(var(--zone-glow) / 2) #ffbe00) drop-shadow(0 0 var(--zone-glow) #ffbe00);
+}
+
+/* Survol : halo blanc plus fort */
+.room .bureau:hover img,
+.room .joueur:hover img,
+.room .handfan:hover img {
+    filter: drop-shadow(0 0 12px #fff) brightness(1.1);
+}
+
+/* Zone du mode actif : halo fixe de la couleur du mode */
+.room .bureau.selected img,
+.room .joueur.selected img {
+    filter: drop-shadow(0 0 8px rgba(255, 60, 60, 0.9));
+}
+
+.room .handfan.selected img {
+    filter: drop-shadow(0 0 8px rgba(0, 220, 0, 0.9));
+}
+
+/* Nom de l'action au survol */
+.room .joueur::after,
+.room .handfan::after {
+    position: absolute;
+    left: 50%;
+    top: -12%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 70%;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2px 8px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.room .joueur::after {
+    content: 'TRAVAILLER (Espace)';
+}
+
+.room .handfan::after {
+    content: 'VENTILER (← →)';
+}
+
+.room .joueur:hover::after,
+.room .handfan:hover::after {
+    opacity: 1;
+}
+
+/* Action travail : le joueur tape */
+.room .joueur.typing img {
+    animation: typing 0.15s ease-out;
+}
+
+@keyframes typing {
+    50% { transform: translateY(-3%); }
+}
+
+/* Action éventail : il bascule dans le sens de la flèche */
+.room .handfan img {
+    transform-origin: bottom center;
+}
+
+.room .handfan.fan-left img {
+    animation: fan-left 0.2s ease-out;
+}
+
+.room .handfan.fan-right img {
+    animation: fan-right 0.2s ease-out;
+}
+
+@keyframes fan-left {
+    50% { transform: rotate(-20deg); }
+}
+
+@keyframes fan-right {
+    50% { transform: rotate(20deg); }
+}
+
+/* Barre qui réagit quand elle change : toute la colonne (texte + barre) bouge ensemble */
+.room .stat-bar-vertical.bump {
+    animation: bar-bump 0.25s ease-out;
+    transform-origin: bottom center;
+}
+
+.room .stat-bar-vertical.bump .bar-bg {
+    animation: bar-glow 0.25s ease-out;
+}
+
+@keyframes bar-bump {
+    50% { transform: scale(1.06); }
+}
+
+@keyframes bar-glow {
+    50% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.9); }
+}
+
+/* Textes flottants */
+.floating-text {
+    position: absolute;
+    z-index: 20;
+    transform: translate(-50%, -50%);
+    font-family: 'Courier New', monospace;
+    font-size: 120%;
+    font-weight: bold;
+    text-shadow: 0 0 3px #000, 0 0 6px #000;
+    pointer-events: none;
+    animation: float-up 0.8s ease-out forwards;
+}
+
+.floating-text.gain { color: #7cff6b; }
+.floating-text.cool { color: #6bd7ff; }
+.floating-text.loss { color: #ff5a5a; font-size: 160%; }
+.floating-text.miss { color: #cccccc; }
+
+@keyframes float-up {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+    15%  { opacity: 1; transform: translate(-50%, -80%) scale(1.1); }
+    100% { opacity: 0; transform: translate(-50%, -250%) scale(1); }
+}

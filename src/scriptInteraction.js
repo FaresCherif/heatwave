@@ -47,6 +47,7 @@ function spawnBubble() {
 
         workLevel = Math.min(100, workLevel + config.reward);
         updateBars();
+        showFloatingText(`+${config.reward}`, bubble, 'gain');
         removeBubble(bubble);
     });
 
@@ -74,10 +75,12 @@ function removeBubble(bubbleElement) {
 function burstBubble(bubbleElement) {
     if (!bubbleElement) return;
 
+    const penalty = getCurrentLevel().bubbles.penalty;
+    showFloatingText(`-${penalty}`, bubbleElement, 'loss');
     bubbleElement.classList.add('burst');
     bubbleElement.innerHTML = '<span>💥</span>';
 
-    workLevel = Math.max(0, workLevel - getCurrentLevel().bubbles.penalty);
+    workLevel = Math.max(0, workLevel - penalty);
     updateBars();
 
     setTimeout(function() {
@@ -153,6 +156,7 @@ function resumeGame() {
 
 function updateModeIndicator() {
     const indicator = document.getElementById('workModeIndicator');
+    updateZoneHighlight();
     
     if (currentMode === 'idle') {
         indicator.innerHTML = `MODE REPOS<div id="alternateIndicator"></div>`;
@@ -248,7 +252,9 @@ function initializeGameEvents() {
         if (currentMode === 'work') {
             // Ignorer la répétition automatique quand la touche est maintenue
             if(e.code === 'Space' && !e.repeat){
-                workLevel = Math.min(100, workLevel + getCurrentLevel().workPerPress);
+                const amount = getCurrentLevel().workPerPress;
+                workLevel = Math.min(100, workLevel + amount);
+                workEffect(amount);
             }
         }
 
@@ -271,7 +277,10 @@ function initializeGameEvents() {
                     lastArrowKey = isLeft ? 'left' : 'right';
                     heatLevel = Math.max(0, heatLevel - cooling_effect_fan);
                     updateAlternateIndicator(lastArrowKey);
-                } 
+                    coolEffect(cooling_effect_fan, lastArrowKey);
+                } else {
+                    missEffect();
+                }
 
             }
             
