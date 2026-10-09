@@ -6,18 +6,20 @@ let bubbleCountdownIntervalId = null;
 
 function scheduleNextBubble() {
     if (bubbleSpawnIntervalId !== null) {
-        clearInterval(bubbleSpawnIntervalId);
+        clearTimeout(bubbleSpawnIntervalId);
     }
 
+    // Nouveau délai aléatoire à chaque tentative
     const delay = 3000 + Math.random() * 4000;
-    bubbleSpawnIntervalId = setInterval(spawnBubble, delay);
+    bubbleSpawnIntervalId = setTimeout(spawnBubble, delay);
 }
 
 function spawnBubble() {
-    if (!gameStarted || gameOver || gamePaused) return;
-
     const background = document.querySelector('.background');
-    if (!background || activeBubbles.length >= 2) return;
+    if (!gameStarted || gameOver || gamePaused || !background || activeBubbles.length >= 2) {
+        scheduleNextBubble();
+        return;
+    }
 
     const bubble = document.createElement('button');
     bubble.type = 'button';
@@ -96,7 +98,7 @@ function startBubbleSystem() {
 
 function stopBubbleSystem() {
     if (bubbleSpawnIntervalId !== null) {
-        clearInterval(bubbleSpawnIntervalId);
+        clearTimeout(bubbleSpawnIntervalId);
         bubbleSpawnIntervalId = null;
     }
 
@@ -220,10 +222,15 @@ function initializeGameEvents() {
         }
 
         if (gamePaused) return;
-        e.preventDefault();
+
+        // Bloquer uniquement les touches du jeu (garder F5, F12, Ctrl+R...)
+        if (e.code === 'Space' || e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+            e.preventDefault();
+        }
 
         if (currentMode === 'work') {
-            if(e.code === 'Space'){
+            // Ignorer la répétition automatique quand la touche est maintenue
+            if(e.code === 'Space' && !e.repeat){
                 workLevel = Math.min(100, workLevel + 1);
             }
         }

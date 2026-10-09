@@ -23,8 +23,8 @@ function updateClock() {
 
     renderClock();
 
-    // Travail augmente graduellement (0 à 100% de 8h à 18h)
-    workLevel = Math.min(100, workLevel - 5);
+    // Le travail baisse à chaque tick
+    workLevel = Math.max(0, workLevel - 5);
 
     // Chaleur augmente plus vite après 12h
     if (currentHour >= 12) {
