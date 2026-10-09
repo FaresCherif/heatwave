@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="src/styles/stylesheet_cool.css">
     <link rel="stylesheet" href="src/styles/stylesheet_menu.css">
 
+    <script src="src/scriptLevels.js"></script>
     <script src="src/scrpitBar.js"></script>
     <script src="src/scriptClock.js"></script>
     <script src="src/scriptGame.js"></script>
@@ -43,6 +44,14 @@
                 </div>
             </div>
 
+            <div class="level-menu hidden" id="levelMenu">
+                <div class="menu-content">
+                    <h1 id="levelMenuTitle"></h1>
+                    <p id="levelMenuText"></p>
+                    <button id="levelMenuButton" onclick="nextLevel()"></button>
+                </div>
+            </div>
+
             <div class="game-over-screen" id="gameOverScreen">
                 <div class="game-over-content">
                     <h1>GAME OVER</h1>
@@ -66,6 +75,7 @@
                 </div>
             </div>
 
+            <div class="level-label"></div>
             <div class="clock"></div>
             <img src="src/images/background.png"/>
             <div class="bureau"><img src="src/images/simpledesk.png"/></div>

@@ -23,14 +23,16 @@ function updateClock() {
 
     renderClock();
 
+    const level = getCurrentLevel();
+
     // Le travail baisse à chaque tick
-    workLevel = Math.max(0, workLevel - 5);
+    workLevel = Math.max(0, workLevel - level.workDecay);
 
     // Chaleur augmente plus vite après 12h
     if (currentHour >= 12) {
-        heatLevel = Math.min(100, heatLevel + 8);
+        heatLevel = Math.min(100, heatLevel + level.heatAfternoon);
     } else {
-        heatLevel = Math.min(100, heatLevel + 2);
+        heatLevel = Math.min(100, heatLevel + level.heatMorning);
     }
 
     // Mise à jour des barres
@@ -46,10 +48,10 @@ function updateClock() {
         currentHour += 1;
     }
 
-    // Boucle à 08:00 quand on atteint 18:00
+    // Fin de journée à 18:00 : niveau réussi
     if (currentHour >= 18) {
-        currentHour = 8;
-        currentMinute = 0;
+        renderClock();
+        triggerLevelComplete();
     }
 }
 

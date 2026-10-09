@@ -1,5 +1,6 @@
 .start-menu,
-.pause-menu {
+.pause-menu,
+.level-menu {
     position: absolute;
     top: 0;
     left: 0;
@@ -15,7 +16,8 @@
 }
 
 .start-menu.hidden,
-.pause-menu.hidden {
+.pause-menu.hidden,
+.level-menu.hidden {
     opacity: 0;
     pointer-events: none;
 }

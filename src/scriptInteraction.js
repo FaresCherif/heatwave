@@ -10,13 +10,15 @@ function scheduleNextBubble() {
     }
 
     // Nouveau délai aléatoire à chaque tentative
-    const delay = 3000 + Math.random() * 4000;
+    const config = getCurrentLevel().bubbles;
+    const delay = config.minDelay + Math.random() * (config.maxDelay - config.minDelay);
     bubbleSpawnIntervalId = setTimeout(spawnBubble, delay);
 }
 
 function spawnBubble() {
+    const config = getCurrentLevel().bubbles;
     const background = document.querySelector('.background');
-    if (!gameStarted || gameOver || gamePaused || !background || activeBubbles.length >= 2) {
+    if (!gameStarted || gameOver || gamePaused || !background || activeBubbles.length >= config.maxCount) {
         scheduleNextBubble();
         return;
     }
@@ -24,7 +26,7 @@ function spawnBubble() {
     const bubble = document.createElement('button');
     bubble.type = 'button';
     bubble.className = 'task-bubble';
-    bubble.innerHTML = '<span class="bubble-check">✓</span><span class="bubble-timer">5s</span>';
+    bubble.innerHTML = `<span class="bubble-check">✓</span><span class="bubble-timer">${config.lifetime}s</span>`;
 
     const left = 15 + Math.random() * 70;
     const top = 15 + Math.random() * 70;
@@ -37,7 +39,7 @@ function spawnBubble() {
     });
 
     background.appendChild(bubble);
-    activeBubbles.push({ element: bubble, timeLeft: 5 });
+    activeBubbles.push({ element: bubble, timeLeft: config.lifetime });
     scheduleNextBubble();
 }
 
@@ -63,7 +65,7 @@ function burstBubble(bubbleElement) {
     bubbleElement.classList.add('burst');
     bubbleElement.innerHTML = '<span>💥</span>';
 
-    workLevel = Math.max(0, workLevel - 50);
+    workLevel = Math.max(0, workLevel - getCurrentLevel().bubbles.penalty);
     updateBars();
 
     setTimeout(function() {
@@ -91,6 +93,9 @@ function updateBubbles() {
 
 function startBubbleSystem() {
     stopBubbleSystem();
+
+    // Pas de bulles si le niveau ne les active pas
+    if (!getCurrentLevel().bubbles) return;
 
     scheduleNextBubble();
     bubbleCountdownIntervalId = setInterval(updateBubbles, 1000);
