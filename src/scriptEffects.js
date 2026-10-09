@@ -40,7 +40,7 @@ function playEffect(element, className) {
 
 // Met en avant les zones du mode actif
 function updateZoneHighlight() {
-    document.querySelectorAll('.bureau, .joueur').forEach(function(zone) {
+    document.querySelectorAll('.bureau, .joueur, .computer').forEach(function(zone) {
         zone.classList.toggle('selected', currentMode === 'work');
     });
 
@@ -52,7 +52,7 @@ function workEffect(amount, overheated) {
     // Texte orange en surchauffe pour montrer que le gain est réduit
     showFloatingText(`+${amount}`, document.querySelector('.joueur'), overheated ? 'slow' : 'gain');
     playEffect(document.querySelector('.joueur'), 'typing');
-    playEffect(document.querySelector('.work-bar-fill').closest('.stat-bar-vertical'), 'bump');
+    playEffect(document.querySelector('.work-bar-fill').closest('.stat-bar'), 'bump');
 }
 
 function coolEffect(amount, direction) {
@@ -61,7 +61,7 @@ function coolEffect(amount, direction) {
     showFloatingText(`-${amount}°`, handfan, 'cool');
     handfan.classList.remove('fan-left', 'fan-right');
     playEffect(handfan, direction === 'left' ? 'fan-left' : 'fan-right');
-    playEffect(document.querySelector('.heat-bar-fill').closest('.stat-bar-vertical'), 'bump');
+    playEffect(document.querySelector('.heat-bar-fill').closest('.stat-bar'), 'bump');
 }
 
 // Mauvaise flèche : l'alternance n'est pas respectée

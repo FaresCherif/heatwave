@@ -1,59 +1,105 @@
-.room .bars-container {
-    position: absolute;
-    bottom: 40%;
-    left: 34%;
-    z-index: 10;
-    display: flex;
-    gap: 3%;
-    align-items: flex-end;
-    background-color: lightgoldenrodyellow;
-    padding: 0.5%;
-    border-radius: 10px;
+/* Interface fixe en haut de l'écran : infos | mode | barres */
+.hud {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;  /* Sous les menus (100 et 1000) */
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: 16px;
+    padding: 12px 16px;
+    pointer-events: none;
 }
 
-.room .stat-bar-vertical {
+/* Panneaux du HUD : même style que les menus */
+.hud-info,
+.bars-container {
+    background: rgba(20, 20, 40, 0.85);
+    border: 2px solid #ff6b35;
+    border-radius: 10px;
+    color: #fff;
+    padding: 8px 14px;
+}
+
+.hud-info {
+    justify-self: start;
+    text-align: center;
+}
+
+.level-label {
+    font-size: 13px;
+    color: #ffb38a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.level-label:empty {
+    display: none;
+}
+
+.clock {
+    font-size: 26px;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;  /* Chiffres de même largeur */
+}
+
+.bars-container {
+    justify-self: end;
     display: flex;
     flex-direction: column;
+    gap: 8px;
+}
+
+.stat-bar {
+    display: flex;
     align-items: center;
-    gap: 1%;
+    gap: 10px;
 }
 
-.room .stat-bar-vertical label {
+.stat-bar label {
+    width: 90px;
+    font-size: 14px;
     font-weight: bold;
-    font-size: 60%;
-    color: #333;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 0.5% 1.5%;
-    border-radius: 3px;
-    min-width: 10%;
-    text-align: center;
-    order: -1;
+    padding: 1px 4px;
+    border-radius: 4px;
 }
 
-.room .bar-bg {
-    width: 4vw;             /* Largeur responsive */
-    height: 18vh;           /* Hauteur responsive (viewport) */
-    background: #d3d3d3;
-    border-radius: 5px;
+.bar-bg {
+    width: clamp(110px, 16vw, 260px);
+    height: 14px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 7px;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
 }
 
-.room .work-bar-fill {
+.work-bar-fill,
+.heat-bar-fill {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
-    width: 100%;
     height: 100%;
-    transition: height 0.3s ease, background-color 0.3s ease;
+    transition: width 0.3s ease, background-color 0.3s ease;
 }
 
-.room .heat-bar-fill {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+.work-bar-fill {
     width: 100%;
-    height: 0%;
-    transition: height 0.3s ease, background-color 0.3s ease;
+    background: hsl(130, 70%, 45%);  /* Avant le premier updateBars() */
+}
+
+.heat-bar-fill {
+    width: 0%;
+}
+
+/* Trait du seuil de surchauffe (position définie par le niveau) */
+.heat-threshold {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
 }

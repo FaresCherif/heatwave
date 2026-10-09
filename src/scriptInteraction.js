@@ -26,7 +26,8 @@ function spawnBubble() {
     const bubble = document.createElement('button');
     bubble.type = 'button';
     bubble.className = 'task-bubble';
-    bubble.innerHTML = `<span class="bubble-check">✓</span><span class="bubble-timer">${config.lifetime}s</span>`;
+    bubble.title = 'Appel urgent : cliquez pour répondre';
+    bubble.innerHTML = '<img class="bubble-icon" src="src/images/phone.png" alt="Téléphone">';
 
     // Position dans la partie visible du décor (les bords peuvent être rognés)
     const rect = background.getBoundingClientRect();
@@ -35,8 +36,11 @@ function spawnBubble() {
     const visibleWidth = 100 - 2 * visibleLeft;
     const visibleHeight = 100 - 2 * visibleTop;
 
-    const left = visibleLeft + visibleWidth * (0.15 + Math.random() * 0.7);
-    const top = visibleTop + visibleHeight * (0.15 + Math.random() * 0.7);
+    // À gauche ou à droite du poste de travail (centre de l'écran), jamais dessus
+    const side = Math.random() < 0.5 ? 0.08 : 0.72;
+    const left = visibleLeft + visibleWidth * (side + Math.random() * 0.2);
+    // Pas trop haut pour ne pas passer sous l'interface du haut
+    const top = visibleTop + visibleHeight * (0.3 + Math.random() * 0.55);
     bubble.style.left = `${left}%`;
     bubble.style.top = `${top}%`;
 
@@ -53,14 +57,17 @@ function spawnBubble() {
 
     background.appendChild(bubble);
     activeBubbles.push({ element: bubble, timeLeft: config.lifetime });
+    // Lancer l'anneau après l'affichage pour que la transition démarre
+    requestAnimationFrame(function() {
+        updateBubbleDisplay(bubble, config.lifetime);
+    });
     scheduleNextBubble();
 }
 
+// Anneau de compte à rebours : proportion du temps restant
 function updateBubbleDisplay(bubble, timeLeft) {
-    const timer = bubble.querySelector('.bubble-timer');
-    if (timer) {
-        timer.textContent = `${timeLeft}s`;
-    }
+    const lifetime = getCurrentLevel().bubbles.lifetime;
+    bubble.style.setProperty('--progress', Math.max(0, timeLeft - 1) / lifetime);
 }
 
 function removeBubble(bubbleElement) {
@@ -164,7 +171,8 @@ function updateModeIndicator() {
         indicator.setAttribute('data-mode', currentMode);
         document.getElementById('alternateIndicator').classList.remove('active');
     } else {
-        indicator.innerHTML = `MODE ${currentMode.toUpperCase()}<div id="alternateIndicator"></div>`;
+        const modeNames = { work: 'TRAVAIL', cool: 'VENTILATION' };
+        indicator.innerHTML = `MODE ${modeNames[currentMode]}<div id="alternateIndicator"></div>`;
         indicator.classList.add('active');
         indicator.setAttribute('data-mode', currentMode);
         const alternateIndicator = document.getElementById('alternateIndicator');
@@ -197,6 +205,7 @@ function initializeGameEvents() {
 
     const bureau = document.querySelector('.bureau');
     const joueur = document.querySelector('.joueur');
+    const computer = document.querySelector('.computer');
     const handfan = document.querySelector('.handfan');
     const pauseMenu = document.getElementById('pauseMenu');
     const alternateIndicator = document.getElementById('alternateIndicator');
@@ -218,6 +227,11 @@ function initializeGameEvents() {
         updateModeIndicator();
     });
 
+    computer.addEventListener('click', function() {
+        currentMode = 'work';
+        updateModeIndicator();
+    });
+
     handfan.addEventListener('click', function() {
         currentMode = 'cool';
         lastArrowKey = null;  // Réinitialiser l'alternance
@@ -226,7 +240,7 @@ function initializeGameEvents() {
 
     // Quitter le mode en cliquant sur le background
     document.querySelector('.background').addEventListener('click', function(e) {
-        if (!e.target.closest('.bureau') && !e.target.closest('.joueur') && !e.target.closest('.handfan') ) {
+        if (!e.target.closest('.sprite')) {
             currentMode = 'idle';
             updateModeIndicator();
         }

@@ -1,19 +1,15 @@
+/* Indicateur de mode, au centre du HUD */
 #workModeIndicator {
-    position: absolute;
-    top: 2%;
-    left: 50%;
-    transform: translateX(-50%);
     background: rgba(255, 0, 0, 0);
     color: #fff;
-    padding: 1% 3%;
+    padding: 8px 28px;
     border-radius: 10px;
-    font-size: 100%;
+    font-size: 18px;
     font-weight: bold;
     opacity: 0;
     transition: opacity 0.3s ease, background 0.3s ease;
-    z-index: 11;
     text-align: center;
-
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 #workModeIndicator.active {
@@ -35,6 +31,7 @@
 
 .room .bureau,
 .room .joueur,
+.room .computer,
 .room .handfan {
     cursor: pointer;
 }

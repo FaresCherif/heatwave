@@ -21,9 +21,33 @@
 
 </head>
 <body>
-    <div id="workModeIndicator" class="active" data-mode="idle">
-        MODE REPOS
-        <div id="alternateIndicator"></div>
+    <!-- Interface fixe en haut de l'écran -->
+    <div class="hud">
+        <div class="hud-info">
+            <div class="level-label"></div>
+            <div class="clock">08:00</div>
+        </div>
+
+        <div id="workModeIndicator" class="active" data-mode="idle">
+            MODE REPOS
+            <div id="alternateIndicator"></div>
+        </div>
+
+        <div class="bars-container">
+            <div class="stat-bar">
+                <label>💼 Travail</label>
+                <div class="bar-bg">
+                    <div class="work-bar-fill"></div>
+                </div>
+            </div>
+            <div class="stat-bar">
+                <label>🌡️ Chaleur</label>
+                <div class="bar-bg">
+                    <div class="heat-bar-fill"></div>
+                    <div class="heat-threshold"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="room">
@@ -62,28 +86,11 @@
                 </div>
             </div>
 
-            <div class="bars-container">
-                <div class="stat-bar-vertical">
-                    <label>Travail</label>
-                    <div class="bar-bg">
-                        <div class="work-bar-fill"></div>
-                    </div>
-                </div>
-                <div class="stat-bar-vertical">
-                    <label>Chaleur</label>
-                    <div class="bar-bg">
-                        <div class="heat-bar-fill"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="level-label"></div>
-            <div class="clock"></div>
-            <img src="src/images/background.png"/>
-            <div class="bureau"><img src="src/images/simpledesk.png"/></div>
-            <div class="computer"><img src="src/images/computer.png"/></div>
-            <div class="joueur"><img src="src/images/user.png"></div>
-            <div class="handfan"><img src="src/images/handfan.png"></div>
+            <img class="decor" src="src/images/background.png"/>
+            <div class="sprite bureau"><img src="src/images/simpledesk.png"/></div>
+            <div class="sprite computer"><img src="src/images/computer.png"/></div>
+            <div class="sprite handfan"><img src="src/images/handfan.png"></div>
+            <div class="sprite joueur"><img src="src/images/user.png"></div>
         </div>
     </div>
 </body>

@@ -18,6 +18,7 @@
 
 .room .bureau img,
 .room .joueur img,
+.room .computer img,
 .room .handfan img {
     filter: drop-shadow(0 0 calc(var(--zone-glow) / 2) #ffbe00) drop-shadow(0 0 var(--zone-glow) #ffbe00);
 }
@@ -25,13 +26,15 @@
 /* Survol : halo blanc plus fort */
 .room .bureau:hover img,
 .room .joueur:hover img,
+.room .computer:hover img,
 .room .handfan:hover img {
     filter: drop-shadow(0 0 12px #fff) brightness(1.1);
 }
 
 /* Zone du mode actif : halo fixe de la couleur du mode */
 .room .bureau.selected img,
-.room .joueur.selected img {
+.room .joueur.selected img,
+.room .computer.selected img {
     filter: drop-shadow(0 0 8px rgba(255, 60, 60, 0.9));
 }
 
@@ -82,7 +85,7 @@
 
 /* Action éventail : il bascule dans le sens de la flèche */
 .room .handfan img {
-    transform-origin: bottom center;
+    transform-origin: 52% 68%;  /* Pied de l'éventail dans le PNG */
 }
 
 .room .handfan.fan-left img {
@@ -101,18 +104,18 @@
     50% { transform: rotate(20deg); }
 }
 
-/* Barre qui réagit quand elle change : toute la colonne (texte + barre) bouge ensemble */
-.room .stat-bar-vertical.bump {
+/* Barre qui réagit quand elle change : toute la ligne (texte + barre) bouge ensemble */
+.stat-bar.bump {
     animation: bar-bump 0.25s ease-out;
-    transform-origin: bottom center;
+    transform-origin: right center;
 }
 
-.room .stat-bar-vertical.bump .bar-bg {
+.stat-bar.bump .bar-bg {
     animation: bar-glow 0.25s ease-out;
 }
 
 @keyframes bar-bump {
-    50% { transform: scale(1.06); }
+    50% { transform: scale(1.04); }
 }
 
 @keyframes bar-glow {
@@ -124,7 +127,6 @@
     position: absolute;
     z-index: 20;
     transform: translate(-50%, -50%);
-    font-family: 'Courier New', monospace;
     font-size: 120%;
     font-weight: bold;
     text-shadow: 0 0 3px #000, 0 0 6px #000;
@@ -145,7 +147,7 @@
 }
 
 /* Surchauffe : l'étiquette Chaleur clignote en rouge */
-.room .stat-bar-vertical.overheat label {
+.stat-bar.overheat label {
     animation: overheat-blink 0.8s ease-in-out infinite;
 }
 

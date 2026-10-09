@@ -1,5 +1,11 @@
 body {
     margin: 0;
+    /* Police unique pour tout le jeu */
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+button {
+    font-family: inherit;
 }
 
 .room {
@@ -22,137 +28,131 @@ body {
     background: linear-gradient(to bottom, #ece3c6 50%, #4a2a06 50%);
 }
 
-.room .background > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.room .background > img.decor {
+    /* Cadrage sur la pièce : on ne garde que la bande y=60..414 de background.png (800x543),
+       pour que le parquet descende jusqu'en bas de l'écran */
+    position: absolute;
+    width: 127.12%;
+    height: 153.39%;
+    left: -13.56%;
+    top: -16.95%;
     z-index: 0;
 }
 
-.room .bureau,
-.room .joueur,
-.room .handfan,
-.room .computer {
+/* Sprites : les PNG font 320x320 avec beaucoup de vide autour du dessin.
+   Le conteneur prend la taille du dessin seul (zone cliquable précise),
+   l'image est agrandie et décalée pour que le dessin remplisse le conteneur.
+   --x0 / --y0 : coin haut-gauche du dessin dans le PNG, --cw / --ch : sa taille. */
+.room .sprite {
     position: absolute;
 }
 
-.room .bureau img,
-.room .joueur img,
-.room .handfan img,
-.room .computer img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.room .sprite img {
+    position: absolute;
+    width: calc(100% * 320 / var(--cw));
+    height: calc(100% * 320 / var(--ch));
+    left: calc(-100% * var(--x0) / var(--cw));
+    top: calc(-100% * var(--y0) / var(--ch));
+    pointer-events: none;        /* Le clic se fait sur le conteneur */
+    image-rendering: pixelated;  /* Sprites pixel art nets, sans flou */
 }
 
-.room .bureau{
-    left: 24%;
-    top: 60%;
-    height: 30%;  /* Adapter selon votre besoin */
-    width: auto;
+/* Placement de la scène (en % du décor 16:9) : poste de travail centré */
+.room .bureau {
+    --x0: 60; --y0: 70; --cw: 170; --ch: 120;
+    left: 42.83%;
+    top: 67%;
+    width: 14.34%;
+    height: 18%;
     z-index: 1;
-    transform: translate(-50%, -50%);
 }
 
-.room .joueur, 
-.room .computer{
-    height: 40%;
+.room .computer {
+    --x0: 100; --y0: 80; --cw: 100; --ch: 80;
+    left: 43.28%;
+    top: 55%;
+    width: 8.44%;
+    height: 12%;
     z-index: 2;
 }
 
-.room .joueur{
-    left: 14%;
-    bottom: 25%;
-    width: 20%;
+.room .handfan {
+    --x0: 90; --y0: 110; --cw: 150; --ch: 110;
+    left: 50.5%;
+    top: 58.2%;
+    width: 6.75%;
+    height: 8.8%;
+    z-index: 3;
 }
 
-.room .computer{
-    left: 14%;
-    bottom: 28%;
-    width: 20%;
+.room .joueur {
+    --x0: 110; --y0: 60; --cw: 90; --ch: 170;
+    left: 43.7%;
+    top: 63.5%;
+    width: 7.59%;
+    height: 25.5%;
+    z-index: 4;
 }
 
-.room .handfan{
-    z-index: 1;
-    bottom: 32%;
-    left: 3%;
-    width: 10%;
-}
-
-
-
-.room .clock {
-    position: absolute;
-    top: 27%;
-    /* (100% - 100vw) / 2 = largeur rognée de chaque côté */
-    right: max(4%, calc((100% - 100vw) / 2 + 2%));
-    z-index: 10;
-    font-size: 100%;
-    font-weight: bold;
-    color: #333;
-    font-family: 'Courier New', monospace;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 0.5% 1%;
-    border-radius: 5px;
-    min-width: 80px;
-    text-align: center;
-}
-
-.room .level-label {
-    position: absolute;
-    top: 22%;
-    /* (100% - 100vw) / 2 = largeur rognée de chaque côté */
-    right: max(4%, calc((100% - 100vw) / 2 + 2%));
-    z-index: 10;
-    font-size: 75%;
-    font-weight: bold;
-    color: #333;
-    font-family: 'Courier New', monospace;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 0.3% 1%;
-    border-radius: 5px;
-    min-width: 80px;
-    text-align: center;
-}
-
-.room .level-label:empty {
-    display: none;
+/* Appel urgent : téléphone qui sonne, avec un anneau de compte à rebours */
+@property --progress {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 1;
 }
 
 .task-bubble {
     position: absolute;
-    z-index: 5;
-    width: 72px;
-    height: 72px;
+    z-index: 12;
+    width: clamp(56px, 5vw, 84px);
+    aspect-ratio: 1;
+    padding: 0;
     border: none;
     border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    background: linear-gradient(135deg, #fff4b8, #ffd166);
-    color: #8a4b00;
-    font-weight: bold;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transform: translate(-50%, -50%);
+    /* Anneau : la part orange diminue avec le temps restant */
+    background: conic-gradient(#ff6b35 calc(var(--progress) * 360deg), rgba(0, 0, 0, 0.25) 0);
+    transition: --progress 1s linear;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* Disque blanc au centre de l'anneau */
+.task-bubble::before {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    border-radius: 50%;
+    background: #fff;
 }
 
 .task-bubble:hover {
-    transform: translate(-50%, -50%) scale(1.04);
+    transform: translate(-50%, -50%) scale(1.08);
 }
 
-.task-bubble .bubble-check {
-    font-size: 20px;
+.task-bubble .bubble-icon {
+    position: relative;
+    width: 50%;
+    image-rendering: pixelated;
+    animation: phone-ring 0.6s ease-in-out infinite;
 }
 
-.task-bubble .bubble-timer {
-    font-size: 12px;
+@keyframes phone-ring {
+    0%, 50%, 100% { transform: rotate(0); }
+    10%, 30%      { transform: rotate(-15deg); }
+    20%, 40%      { transform: rotate(15deg); }
 }
 
 .task-bubble.burst {
-    background: linear-gradient(135deg, #ff7b7b, #ff4d4d);
-    color: white;
+    background: #ff4d4d;
+}
+
+.task-bubble.burst::before {
+    background: #ff4d4d;
+}
+
+.task-bubble.burst span {
+    position: relative;
+    font-size: 150%;
 }
 
