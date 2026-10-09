@@ -1,5 +1,117 @@
 let lastArrowKey = null;  // Tracker la dernière flèche pressée
 let gameEventsInitialized = false;
+let activeBubbles = [];
+let bubbleSpawnIntervalId = null;
+let bubbleCountdownIntervalId = null;
+
+function scheduleNextBubble() {
+    if (bubbleSpawnIntervalId !== null) {
+        clearInterval(bubbleSpawnIntervalId);
+    }
+
+    const delay = 3000 + Math.random() * 4000;
+    bubbleSpawnIntervalId = setInterval(spawnBubble, delay);
+}
+
+function spawnBubble() {
+    if (!gameStarted || gameOver || gamePaused) return;
+
+    const background = document.querySelector('.background');
+    if (!background || activeBubbles.length >= 2) return;
+
+    const bubble = document.createElement('button');
+    bubble.type = 'button';
+    bubble.className = 'task-bubble';
+    bubble.innerHTML = '<span class="bubble-check">✓</span><span class="bubble-timer">5s</span>';
+
+    const left = 15 + Math.random() * 70;
+    const top = 15 + Math.random() * 70;
+    bubble.style.left = `${left}%`;
+    bubble.style.top = `${top}%`;
+
+    bubble.addEventListener('click', function(e) {
+        e.stopPropagation();
+        removeBubble(bubble);
+    });
+
+    background.appendChild(bubble);
+    activeBubbles.push({ element: bubble, timeLeft: 5 });
+    scheduleNextBubble();
+}
+
+function updateBubbleDisplay(bubble, timeLeft) {
+    const timer = bubble.querySelector('.bubble-timer');
+    if (timer) {
+        timer.textContent = `${timeLeft}s`;
+    }
+}
+
+function removeBubble(bubbleElement) {
+    if (!bubbleElement) return;
+
+    activeBubbles = activeBubbles.filter(item => item.element !== bubbleElement);
+    if (bubbleElement.parentNode) {
+        bubbleElement.parentNode.removeChild(bubbleElement);
+    }
+}
+
+function burstBubble(bubbleElement) {
+    if (!bubbleElement) return;
+
+    bubbleElement.classList.add('burst');
+    bubbleElement.innerHTML = '<span>💥</span>';
+
+    workLevel = Math.max(0, workLevel - 50);
+    updateBars();
+
+    setTimeout(function() {
+        removeBubble(bubbleElement);
+    }, 180);
+
+    checkGameOver();
+}
+
+function updateBubbles() {
+    if (!gameStarted || gameOver || gamePaused) return;
+
+    activeBubbles = activeBubbles.filter(item => {
+        item.timeLeft -= 1;
+        updateBubbleDisplay(item.element, item.timeLeft);
+
+        if (item.timeLeft <= 0) {
+            burstBubble(item.element);
+            return false;
+        }
+
+        return true;
+    });
+}
+
+function startBubbleSystem() {
+    stopBubbleSystem();
+
+    scheduleNextBubble();
+    bubbleCountdownIntervalId = setInterval(updateBubbles, 1000);
+}
+
+function stopBubbleSystem() {
+    if (bubbleSpawnIntervalId !== null) {
+        clearInterval(bubbleSpawnIntervalId);
+        bubbleSpawnIntervalId = null;
+    }
+
+    if (bubbleCountdownIntervalId !== null) {
+        clearInterval(bubbleCountdownIntervalId);
+        bubbleCountdownIntervalId = null;
+    }
+
+    activeBubbles.forEach(item => {
+        if (item.element.parentNode) {
+            item.element.parentNode.removeChild(item.element);
+        }
+    });
+    activeBubbles = [];
+}
 
 function togglePause() {
     if (!gameStarted || gameOver) return;

@@ -18,6 +18,7 @@ function restartGame() {
 
     initializeGameEvents();
     startClock();
+    startBubbleSystem();
 }
 
 // Attendre que la page soit chargée

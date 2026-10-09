@@ -94,3 +94,40 @@ body {
     text-align: center;
 }
 
+.task-bubble {
+    position: absolute;
+    z-index: 5;
+    width: 72px;
+    height: 72px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    background: linear-gradient(135deg, #fff4b8, #ffd166);
+    color: #8a4b00;
+    font-weight: bold;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+}
+
+.task-bubble:hover {
+    transform: translate(-50%, -50%) scale(1.04);
+}
+
+.task-bubble .bubble-check {
+    font-size: 20px;
+}
+
+.task-bubble .bubble-timer {
+    font-size: 12px;
+}
+
+.task-bubble.burst {
+    background: linear-gradient(135deg, #ff7b7b, #ff4d4d);
+    color: white;
+}
+

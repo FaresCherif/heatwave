@@ -8,6 +8,8 @@ function resetGameState() {
     currentMode = 'idle';
     lastArrowKey = null;
 
+    stopBubbleSystem();
+
     const startMenu = document.getElementById('startMenu');
     const pauseMenu = document.getElementById('pauseMenu');
     const gameOverScreen = document.getElementById('gameOverScreen');
