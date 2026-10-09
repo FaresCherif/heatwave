@@ -7,6 +7,13 @@ function updateBars() {
 
     heatBar.style.height = heatLevel + '%';
     heatBar.style.backgroundColor = getBarColor(heatLevel, 'heat');
+
+    // Signaler la surchauffe sur la colonne Chaleur
+    heatBar.closest('.stat-bar-vertical').classList.toggle('overheat', isOverheated());
+}
+
+function isOverheated() {
+    return heatLevel >= getCurrentLevel().overheatThreshold;
 }
 
 

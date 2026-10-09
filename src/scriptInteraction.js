@@ -252,9 +252,12 @@ function initializeGameEvents() {
         if (currentMode === 'work') {
             // Ignorer la répétition automatique quand la touche est maintenue
             if(e.code === 'Space' && !e.repeat){
-                const amount = getCurrentLevel().workPerPress;
+                const level = getCurrentLevel();
+                const overheated = isOverheated();
+                // En surchauffe, chaque appui rapporte moins : il vaut mieux refroidir d'abord
+                const amount = overheated ? level.workPerPress * level.overheatWorkFactor : level.workPerPress;
                 workLevel = Math.min(100, workLevel + amount);
-                workEffect(amount);
+                workEffect(amount, overheated);
             }
         }
 

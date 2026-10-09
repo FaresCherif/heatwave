@@ -10,6 +10,8 @@ const LEVELS = [
         heatMorning: 1,         // Chaleur gagnée par tick avant 12h
         heatAfternoon: 4,       // Chaleur gagnée par tick après 12h
         fanCooling: 1.5,        // Chaleur retirée par alternance ← →
+        overheatThreshold: 70,  // Au-dessus de cette chaleur, le travail rapporte moins
+        overheatWorkFactor: 0.5,// Multiplicateur du gain de travail en surchauffe
         bubbles: null
     },
     {
@@ -20,6 +22,8 @@ const LEVELS = [
         heatMorning: 1,
         heatAfternoon: 4,
         fanCooling: 1.5,
+        overheatThreshold: 70,
+        overheatWorkFactor: 0.5,
         bubbles: {
             maxCount: 2,        // Bulles simultanées maximum
             minDelay: 3000,     // Délai minimum entre deux bulles (ms)

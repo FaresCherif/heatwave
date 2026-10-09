@@ -136,9 +136,19 @@
 .floating-text.cool { color: #6bd7ff; }
 .floating-text.loss { color: #ff5a5a; font-size: 160%; }
 .floating-text.miss { color: #cccccc; }
+.floating-text.slow { color: #ffa040; }
 
 @keyframes float-up {
     0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
     15%  { opacity: 1; transform: translate(-50%, -80%) scale(1.1); }
     100% { opacity: 0; transform: translate(-50%, -250%) scale(1); }
+}
+
+/* Surchauffe : l'étiquette Chaleur clignote en rouge */
+.room .stat-bar-vertical.overheat label {
+    animation: overheat-blink 0.8s ease-in-out infinite;
+}
+
+@keyframes overheat-blink {
+    50% { background: #ff3b3b; color: #fff; }
 }

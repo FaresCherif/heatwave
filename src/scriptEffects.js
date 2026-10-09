@@ -48,8 +48,9 @@ function updateZoneHighlight() {
     if (handfan) handfan.classList.toggle('selected', currentMode === 'cool');
 }
 
-function workEffect(amount) {
-    showFloatingText(`+${amount}`, document.querySelector('.joueur'), 'gain');
+function workEffect(amount, overheated) {
+    // Texte orange en surchauffe pour montrer que le gain est réduit
+    showFloatingText(`+${amount}`, document.querySelector('.joueur'), overheated ? 'slow' : 'gain');
     playEffect(document.querySelector('.joueur'), 'typing');
     playEffect(document.querySelector('.work-bar-fill').closest('.stat-bar-vertical'), 'bump');
 }
