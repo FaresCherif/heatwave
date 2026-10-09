@@ -13,10 +13,13 @@ body {
 
 .room .background {
     position: relative;
-    width: min(100vw, calc(100vh * (16 / 9)));
-    aspect-ratio: 16 / 9;  
+    /* Couvre tout l'écran en gardant le 16:9 : les bords qui dépassent sont rognés */
+    width: max(100vw, calc(100vh * (16 / 9)));
+    flex-shrink: 0;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
-    max-height: 100vh;
+    /* Le haut et le bas de background.png sont transparents : plafond et parquet */
+    background: linear-gradient(to bottom, #ece3c6 50%, #4a2a06 50%);
 }
 
 .room .background > img {
@@ -81,7 +84,8 @@ body {
 .room .clock {
     position: absolute;
     top: 27%;
-    right: 4%;
+    /* (100% - 100vw) / 2 = largeur rognée de chaque côté */
+    right: max(4%, calc((100% - 100vw) / 2 + 2%));
     z-index: 10;
     font-size: 100%;
     font-weight: bold;
@@ -97,7 +101,8 @@ body {
 .room .level-label {
     position: absolute;
     top: 22%;
-    right: 4%;
+    /* (100% - 100vw) / 2 = largeur rognée de chaque côté */
+    right: max(4%, calc((100% - 100vw) / 2 + 2%));
     z-index: 10;
     font-size: 75%;
     font-weight: bold;
@@ -108,6 +113,10 @@ body {
     border-radius: 5px;
     min-width: 80px;
     text-align: center;
+}
+
+.room .level-label:empty {
+    display: none;
 }
 
 .task-bubble {

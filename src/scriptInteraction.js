@@ -28,13 +28,25 @@ function spawnBubble() {
     bubble.className = 'task-bubble';
     bubble.innerHTML = `<span class="bubble-check">✓</span><span class="bubble-timer">${config.lifetime}s</span>`;
 
-    const left = 15 + Math.random() * 70;
-    const top = 15 + Math.random() * 70;
+    // Position dans la partie visible du décor (les bords peuvent être rognés)
+    const rect = background.getBoundingClientRect();
+    const visibleLeft = Math.max(0, -rect.left) / rect.width * 100;
+    const visibleTop = Math.max(0, -rect.top) / rect.height * 100;
+    const visibleWidth = 100 - 2 * visibleLeft;
+    const visibleHeight = 100 - 2 * visibleTop;
+
+    const left = visibleLeft + visibleWidth * (0.15 + Math.random() * 0.7);
+    const top = visibleTop + visibleHeight * (0.15 + Math.random() * 0.7);
     bubble.style.left = `${left}%`;
     bubble.style.top = `${top}%`;
 
     bubble.addEventListener('click', function(e) {
         e.stopPropagation();
+        // Une bulle déjà éclatée ne rapporte rien
+        if (bubble.classList.contains('burst')) return;
+
+        workLevel = Math.min(100, workLevel + config.reward);
+        updateBars();
         removeBubble(bubble);
     });
 
@@ -236,7 +248,7 @@ function initializeGameEvents() {
         if (currentMode === 'work') {
             // Ignorer la répétition automatique quand la touche est maintenue
             if(e.code === 'Space' && !e.repeat){
-                workLevel = Math.min(100, workLevel + 1);
+                workLevel = Math.min(100, workLevel + getCurrentLevel().workPerPress);
             }
         }
 
@@ -248,7 +260,7 @@ function initializeGameEvents() {
             const isLeft = e.code === 'ArrowLeft';
             const isRight = e.code === 'ArrowRight';
 
-            const cooling_effect_fan = 1;
+            const cooling_effect_fan = getCurrentLevel().fanCooling;
 
             if (isLeft || isRight) {
 
