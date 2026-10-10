@@ -43,3 +43,6 @@ Lorsque tu modifies ce projet, tu dois préserver le gameplay, la cohérence vis
 - Ouvrir le jeu dans le navigateur avec [index.html](index.html).
 - Vérifier les erreurs JavaScript dans la console du navigateur.
 - Tester rapidement les changements en rechargeant la page.
+
+## Déploiement itch.io
+- Automatique : chaque push sur `main` déclenche [.github/workflows/itch.yml](.github/workflows/itch.yml) (secret `BUTLER_API_KEY`, variables `ITCH_USER` et `ITCH_GAME` à définir sur GitHub).
