@@ -1,0 +1,12 @@
+{
+  "name": "heatwave",
+  "version": "1.0.0",
+  "description": "Jeu web : survivre à une journée de bureau pendant la canicule.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npx --yes serve@14 .",
+    "test": "node --test"
+  },
+  "author": "Fares Cherif"
+}

@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 50;  /* Sous les menus (100 et 1000) */
+    z-index: 50;  /* Sous les écrans superposés (1000) */
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: start;
@@ -132,4 +132,47 @@
 
 @keyframes pay-loss {
     30% { color: #fff; background: #ff3b3b; transform: scale(1.1); }
+}
+
+/* Indicateur de mode, au centre du HUD : couleur selon le mode actif */
+#workModeIndicator {
+    color: #fff;
+    padding: 8px 28px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+#workModeIndicator[data-mode='idle'] {
+    background: rgba(0, 100, 255, 0.7);
+}
+
+#workModeIndicator[data-mode='work'] {
+    background: rgba(255, 0, 0, 0.7);
+}
+
+#workModeIndicator[data-mode='cool'] {
+    background: rgba(0, 150, 0, 0.7);
+}
+
+/* Rappel de l'alternance des flèches en mode ventilation */
+#alternateIndicator {
+    display: none;
+    font-size: 150%;
+    color: #fff;
+}
+
+#alternateIndicator.active {
+    display: block;
+}
+
+#alternateIndicator.left {
+    color: #00ffff;
+}
+
+#alternateIndicator.right {
+    color: #ffff00;
 }

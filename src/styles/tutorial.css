@@ -4,7 +4,7 @@
     left: 50%;
     top: 110px;
     transform: translateX(-50%);
-    z-index: 60;  /* Au-dessus du HUD (50), sous les menus (100 et 1000) */
+    z-index: 60;  /* Au-dessus du HUD (50), sous les écrans superposés (1000) */
     width: min(560px, calc(100vw - 32px));
     box-sizing: border-box;
     padding: 14px 20px;

@@ -43,8 +43,10 @@ button {
    Le conteneur prend la taille du dessin seul (zone cliquable précise),
    l'image est agrandie et décalée pour que le dessin remplisse le conteneur.
    --x0 / --y0 : coin haut-gauche du dessin dans le PNG, --cw / --ch : sa taille. */
+/* Sprites cliquables : chacun active un mode */
 .room .sprite {
     position: absolute;
+    cursor: pointer;
 }
 
 .room .sprite img {

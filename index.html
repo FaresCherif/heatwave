@@ -2,26 +2,18 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Heatwave : survivez à une journée de bureau pendant la canicule, entre productivité et coups de chaud.">
+    <title>Heatwave</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌡️</text></svg>">
 
-    <link rel="stylesheet" href="src/styles/stylesheet.css">
-    <link rel="stylesheet" href="src/styles/stylesheet_bars.css">
-    <link rel="stylesheet" href="src/styles/stylesheet_gameover.css">
-    <link rel="stylesheet" href="src/styles/stylesheet_work.css">
-    <link rel="stylesheet" href="src/styles/stylesheet_cool.css">
-    <link rel="stylesheet" href="src/styles/stylesheet_menu.css">
-    <link rel="stylesheet" href="src/styles/stylesheet_effects.css">
-    <link rel="stylesheet" href="src/styles/stylesheet_tutorial.css">
+    <link rel="stylesheet" href="src/styles/scene.css">
+    <link rel="stylesheet" href="src/styles/hud.css">
+    <link rel="stylesheet" href="src/styles/screens.css">
+    <link rel="stylesheet" href="src/styles/effects.css">
+    <link rel="stylesheet" href="src/styles/tutorial.css">
 
-    <script src="src/scriptLevels.js"></script>
-    <script src="src/scriptTutorial.js"></script>
-    <script src="src/scriptMoney.js"></script>
-    <script src="src/scrpitBar.js"></script>
-    <script src="src/scriptClock.js"></script>
-    <script src="src/scriptGame.js"></script>
-    <script src="src/scriptEffects.js"></script>
-    <script src="src/scriptInteraction.js"></script>
-    <script src="src/scriptMenu.js"></script>
-
+    <script type="module" src="src/main.js"></script>
 </head>
 <body>
     <!-- Interface fixe en haut de l'écran -->
@@ -33,8 +25,8 @@
             <div class="total-money"></div>
         </div>
 
-        <div id="workModeIndicator" class="active" data-mode="idle">
-            MODE REPOS
+        <div id="workModeIndicator" data-mode="idle">
+            <span id="modeLabel">MODE REPOS</span>
             <div id="alternateIndicator"></div>
         </div>
 
@@ -65,55 +57,54 @@
         <p id="tutorialText"></p>
         <div id="tutorialProgress"></div>
         <div class="tutorial-buttons">
-            <button id="tutorialNext" onclick="this.blur(); nextTutorialStep()"></button>
-            <button class="tutorial-skip" onclick="this.blur(); endTutorial()">Passer le tutoriel</button>
+            <button id="tutorialNext"></button>
+            <button id="tutorialSkip" class="tutorial-skip">Passer le tutoriel</button>
         </div>
     </div>
 
     <div class="room">
         <div class="background">
 
-            <div class="start-menu" id="startMenu">
+            <div class="overlay" id="startMenu">
                 <div class="menu-content">
                     <h1>HEATWAVE</h1>
                     <p>Gérez votre température et votre productivité</p>
-                    <button onclick="startGame()">DÉMARRER</button>
+                    <button id="startButton">DÉMARRER</button>
                 </div>
             </div>
 
-            <div class="pause-menu hidden" id="pauseMenu">
+            <div class="overlay hidden" id="pauseMenu">
                 <div class="menu-content">
                     <h1>PAUSE</h1>
                     <p>Le jeu est en pause. Appuyez sur Échap ou reprendre pour continuer.</p>
-                    <button onclick="resumeGame()">REPRENDRE</button>
-                    <button onclick="restartGame()">REDÉMARRER</button>
+                    <button id="resumeButton">REPRENDRE</button>
+                    <button id="restartButton">REDÉMARRER</button>
                 </div>
             </div>
 
-            <div class="level-menu hidden" id="levelMenu">
+            <div class="overlay hidden" id="levelMenu">
                 <div class="menu-content">
                     <h1 id="levelMenuTitle"></h1>
-                    <p id="levelMenuPay"></p>
+                    <p id="levelMenuPay" class="menu-highlight"></p>
                     <p id="levelMenuText"></p>
-                    <button id="levelMenuButton" onclick="nextLevel()"></button>
+                    <button id="levelMenuButton"></button>
                 </div>
             </div>
 
-            <div class="game-over-screen" id="gameOverScreen">
-                <div class="game-over-content">
+            <div class="overlay hidden" id="gameOverScreen">
+                <div class="menu-content game-over">
                     <h1>GAME OVER</h1>
                     <p id="gameOverReason"></p>
-                    <button onclick="restartGame()">Recommencer</button>
+                    <button id="retryButton">RECOMMENCER</button>
                 </div>
             </div>
 
-            <img class="decor" src="src/images/background.png"/>
-            <div class="sprite bureau"><img src="src/images/simpledesk.png"/></div>
-            <div class="sprite computer"><img src="src/images/computer.png"/></div>
-            <div class="sprite handfan"><img src="src/images/handfan.png"></div>
-            <div class="sprite joueur"><img src="src/images/user.png"></div>
+            <img class="decor" src="src/images/background.png" alt="">
+            <div class="sprite bureau"><img src="src/images/simpledesk.png" alt="Bureau"></div>
+            <div class="sprite computer"><img src="src/images/computer.png" alt="Ordinateur"></div>
+            <div class="sprite handfan"><img src="src/images/handfan.png" alt="Éventail"></div>
+            <div class="sprite joueur"><img src="src/images/user.png" alt="Joueur"></div>
         </div>
     </div>
 </body>
-
 </html>

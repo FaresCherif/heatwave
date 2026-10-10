@@ -19,14 +19,17 @@ Lorsque tu modifies ce projet, tu dois préserver le gameplay, la cohérence vis
 - Si tu ajoutes une fonctionnalité, garder le style du jeu déjà présent.
 
 ## Fichiers importants à connaître
-- [index.html](index.html) : structure de la page et menus.
-- [src/scriptGame.js](src/scriptGame.js) : logique principale du jeu.
-- [src/scriptInteraction.js](src/scriptInteraction.js) : interactions avec les éléments du jeu.
-- [src/scriptMenu.js](src/scriptMenu.js) : menus et états du jeu.
-- [src/scriptClock.js](src/scriptClock.js) : horloge / temps.
-- [src/scrpitBar.js](src/scrpitBar.js) : barres d'état.
-- [src/scriptTutorial.js](src/scriptTutorial.js) : tutoriel guidé du niveau 1 (étapes dans `TUTORIAL_STEPS`).
-- [src/styles](src/styles) : feuilles de style du jeu.
+La structure complète est décrite dans [README.md](README.md).
+- [index.html](index.html) : structure de la page, HUD et écrans.
+- [src/main.js](src/main.js) : point d'entrée (modules ES).
+- [src/config/levels.js](src/config/levels.js) : paramètres des niveaux.
+- [src/core/rules.js](src/core/rules.js) : règles du jeu en fonctions pures, sans DOM. Toute nouvelle règle de calcul va ici, avec son test dans [tests/rules.test.js](tests/rules.test.js).
+- [src/core/state.js](src/core/state.js) : état unique de la partie (`state.phase` : menu, tutorial, playing, ended).
+- [src/core/game.js](src/core/game.js) : boucle de jeu, début et fin de journée, pause.
+- [src/core/events.js](src/core/events.js) : bus d'événements (`mode-changed`, `action`, `stats-changed`).
+- [src/systems](src/systems) : tutoriel, appels urgents, salaire.
+- [src/ui](src/ui) : seuls modules qui modifient l'affichage.
+- [src/styles](src/styles) : une feuille de style par zone (scène, HUD, écrans, effets, tutoriel).
 
 ## Comportements à préserver
 - Le jeu doit pouvoir démarrer depuis le menu.
@@ -41,9 +44,9 @@ Lorsque tu modifies ce projet, tu dois préserver le gameplay, la cohérence vis
 - Si tu corriges un bug, explique la cause et la solution de manière claire.
 
 ## Commandes utiles
-- Ouvrir le jeu dans le navigateur avec [index.html](index.html).
+- `npm start` : sert le jeu en local (les modules ES ne fonctionnent pas en ouvrant index.html directement).
+- `npm test` : tests unitaires des règles (node:test, aucune dépendance).
 - Vérifier les erreurs JavaScript dans la console du navigateur.
-- Tester rapidement les changements en rechargeant la page.
 
 ## Déploiement itch.io
-- Automatique : chaque push sur `main` déclenche [.github/workflows/itch.yml](.github/workflows/itch.yml) (secret `BUTLER_API_KEY`, variables `ITCH_USER` et `ITCH_GAME` à définir sur GitHub).
+- Automatique : chaque push sur `main` déclenche [.github/workflows/itch.yml](.github/workflows/itch.yml) après les tests (secret `BUTLER_API_KEY`, variables `ITCH_USER` et `ITCH_GAME` à définir sur GitHub).
