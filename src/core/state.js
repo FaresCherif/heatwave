@@ -27,7 +27,9 @@ export const state = {
     totalMoney: 0,      // Argent cumulé sur la partie
 
     tutorialDone: false,        // Le tutoriel ne s'affiche qu'une fois par session
-    seenDialogues: new Set()    // Idem pour chaque appel de l'histoire
+    seenDialogues: new Set(),   // Idem pour chaque appel de l'histoire
+    /** @type {import('./employee.js').Employee|null} */
+    employee: null              // Fiche du nouvel employé, une fois remplie
 };
 
 export function getLevel() {

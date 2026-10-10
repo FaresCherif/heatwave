@@ -3,7 +3,8 @@ import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import {
     clampGauge, heatGainAt, isOverheated, workGain, isValidAlternation,
-    advanceTime, getGameOverReason, getDayTicks, computeDayPay, workBarColor
+    advanceTime, getGameOverReason, getDayTicks, computeDayPay, workBarColor,
+    formatTime, minutesUntil
 } from '../src/core/rules.js';
 import { LEVELS } from '../src/config/levels.js';
 
@@ -65,6 +66,17 @@ describe('horloge', () => {
     test('compte 12 ticks par heure de journée', () => {
         assert.equal(getDayTicks(level), 60);
     });
+
+    test('formate l\'heure sur deux chiffres', () => {
+        assert.equal(formatTime(9, 5), '09:05');
+        assert.equal(formatTime(16), '16:00');
+    });
+
+    test('compte les minutes avant une heure limite', () => {
+        assert.equal(minutesUntil(15, 30, 16), 30);
+        assert.equal(minutesUntil(16, 0, 16), 0);
+        assert.equal(minutesUntil(16, 5, 16), -5);
+    });
 });
 
 describe('fin de partie', () => {
@@ -113,6 +125,13 @@ describe('configuration des niveaux', () => {
         for (const { name, overheatThreshold, lowWorkThreshold } of LEVELS) {
             assert.ok(overheatThreshold > 0 && overheatThreshold < 100, `${name} : seuil de surchauffe`);
             assert.ok(lowWorkThreshold > 0 && lowWorkThreshold < 100, `${name} : seuil de salaire`);
+        }
+    });
+
+    test('l\'échéance de la fiche employé tombe pendant la journée', () => {
+        for (const { name, startHour, endHour, employeeForm } of LEVELS.filter(l => l.employeeForm)) {
+            const { deadlineHour } = employeeForm;
+            assert.ok(deadlineHour > startHour && deadlineHour <= endHour, `${name} : échéance ${deadlineHour}h`);
         }
     });
 });

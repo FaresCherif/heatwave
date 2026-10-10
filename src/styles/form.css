@@ -1,0 +1,249 @@
+/* Fiche du nouvel employé : panneau à gauche de l'écran, la scène reste visible et jouable */
+.employee-form {
+    position: fixed;
+    left: 16px;
+    top: 140px;     /* Sous le HUD */
+    bottom: 84px;   /* Au-dessus du bouton d'ouverture */
+    z-index: 10;    /* Au-dessus des sprites, sous les appels urgents (12) et le HUD (50) */
+    display: flex;
+    align-items: flex-start;
+    width: min(440px, calc(100vw - 32px));
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.employee-form.hidden {
+    opacity: 0;
+    transform: translateX(-20px);
+    pointer-events: none;
+}
+
+.form-paper {
+    width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 20px 24px;
+    color: #2b2b2b;
+    background: #fdf8ec;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: rotate(-0.6deg);  /* Feuille posée de travers */
+}
+
+.form-header {
+    position: relative;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2b2b2b;
+}
+
+.form-header h2 {
+    margin: 0;
+    padding-right: 70px;  /* Place du bouton Fermer */
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-header p {
+    margin: 4px 0 6px;
+    font-size: 12px;
+    font-style: italic;
+    color: #666;
+}
+
+.form-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 8px;
+    font-size: 13px;
+    color: #2b2b2b;
+    background: none;
+    border: 1px solid #2b2b2b;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-close:hover {
+    color: #fff;
+    background: #2b2b2b;
+}
+
+/* Échéance : en rouge et clignotante quand elle approche */
+.form-deadline {
+    font-size: 14px;
+}
+
+.form-deadline.urgent {
+    color: #d62828;
+    animation: deadline-blink 0.6s ease-in-out infinite;
+}
+
+@keyframes deadline-blink {
+    50% { opacity: 0.3; }
+}
+
+/* Champs : intitulé à gauche, réponse à droite */
+.form-field {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 10px;
+    padding: 0;
+    border: none;
+    font-weight: bold;
+}
+
+.form-field legend {
+    float: left;  /* Permet au legend de suivre la grille */
+    width: 70px;
+}
+
+.form-field input:not([type='radio']) {
+    padding: 4px 6px;
+    font: inherit;
+    font-weight: normal;
+    font-family: 'Courier New', monospace;  /* Écriture « tapée à la machine » */
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed #2b2b2b;
+    outline: none;
+}
+
+.form-field input:focus {
+    border-bottom-style: solid;
+    border-bottom-color: #ff6b35;
+}
+
+.form-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-weight: normal;
+}
+
+.form-paper h3 {
+    margin: 14px 0 6px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/* Notes de 1 à 5 : icônes grisées puis colorées jusqu'à la note choisie */
+.form-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 6px;
+    padding: 0;
+    border: none;
+}
+
+.form-rating legend {
+    float: left;
+    font-size: 13px;
+}
+
+.rating-icons {
+    display: flex;
+    flex-shrink: 0;
+    gap: 2px;
+}
+
+.rating-icons label {
+    font-size: 20px;
+    cursor: pointer;
+    filter: grayscale(1);
+    opacity: 0.2;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+.rating-icons label.filled {
+    /* Contour sombre : certaines icônes sont très claires */
+    filter: drop-shadow(0 0 1px #2b2b2b) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
+    opacity: 1;
+}
+
+.rating-icons label:hover {
+    transform: scale(1.2);
+}
+
+/* Bouton radio masqué : l'icône sert de bouton */
+.rating-icons input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#formSubmit {
+    display: block;
+    margin: 16px auto 0;
+    padding: 8px 36px;
+    font-size: 17px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+#formSubmit:disabled {
+    background: #bbb;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Bouton d'ouverture : en bas à gauche, il pulse tant que la fiche est fermée */
+.form-toggle {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 16px;
+    color: #2b2b2b;
+    background: #fdf8ec;
+    border: 3px solid #ff6b35;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.form-toggle span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.form-toggle small {
+    font-size: 12px;
+}
+
+.form-toggle:not(.open) {
+    animation: toggle-pulse 1.2s ease-in-out infinite;
+}
+
+.form-toggle.urgent {
+    border-color: #d62828;
+}
+
+.form-toggle.urgent small {
+    color: #d62828;
+    font-weight: bold;
+}
+
+.form-toggle.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes toggle-pulse {
+    50% { box-shadow: 0 0 0 6px rgba(255, 107, 53, 0.35), 0 4px 15px rgba(0, 0, 0, 0.4); }
+}

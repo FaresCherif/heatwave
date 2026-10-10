@@ -5,6 +5,25 @@ export default {
             next: 'Cliquez pour continuer ▸',
             hangUp: 'Cliquez pour raccrocher ▸',
             skip: 'Passer l\'appel'
+        },
+        form: {
+            title: 'Fiche du nouvel employé',
+            subtitle: 'Service des ressources humaines — à remplir obligatoirement',
+            deadline: 'À rendre avant {time}',
+            open: '📋 Fiche RH',
+            close: 'Fermer',
+            name: 'Nom',
+            sex: 'Sexe',
+            male: 'Homme',
+            female: 'Femme',
+            other: 'Autre',
+            age: 'Âge',
+            ratings: 'Notez de 1 à 5',
+            love: 'Amour pour l\'entreprise',
+            suicide: 'Envie de suicide',
+            toilets: 'Risque de boucher les toilettes au travail',
+            submit: 'Signer',
+            timeout: 'Fiche RH non rendue avant {time}. Les RH vous ont raccompagné vers la sortie.'
         }
     },
 

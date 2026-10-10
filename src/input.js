@@ -55,6 +55,8 @@ function onKeyDown(event) {
     }
 
     if (!acceptsInput()) return;
+    // Saisie dans un champ (fiche employé) : les touches servent au texte
+    if (event.target.closest('input, textarea, select')) return;
     if (GAME_KEYS.includes(event.code)) event.preventDefault();
 
     if (state.mode === 'work' && event.code === 'Space') {

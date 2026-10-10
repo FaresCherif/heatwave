@@ -43,6 +43,16 @@ export function advanceTime(hour, minute) {
     return { hour: Math.floor(total / 60), minute: total % 60 };
 }
 
+/** Heure au format 13:05 */
+export function formatTime(hour, minute = 0) {
+    return `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+}
+
+/** Minutes restantes avant une heure limite (négatif si dépassée). */
+export function minutesUntil(hour, minute, deadlineHour) {
+    return deadlineHour * 60 - (hour * 60 + minute);
+}
+
 /** @returns {string|null} La raison de la défaite, ou null si la partie continue. */
 export function getGameOverReason(work, heat) {
     if (heat >= 100) return 'Trop chaud ! Vous avez fini en merguez.';

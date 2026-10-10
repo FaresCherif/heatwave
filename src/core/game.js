@@ -1,6 +1,6 @@
 // Déroulement de la partie : boucle de jeu, début et fin de journée, pause
 import { state, getLevel, getNextLevel, isLastLevel, isTimeRunning } from './state.js';
-import { clampGauge, heatGainAt, advanceTime, getGameOverReason } from './rules.js';
+import { clampGauge, heatGainAt, advanceTime, getGameOverReason, formatTime } from './rules.js';
 import { on } from './events.js';
 import { renderHud, renderBars, renderClock } from '../ui/hud.js';
 import { hideAllScreens, showScreen, hideScreen, showLevelComplete, showGameOver } from '../ui/screens.js';
@@ -8,7 +8,8 @@ import { trackPay, collectDayPay } from '../systems/money.js';
 import { startBubbles, stopBubbles, updateBubbles } from '../systems/bubbles.js';
 import { shouldShowTutorial, startTutorial, hideTutorial } from '../systems/tutorial.js';
 import { playDialogue } from '../systems/dialogue.js';
-import { getDialogue } from '../i18n/index.js';
+import { startEmployeeForm, stopEmployeeForm, updateFormDeadline, isFormOverdue } from '../systems/employeeForm.js';
+import { getDialogue, t } from '../i18n/index.js';
 
 const TICK_MS = 1000;  // Un tick = 5 minutes de jeu
 let loopId = null;
@@ -50,6 +51,7 @@ export function restartLevel() {
 
     stopBubbles();
     hideTutorial();
+    stopEmployeeForm();
     hideAllScreens();
     renderHud();
 
@@ -58,19 +60,26 @@ export function restartLevel() {
     playPrelude(level);
 }
 
-// Avant la journée : appel de l'histoire, puis tutoriel (chacun une seule fois par session)
+// Début de journée : appel de l'histoire et tutoriel (une fois par session chacun),
+// puis la fiche employé devient disponible tant qu'elle n'est pas signée
 async function playPrelude(level) {
     const dayId = ++currentDayId;
+    // Niveau relancé pendant une étape : la suite de l'ancien lancement est périmée
+    const isStale = () => dayId !== currentDayId;
 
     if (level.intro && !state.seenDialogues.has(level.intro)) {
         state.seenDialogues.add(level.intro);
         await playDialogue(getDialogue(level.intro));
-        // Niveau relancé pendant l'appel : cette suite est périmée
-        if (dayId !== currentDayId) return;
-        state.phase = 'playing';
+        if (isStale()) return;
     }
 
-    if (shouldShowTutorial()) startTutorial();
+    if (shouldShowTutorial()) {
+        await startTutorial();
+        if (isStale()) return;
+    }
+
+    state.phase = 'playing';
+    if (level.employeeForm && !state.employee) startEmployeeForm(level.employeeForm.deadlineHour);
 }
 
 function startLoop() {
@@ -98,6 +107,12 @@ function tick() {
     Object.assign(state, advanceTime(state.hour, state.minute));
     renderClock();
 
+    updateFormDeadline();
+    if (isFormOverdue()) {
+        loseDay(t('form.timeout', { time: formatTime(level.employeeForm.deadlineHour) }));
+        return;
+    }
+
     if (state.hour >= level.endHour) completeLevel();
 }
 
@@ -105,9 +120,13 @@ function checkGameOver() {
     const reason = getGameOverReason(state.work, state.heat);
     if (!reason) return false;
 
+    loseDay(reason);
+    return true;
+}
+
+function loseDay(reason) {
     endDay();
     showGameOver(reason);
-    return true;
 }
 
 // Fige le jeu : horloge, clavier et appels urgents
@@ -115,6 +134,7 @@ function endDay() {
     state.phase = 'ended';
     clearInterval(loopId);
     stopBubbles();
+    stopEmployeeForm();
 }
 
 function completeLevel() {

@@ -49,11 +49,13 @@ const els = {
 
 let stepIndex = 0;
 let actionCount = 0;
+let resolveEnd = null;  // Résout la promesse de startTutorial()
 
 export function shouldShowTutorial() {
     return Boolean(getLevel().tutorial) && !state.tutorialDone;
 }
 
+/** @returns {Promise<void>} Résolue à la fin du tutoriel (terminé ou passé) */
 export function startTutorial() {
     state.phase = 'tutorial';
     // Barre de travail entamée pour voir l'effet de la touche Espace
@@ -61,6 +63,7 @@ export function startTutorial() {
     renderBars();
     els.panel.classList.remove('hidden');
     showStep(0);
+    return new Promise(resolve => { resolveEnd = resolve; });
 }
 
 function showStep(index) {
@@ -131,6 +134,8 @@ export function endTutorial() {
     state.heat = 0;
     renderBars();
     hideTutorial();
+    resolveEnd?.();
+    resolveEnd = null;
 }
 
 export function hideTutorial() {

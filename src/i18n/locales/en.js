@@ -5,6 +5,25 @@ export default {
             next: 'Click to continue ▸',
             hangUp: 'Click to hang up ▸',
             skip: 'Skip call'
+        },
+        form: {
+            title: 'New employee form',
+            subtitle: 'Human resources department — mandatory',
+            deadline: 'Due before {time}',
+            open: '📋 HR form',
+            close: 'Close',
+            name: 'Name',
+            sex: 'Sex',
+            male: 'Male',
+            female: 'Female',
+            other: 'Other',
+            age: 'Age',
+            ratings: 'Rate from 1 to 5',
+            love: 'Love for the company',
+            suicide: 'Suicidal urges',
+            toilets: 'Risk of clogging the office toilets',
+            submit: 'Sign',
+            timeout: 'HR form not handed in before {time}. HR escorted you to the exit.'
         }
     },
 

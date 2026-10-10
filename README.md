@@ -24,9 +24,10 @@ Tenez jusqu'à 18h pour toucher votre salaire. Au niveau 2, des appels urgents a
 | Passer en mode ventilation | Clic sur l'éventail |
 | Se ventiler | Alterner `←` et `→` |
 | Répondre à un appel | Clic sur le téléphone |
+| Ouvrir / fermer la fiche RH | Bouton « 📋 Fiche RH » en bas à gauche |
 | Pause | `Échap` |
 
-Le premier niveau commence par un appel du patron, puis un tutoriel interactif.
+Le premier niveau commence par un appel du patron et un tutoriel interactif. Pendant la journée, il faut aussi remplir et signer la **fiche RH** du nouvel employé avant 16h, sinon c'est le game over.
 
 ## Points techniques
 
@@ -35,7 +36,7 @@ Le premier niveau commence par un appel du patron, puis un tutoriel interactif.
 - **État centralisé** : un seul objet [`state`](src/core/state.js) avec une phase explicite (`menu` → `dialogue` → `tutorial` → `playing` → `ended`) et un indicateur de pause indépendant.
 - **Découplage par événements** : un [bus d'événements](src/core/events.js) minimal permet au tutoriel de réagir aux actions du joueur sans que le code des contrôles le connaisse.
 - **Niveaux pilotés par la configuration** : durée de la journée, vitesses, seuils et salaire sont réglés dans [`src/config/levels.js`](src/config/levels.js) (documenté en JSDoc).
-- **Traductions** : les dialogues de l'histoire sont dans un fichier par langue ([`src/i18n/locales`](src/i18n/locales)), avec repli sur le français. Un test vérifie que chaque langue contient tous les textes. La langue se choisit avec `?lang=en` dans l'URL.
+- **Traductions** : les dialogues de l'histoire et les textes de la fiche employé (attributs `data-i18n`) sont dans un fichier par langue ([`src/i18n/locales`](src/i18n/locales)), avec repli sur le français. Un test vérifie que chaque langue contient tous les textes. La langue se choisit avec `?lang=en` dans l'URL.
 - **CI/CD** : à chaque push sur `main`, GitHub Actions lance les tests, puis publie le jeu sur itch.io avec [butler](https://itch.io/docs/butler/).
 - **Rendu** : scène en 16:9 qui couvre tout l'écran, sprites en pixel art, animations et retours visuels en CSS.
 
@@ -52,12 +53,14 @@ src/
 │   ├── state.js        État de la partie
 │   ├── rules.js        Règles du jeu (fonctions pures, testées)
 │   ├── game.js         Boucle de jeu, début et fin de journée, pause
+│   ├── employee.js     Validation de la fiche employé (fonction pure, testée)
 │   └── events.js       Bus d'événements
 ├── i18n/
 │   ├── index.js        Choix de la langue, accès aux textes
 │   └── locales/        Textes par langue (fr, en) : dialogues de l'histoire
 ├── systems/
 │   ├── dialogue.js     Appels téléphoniques de l'histoire
+│   ├── employeeForm.js Fiche du nouvel employé
 │   ├── tutorial.js     Tutoriel guidé
 │   ├── bubbles.js      Appels urgents
 │   └── money.js        Salaire
@@ -69,6 +72,7 @@ src/
 └── images/             Sprites
 tests/
 ├── rules.test.js       Tests unitaires des règles
+├── employee.test.js    Validation de la fiche employé
 └── i18n.test.js        Complétude des traductions
 ```
 

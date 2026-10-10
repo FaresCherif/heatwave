@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="src/styles/effects.css">
     <link rel="stylesheet" href="src/styles/tutorial.css">
     <link rel="stylesheet" href="src/styles/dialogue.css">
+    <link rel="stylesheet" href="src/styles/form.css">
 
     <script type="module" src="src/main.js"></script>
 </head>
@@ -61,6 +62,47 @@
             <button id="tutorialNext"></button>
             <button id="tutorialSkip" class="tutorial-skip">Passer le tutoriel</button>
         </div>
+    </div>
+
+    <!-- Fiche du nouvel employé, à remplir pendant la journée (textes : data-i18n, voir src/i18n) -->
+    <button class="form-toggle hidden" id="formToggle" aria-controls="employeeForm" aria-expanded="false">
+        <span data-i18n="form.open"></span>
+        <small id="formToggleDeadline"></small>
+    </button>
+
+    <div class="employee-form hidden" id="employeeForm">
+        <form class="form-paper" id="employeeFormFields" autocomplete="off" novalidate>
+            <header class="form-header">
+                <button type="button" class="form-close" id="formClose" data-i18n="form.close"></button>
+                <h2 data-i18n="form.title"></h2>
+                <p data-i18n="form.subtitle"></p>
+                <strong class="form-deadline" id="formDeadline"></strong>
+            </header>
+
+            <label class="form-field">
+                <span data-i18n="form.name"></span>
+                <input id="formName" name="name" maxlength="30">
+            </label>
+
+            <fieldset class="form-field">
+                <legend data-i18n="form.sex"></legend>
+                <div class="form-choices">
+                    <label><input type="radio" name="sex" value="male"> <span data-i18n="form.male"></span></label>
+                    <label><input type="radio" name="sex" value="female"> <span data-i18n="form.female"></span></label>
+                    <label><input type="radio" name="sex" value="other"> <span data-i18n="form.other"></span></label>
+                </div>
+            </fieldset>
+
+            <label class="form-field">
+                <span data-i18n="form.age"></span>
+                <input name="age" type="number" min="16" max="99">
+            </label>
+
+            <h3 data-i18n="form.ratings"></h3>
+            <div id="formRatings"></div>
+
+            <button type="submit" id="formSubmit" data-i18n="form.submit"></button>
+        </form>
     </div>
 
     <div class="room">

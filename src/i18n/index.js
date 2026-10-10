@@ -60,9 +60,20 @@ function lookup(root, key) {
     return key.split('.').reduce((node, part) => node?.[part], root);
 }
 
-/** Texte de l'interface, ex : t('dialogue.skip') */
-export function t(key) {
-    return lookup(LOCALES[language].ui, key) ?? lookup(LOCALES[DEFAULT_LANGUAGE].ui, key) ?? key;
+/**
+ * Texte de l'interface, ex : t('dialogue.skip').
+ * Les variables {nom} sont remplacées : t('form.deadline', { time: '16:00' })
+ */
+export function t(key, params = {}) {
+    const text = lookup(LOCALES[language].ui, key) ?? lookup(LOCALES[DEFAULT_LANGUAGE].ui, key) ?? key;
+    return text.replace(/\{(\w+)\}/g, (match, name) => params[name] ?? match);
+}
+
+/** Traduit les éléments HTML marqués data-i18n="clé" */
+export function applyTranslations(root = document) {
+    root.querySelectorAll('[data-i18n]').forEach(element => {
+        element.textContent = t(element.dataset.i18n);
+    });
 }
 
 /**

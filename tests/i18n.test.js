@@ -56,6 +56,10 @@ describe('accès aux textes', () => {
         assert.equal(getLanguage(), DEFAULT_LANGUAGE);
     });
 
+    test('remplace les variables du texte', () => {
+        assert.equal(t('form.deadline', { time: '16:00' }), 'À rendre avant 16:00');
+    });
+
     test('renvoie la clé si le texte n\'existe nulle part', () => {
         assert.equal(t('inconnu.cle'), 'inconnu.cle');
     });

@@ -1,6 +1,6 @@
 // Interface du haut de l'écran : horloge, salaire, mode actif et barres
 import { state, getLevel } from '../core/state.js';
-import { isOverheated, workBarColor, heatBarColor, computeDayPay } from '../core/rules.js';
+import { isOverheated, workBarColor, heatBarColor, computeDayPay, formatTime } from '../core/rules.js';
 import { playEffect, highlightZones } from './effects.js';
 
 const els = {
@@ -24,8 +24,7 @@ export function renderLevelLabel() {
 }
 
 export function renderClock() {
-    const pad = value => String(value).padStart(2, '0');
-    els.clock.textContent = `${pad(state.hour)}:${pad(state.minute)}`;
+    els.clock.textContent = formatTime(state.hour, state.minute);
 }
 
 export function renderBars() {
