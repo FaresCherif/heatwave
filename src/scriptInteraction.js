@@ -184,6 +184,8 @@ function updateModeIndicator() {
             alternateIndicator.classList.remove('active');
         }
     }
+
+    updateTutorial();
 }
 
 function updateAlternateIndicator(direction) {
@@ -272,6 +274,7 @@ function initializeGameEvents() {
                 const amount = overheated ? level.workPerPress * level.overheatWorkFactor : level.workPerPress;
                 workLevel = Math.min(100, workLevel + amount);
                 workEffect(amount, overheated);
+                updateTutorial('work');
             }
         }
 
@@ -295,6 +298,7 @@ function initializeGameEvents() {
                     heatLevel = Math.max(0, heatLevel - cooling_effect_fan);
                     updateAlternateIndicator(lastArrowKey);
                     coolEffect(cooling_effect_fan, lastArrowKey);
+                    updateTutorial('cool');
                 } else {
                     missEffect();
                 }

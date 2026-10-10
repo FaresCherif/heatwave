@@ -1,0 +1,137 @@
+/* Panneau du tutoriel : sur le mur, sous le HUD, sans cacher le poste de travail */
+.tutorial {
+    position: fixed;
+    left: 50%;
+    top: 110px;
+    transform: translateX(-50%);
+    z-index: 60;  /* Au-dessus du HUD (50), sous les menus (100 et 1000) */
+    width: min(560px, calc(100vw - 32px));
+    box-sizing: border-box;
+    padding: 14px 20px;
+    color: #fff;
+    background: rgba(20, 20, 40, 0.92);
+    border: 3px solid #ff6b35;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    transition: opacity 0.3s ease;
+}
+
+.tutorial.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tutorial-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #ff6b35;
+}
+
+.tutorial p {
+    margin: 8px 0;
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.tutorial b {
+    color: #ffb38a;
+}
+
+#tutorialProgress {
+    font-size: 15px;
+    font-weight: bold;
+    color: #7cff6b;
+}
+
+#tutorialProgress:empty {
+    display: none;
+}
+
+.tutorial-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+#tutorialNext {
+    padding: 8px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+#tutorialNext:hover {
+    background: linear-gradient(135deg, #ff8c42 0%, #ffa500 100%);
+}
+
+#tutorialNext.hidden {
+    display: none;
+}
+
+.tutorial-skip {
+    padding: 0;
+    font-size: 13px;
+    color: #aaa;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.tutorial-skip.hidden {
+    display: none;
+}
+
+.tutorial-skip:hover {
+    color: #fff;
+}
+
+/* Élément désigné par l'étape en cours : flèche qui rebondit au-dessus du sprite */
+.room .sprite.tuto-target::before {
+    content: '▼';
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    z-index: 10;
+    font-size: clamp(24px, 2.5vw, 40px);
+    color: #ff6b35;
+    text-shadow: 0 0 4px #000;
+    pointer-events: none;
+    animation: tuto-arrow 0.8s ease-in-out infinite;
+}
+
+/* Le personnage est grand : la flèche descend sur sa tête plutôt qu'au-dessus du cadre */
+.room .joueur.tuto-target::before {
+    bottom: 75%;
+}
+
+@keyframes tuto-arrow {
+    0%, 100% { transform: translate(-50%, 0); }
+    50%      { transform: translate(-50%, -30%); }
+}
+
+/* Ligne de barre désignée : contour orange qui pulse */
+.stat-bar.tuto-target {
+    border-radius: 6px;
+    animation: tuto-glow 1s ease-in-out infinite;
+}
+
+@keyframes tuto-glow {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.4); }
+    50%      { box-shadow: 0 0 0 2px #ff6b35, 0 0 12px #ff6b35; }
+}
+
+/* Garder le petit rebond de la barre pendant le tutoriel */
+.stat-bar.tuto-target.bump {
+    animation: bar-bump 0.25s ease-out, tuto-glow 1s ease-in-out infinite;
+}

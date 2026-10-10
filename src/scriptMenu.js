@@ -25,6 +25,7 @@ function restartGame() {
     if (pauseMenu) pauseMenu.classList.add('hidden');
 
     initializeGameEvents();
+    if (shouldShowTutorial()) startTutorial();
     startClock();
     startBubbleSystem();
 }

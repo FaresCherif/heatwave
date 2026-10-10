@@ -16,7 +16,8 @@ function renderClock() {
 }
 
 function updateClock() {
-    if (gameOver || !gameStarted || gamePaused) {
+    // Le temps est figé pendant le tutoriel
+    if (gameOver || !gameStarted || gamePaused || tutorialActive) {
         renderClock();
         return;
     }

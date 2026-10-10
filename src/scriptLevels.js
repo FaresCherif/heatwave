@@ -1,6 +1,7 @@
 // Définition des niveaux
 // Pour ajouter un niveau : copier un bloc et modifier ses valeurs.
 // bubbles: null désactive les bulles de tâches pour le niveau.
+// tutorial: true affiche le tutoriel guidé (une fois par session).
 const LEVELS = [
     {
         name: 'Niveau 1',
@@ -12,6 +13,7 @@ const LEVELS = [
         fanCooling: 1.5,        // Chaleur retirée par alternance ← →
         overheatThreshold: 70,  // Au-dessus de cette chaleur, le travail rapporte moins
         overheatWorkFactor: 0.5,// Multiplicateur du gain de travail en surchauffe
+        tutorial: true,         // Tutoriel guidé avant le début de la journée
         bubbles: null
     },
     {

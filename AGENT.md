@@ -25,6 +25,7 @@ Lorsque tu modifies ce projet, tu dois préserver le gameplay, la cohérence vis
 - [src/scriptMenu.js](src/scriptMenu.js) : menus et états du jeu.
 - [src/scriptClock.js](src/scriptClock.js) : horloge / temps.
 - [src/scrpitBar.js](src/scrpitBar.js) : barres d'état.
+- [src/scriptTutorial.js](src/scriptTutorial.js) : tutoriel guidé du niveau 1 (étapes dans `TUTORIAL_STEPS`).
 - [src/styles](src/styles) : feuilles de style du jeu.
 
 ## Comportements à préserver

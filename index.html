@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="src/styles/stylesheet_cool.css">
     <link rel="stylesheet" href="src/styles/stylesheet_menu.css">
     <link rel="stylesheet" href="src/styles/stylesheet_effects.css">
+    <link rel="stylesheet" href="src/styles/stylesheet_tutorial.css">
 
     <script src="src/scriptLevels.js"></script>
+    <script src="src/scriptTutorial.js"></script>
     <script src="src/scrpitBar.js"></script>
     <script src="src/scriptClock.js"></script>
     <script src="src/scriptGame.js"></script>
@@ -47,6 +49,20 @@
                     <div class="heat-threshold"></div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Tutoriel guidé du niveau 1 -->
+    <div class="tutorial hidden" id="tutorial">
+        <div class="tutorial-header">
+            <span>TUTORIEL</span>
+            <span id="tutorialStep"></span>
+        </div>
+        <p id="tutorialText"></p>
+        <div id="tutorialProgress"></div>
+        <div class="tutorial-buttons">
+            <button id="tutorialNext" onclick="this.blur(); nextTutorialStep()"></button>
+            <button class="tutorial-skip" onclick="this.blur(); endTutorial()">Passer le tutoriel</button>
         </div>
     </div>
 

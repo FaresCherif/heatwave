@@ -10,6 +10,10 @@ function resetGameState() {
 
     stopBubbleSystem();
 
+    // Un tutoriel interrompu (redémarrage) sera relancé par restartGame
+    tutorialActive = false;
+    hideTutorial();
+
     const startMenu = document.getElementById('startMenu');
     const pauseMenu = document.getElementById('pauseMenu');
     const gameOverScreen = document.getElementById('gameOverScreen');
