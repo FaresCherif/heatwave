@@ -2,12 +2,19 @@ let gameStarted = false;
 
 function startGame() {
     currentLevelIndex = 0;
+    resetMoney();
     restartGame();
 }
 
 // Bouton de l'écran de fin de niveau
 function nextLevel() {
-    currentLevelIndex = isLastLevel() ? 0 : currentLevelIndex + 1;
+    // Après la victoire, REJOUER relance une partie complète
+    if (isLastLevel()) {
+        currentLevelIndex = 0;
+        resetMoney();
+    } else {
+        currentLevelIndex++;
+    }
     restartGame();
 }
 

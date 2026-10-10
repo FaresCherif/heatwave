@@ -28,6 +28,7 @@ function resetGameState() {
     if (levelMenu) levelMenu.classList.add('hidden');
     if (levelLabel) levelLabel.textContent = getCurrentLevel().name;
     renderClock();
+    resetDayPay();
 
     updateBars();
     updateModeIndicator();
@@ -43,6 +44,9 @@ function triggerLevelComplete() {
     const title = document.getElementById('levelMenuTitle');
     const text = document.getElementById('levelMenuText');
     const button = document.getElementById('levelMenuButton');
+
+    const pay = collectDayPay();
+    document.getElementById('levelMenuPay').textContent = `Salaire du jour : ${pay} € — Total : ${totalMoney} €`;
 
     if (isLastLevel()) {
         title.textContent = 'VICTOIRE';

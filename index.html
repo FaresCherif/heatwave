@@ -14,6 +14,7 @@
 
     <script src="src/scriptLevels.js"></script>
     <script src="src/scriptTutorial.js"></script>
+    <script src="src/scriptMoney.js"></script>
     <script src="src/scrpitBar.js"></script>
     <script src="src/scriptClock.js"></script>
     <script src="src/scriptGame.js"></script>
@@ -28,6 +29,8 @@
         <div class="hud-info">
             <div class="level-label"></div>
             <div class="clock">08:00</div>
+            <div class="day-pay"></div>
+            <div class="total-money"></div>
         </div>
 
         <div id="workModeIndicator" class="active" data-mode="idle">
@@ -40,6 +43,7 @@
                 <label>💼 Travail</label>
                 <div class="bar-bg">
                     <div class="work-bar-fill"></div>
+                    <div class="work-threshold"></div>
                 </div>
             </div>
             <div class="stat-bar">
@@ -89,6 +93,7 @@
             <div class="level-menu hidden" id="levelMenu">
                 <div class="menu-content">
                     <h1 id="levelMenuTitle"></h1>
+                    <p id="levelMenuPay"></p>
                     <p id="levelMenuText"></p>
                     <button id="levelMenuButton" onclick="nextLevel()"></button>
                 </div>

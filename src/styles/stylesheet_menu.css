@@ -70,3 +70,11 @@
 .menu-content button:active {
     transform: scale(0.95);
 }
+
+/* Salaire affiché à la fin de la journée */
+.menu-content #levelMenuPay {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffd84a;
+}

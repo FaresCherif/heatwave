@@ -93,7 +93,8 @@
     width: 0%;
 }
 
-/* Trait du seuil de surchauffe (position définie par le niveau) */
+/* Traits des seuils : salaire réduit (Travail) et surchauffe (Chaleur), position définie par le niveau */
+.work-threshold,
 .heat-threshold {
     position: absolute;
     top: 0;
@@ -102,4 +103,33 @@
     background: #fff;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
     pointer-events: none;
+}
+
+/* Salaire du jour et total de la partie */
+.day-pay {
+    margin-top: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffd84a;
+    font-variant-numeric: tabular-nums;
+    border-radius: 4px;
+}
+
+.total-money {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.day-pay:empty,
+.total-money:empty {
+    display: none;
+}
+
+/* Le salaire vient de baisser : flash rouge */
+.day-pay.pay-loss {
+    animation: pay-loss 0.4s ease-out;
+}
+
+@keyframes pay-loss {
+    30% { color: #fff; background: #ff3b3b; transform: scale(1.1); }
 }

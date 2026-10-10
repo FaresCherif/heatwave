@@ -42,6 +42,9 @@ function updateClock() {
     // Vérifier le game over    
     if (checkGameOver()) return;
 
+    // Le temps passé avec peu de travail réduit le salaire du jour
+    trackPay();
+
     // Avance de 5 minutes
     currentMinute += 5;
     if (currentMinute >= 60) {

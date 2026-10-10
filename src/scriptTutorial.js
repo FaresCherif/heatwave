@@ -10,7 +10,7 @@ const TUTORIAL_STEPS = [
         done: () => currentMode === 'work'
     },
     {
-        text: 'Appuyez sur <b>Espace</b> pour remplir la barre 💼 Travail. Elle baisse en continu : à 0, vous êtes renvoyé !',
+        text: 'Appuyez sur <b>Espace</b> pour remplir la barre 💼 Travail. Elle baisse en continu : sous le trait blanc, votre <b>salaire du jour</b> 💰 diminue. À 0, vous êtes renvoyé !',
         target: '.work-bar-fill',
         action: 'work',
         count: 5

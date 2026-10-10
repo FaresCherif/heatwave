@@ -5,7 +5,7 @@
 const LEVELS = [
     {
         name: 'Niveau 1',
-        description: 'Travaillez et restez au frais jusqu\'à 16h.',
+        description: 'Travaillez et restez au frais jusqu\'à 18h.',
         startHour: 13,          // Heure de début de journée
         endHour: 18,            // Heure de fin : niveau réussi
         workDecay: 2,           // Travail perdu à chaque tick
@@ -15,6 +15,8 @@ const LEVELS = [
         fanCooling: 1.5,        // Chaleur retirée par alternance ← →
         overheatThreshold: 70,  // Au-dessus de cette chaleur, le travail rapporte moins
         overheatWorkFactor: 0.5,// Multiplicateur du gain de travail en surchauffe
+        dailyPay: 100,          // Salaire maximum de la journée (€)
+        lowWorkThreshold: 50,   // Sous ce niveau de travail, le salaire diminue
         tutorial: true,         // Tutoriel guidé avant le début de la journée
         bubbles: null
     },
@@ -30,6 +32,8 @@ const LEVELS = [
         fanCooling: 1.5,
         overheatThreshold: 70,
         overheatWorkFactor: 0.5,
+        dailyPay: 100,
+        lowWorkThreshold: 50,
         bubbles: {
             maxCount: 2,        // Bulles simultanées maximum
             minDelay: 3000,     // Délai minimum entre deux bulles (ms)
