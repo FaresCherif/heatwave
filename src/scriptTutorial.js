@@ -28,7 +28,7 @@ const TUTORIAL_STEPS = [
         count: 6
     },
     {
-        text: 'Au-delà du trait blanc, c\'est la <b>surchauffe</b> : le travail rapporte moitié moins. À 100 %, c\'est fini.<br>Tenez jusqu\'à <b>18h</b> ! (Échap = pause)',
+        text: () => `Au-delà du trait blanc, c'est la <b>surchauffe</b> : le travail rapporte moitié moins. À 100 %, c'est fini.<br>Tenez jusqu'à <b>${getCurrentLevel().endHour}h</b> ! (Échap = pause)`,
         target: '.heat-threshold',
         button: 'C\'EST PARTI'
     }
@@ -64,7 +64,8 @@ function showTutorialStep(index) {
     }
 
     document.getElementById('tutorialStep').textContent = `${index + 1}/${TUTORIAL_STEPS.length}`;
-    document.getElementById('tutorialText').innerHTML = step.text;
+    // Le texte peut être une fonction pour dépendre du niveau
+    document.getElementById('tutorialText').innerHTML = typeof step.text === 'function' ? step.text() : step.text;
 
     const button = document.getElementById('tutorialNext');
     button.textContent = step.button || '';

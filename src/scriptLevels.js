@@ -5,7 +5,9 @@
 const LEVELS = [
     {
         name: 'Niveau 1',
-        description: 'Travaillez et restez au frais jusqu\'à 18h.',
+        description: 'Travaillez et restez au frais jusqu\'à 16h.',
+        startHour: 13,          // Heure de début de journée
+        endHour: 18,            // Heure de fin : niveau réussi
         workDecay: 2,           // Travail perdu à chaque tick
         workPerPress: 1,        // Travail gagné par appui sur Espace
         heatMorning: 1,         // Chaleur gagnée par tick avant 12h
@@ -19,6 +21,8 @@ const LEVELS = [
     {
         name: 'Niveau 2',
         description: 'Des tâches urgentes apparaissent : cliquez-les avant qu\'elles n\'éclatent !',
+        startHour: 8,
+        endHour: 18,
         workDecay: 2,
         workPerPress: 1,
         heatMorning: 1,

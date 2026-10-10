@@ -49,8 +49,8 @@ function updateClock() {
         currentHour += 1;
     }
 
-    // Fin de journée à 18:00 : niveau réussi
-    if (currentHour >= 18) {
+    // Fin de journée : niveau réussi
+    if (currentHour >= level.endHour) {
         renderClock();
         triggerLevelComplete();
     }

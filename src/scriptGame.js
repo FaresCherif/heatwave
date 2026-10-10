@@ -1,5 +1,5 @@
 function resetGameState() {
-    currentHour = 8;
+    currentHour = getCurrentLevel().startHour;
     currentMinute = 0;
     workLevel = 100;
     heatLevel = 0;
@@ -20,7 +20,6 @@ function resetGameState() {
     const gameOverReason = document.getElementById('gameOverReason');
     const levelMenu = document.getElementById('levelMenu');
     const levelLabel = document.querySelector('.level-label');
-    const clock = document.querySelector('.clock');
 
     if (startMenu) startMenu.classList.add('hidden');
     if (pauseMenu) pauseMenu.classList.add('hidden');
@@ -28,7 +27,7 @@ function resetGameState() {
     if (gameOverReason) gameOverReason.textContent = '';
     if (levelMenu) levelMenu.classList.add('hidden');
     if (levelLabel) levelLabel.textContent = getCurrentLevel().name;
-    if (clock) clock.textContent = '08:00';
+    renderClock();
 
     updateBars();
     updateModeIndicator();
