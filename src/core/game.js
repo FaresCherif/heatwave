@@ -7,9 +7,12 @@ import { hideAllScreens, showScreen, hideScreen, showLevelComplete, showGameOver
 import { trackPay, collectDayPay } from '../systems/money.js';
 import { startBubbles, stopBubbles, updateBubbles } from '../systems/bubbles.js';
 import { shouldShowTutorial, startTutorial, hideTutorial } from '../systems/tutorial.js';
+import { playDialogue } from '../systems/dialogue.js';
+import { getDialogue } from '../i18n/index.js';
 
 const TICK_MS = 1000;  // Un tick = 5 minutes de jeu
 let loopId = null;
+let currentDayId = 0;  // Change à chaque (re)lancement de niveau
 
 // Nouvelle partie depuis le menu de démarrage
 export function startGame() {
@@ -50,9 +53,24 @@ export function restartLevel() {
     hideAllScreens();
     renderHud();
 
-    if (shouldShowTutorial()) startTutorial();
     startBubbles();
     startLoop();
+    playPrelude(level);
+}
+
+// Avant la journée : appel de l'histoire, puis tutoriel (chacun une seule fois par session)
+async function playPrelude(level) {
+    const dayId = ++currentDayId;
+
+    if (level.intro && !state.seenDialogues.has(level.intro)) {
+        state.seenDialogues.add(level.intro);
+        await playDialogue(getDialogue(level.intro));
+        // Niveau relancé pendant l'appel : cette suite est périmée
+        if (dayId !== currentDayId) return;
+        state.phase = 'playing';
+    }
+
+    if (shouldShowTutorial()) startTutorial();
 }
 
 function startLoop() {

@@ -26,15 +26,16 @@ Tenez jusqu'à 18h pour toucher votre salaire. Au niveau 2, des appels urgents a
 | Répondre à un appel | Clic sur le téléphone |
 | Pause | `Échap` |
 
-Le premier niveau commence par un tutoriel interactif.
+Le premier niveau commence par un appel du patron, puis un tutoriel interactif.
 
 ## Points techniques
 
 - **JavaScript vanilla, modules ES, aucune dépendance** : pas de framework ni de bundler, le navigateur charge directement les sources.
 - **Règles du jeu isolées et testées** : toute la logique (chaleur, surchauffe, alternance des flèches, salaire, fin de partie) est faite de fonctions pures dans [`src/core/rules.js`](src/core/rules.js), sans accès au DOM ni à l'état global. Elles sont couvertes par des tests unitaires avec le test runner natif de Node (`node:test`).
-- **État centralisé** : un seul objet [`state`](src/core/state.js) avec une phase explicite (`menu` → `tutorial` → `playing` → `ended`) et un indicateur de pause indépendant.
+- **État centralisé** : un seul objet [`state`](src/core/state.js) avec une phase explicite (`menu` → `dialogue` → `tutorial` → `playing` → `ended`) et un indicateur de pause indépendant.
 - **Découplage par événements** : un [bus d'événements](src/core/events.js) minimal permet au tutoriel de réagir aux actions du joueur sans que le code des contrôles le connaisse.
 - **Niveaux pilotés par la configuration** : durée de la journée, vitesses, seuils et salaire sont réglés dans [`src/config/levels.js`](src/config/levels.js) (documenté en JSDoc).
+- **Traductions** : les dialogues de l'histoire sont dans un fichier par langue ([`src/i18n/locales`](src/i18n/locales)), avec repli sur le français. Un test vérifie que chaque langue contient tous les textes. La langue se choisit avec `?lang=en` dans l'URL.
 - **CI/CD** : à chaque push sur `main`, GitHub Actions lance les tests, puis publie le jeu sur itch.io avec [butler](https://itch.io/docs/butler/).
 - **Rendu** : scène en 16:9 qui couvre tout l'écran, sprites en pixel art, animations et retours visuels en CSS.
 
@@ -52,7 +53,11 @@ src/
 │   ├── rules.js        Règles du jeu (fonctions pures, testées)
 │   ├── game.js         Boucle de jeu, début et fin de journée, pause
 │   └── events.js       Bus d'événements
+├── i18n/
+│   ├── index.js        Choix de la langue, accès aux textes
+│   └── locales/        Textes par langue (fr, en) : dialogues de l'histoire
 ├── systems/
+│   ├── dialogue.js     Appels téléphoniques de l'histoire
 │   ├── tutorial.js     Tutoriel guidé
 │   ├── bubbles.js      Appels urgents
 │   └── money.js        Salaire
@@ -63,7 +68,8 @@ src/
 ├── styles/             Feuilles de style par zone de l'interface
 └── images/             Sprites
 tests/
-└── rules.test.js       Tests unitaires des règles
+├── rules.test.js       Tests unitaires des règles
+└── i18n.test.js        Complétude des traductions
 ```
 
 ## Lancer le projet

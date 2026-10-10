@@ -24,6 +24,7 @@
  * @property {number} overheatWorkFactor  Multiplicateur du gain de travail en surchauffe
  * @property {number} dailyPay            Salaire maximum de la journée (€)
  * @property {number} lowWorkThreshold    Sous ce niveau de travail, le salaire diminue
+ * @property {string} [intro]            Appel joué avant la journée : nom d'un dialogue (src/i18n/locales)
  * @property {boolean} [tutorial]         Tutoriel guidé avant la journée (une fois par session)
  * @property {BubbleConfig|null} bubbles  null désactive les appels urgents
  */
@@ -44,6 +45,7 @@ export const LEVELS = [
         overheatWorkFactor: 0.5,
         dailyPay: 100,
         lowWorkThreshold: 50,
+        intro: 'welcome',
         tutorial: true,
         bubbles: null
     },

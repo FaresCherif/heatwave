@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="src/styles/screens.css">
     <link rel="stylesheet" href="src/styles/effects.css">
     <link rel="stylesheet" href="src/styles/tutorial.css">
+    <link rel="stylesheet" href="src/styles/dialogue.css">
 
     <script type="module" src="src/main.js"></script>
 </head>
@@ -97,6 +98,19 @@
                     <p id="gameOverReason"></p>
                     <button id="retryButton">RECOMMENCER</button>
                 </div>
+            </div>
+
+            <!-- Appel téléphonique de l'histoire -->
+            <div class="dialogue hidden" id="dialogue">
+                <div class="dialogue-phone">
+                    <img src="src/images/phone.png" alt="Téléphone">
+                </div>
+                <div class="dialogue-bubble">
+                    <div class="dialogue-caller" id="dialogueCaller"></div>
+                    <p id="dialogueText"></p>
+                    <div class="dialogue-hint" id="dialogueHint"></div>
+                </div>
+                <button class="dialogue-skip" id="dialogueSkip">Passer l'appel</button>
             </div>
 
             <img class="decor" src="src/images/background.png" alt="">

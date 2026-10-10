@@ -5,6 +5,7 @@ import { LEVELS } from '../config/levels.js';
  *
  * phase :
  * - 'menu'     : menu de démarrage
+ * - 'dialogue' : appel téléphonique de l'histoire, le temps est figé
  * - 'tutorial' : tutoriel en cours, le temps est figé
  * - 'playing'  : journée en cours
  * - 'ended'    : journée terminée (réussie ou game over)
@@ -25,7 +26,8 @@ export const state = {
     lowWorkTicks: 0,    // Ticks passés sous le seuil de salaire pendant la journée
     totalMoney: 0,      // Argent cumulé sur la partie
 
-    tutorialDone: false // Le tutoriel ne s'affiche qu'une fois par session
+    tutorialDone: false,        // Le tutoriel ne s'affiche qu'une fois par session
+    seenDialogues: new Set()    // Idem pour chaque appel de l'histoire
 };
 
 export function getLevel() {

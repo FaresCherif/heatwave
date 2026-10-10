@@ -27,7 +27,8 @@ La structure complète est décrite dans [README.md](README.md).
 - [src/core/state.js](src/core/state.js) : état unique de la partie (`state.phase` : menu, tutorial, playing, ended).
 - [src/core/game.js](src/core/game.js) : boucle de jeu, début et fin de journée, pause.
 - [src/core/events.js](src/core/events.js) : bus d'événements (`mode-changed`, `action`, `stats-changed`).
-- [src/systems](src/systems) : tutoriel, appels urgents, salaire.
+- [src/systems](src/systems) : appels de l'histoire, tutoriel, appels urgents, salaire.
+- [src/i18n](src/i18n) : traductions. Les dialogues de l'histoire sont dans `locales/<langue>.js` ; le français est la référence et toute nouvelle clé doit être ajoutée dans chaque langue (vérifié par [tests/i18n.test.js](tests/i18n.test.js)).
 - [src/ui](src/ui) : seuls modules qui modifient l'affichage.
 - [src/styles](src/styles) : une feuille de style par zone (scène, HUD, écrans, effets, tutoriel).
 

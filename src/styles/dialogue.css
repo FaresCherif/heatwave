@@ -1,0 +1,114 @@
+/* Appel téléphonique : la scène s'assombrit, un téléphone sonne avec une bulle de dialogue */
+.dialogue {
+    /* Fixe par rapport à la fenêtre : le décor peut être rogné sur les côtés */
+    position: fixed;
+    inset: 0;
+    z-index: 500;  /* Au-dessus de la scène et du HUD, sous les écrans superposés (1000) */
+    background: rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.dialogue.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Téléphone : centré verticalement, à gauche du poste de travail */
+.dialogue-phone {
+    position: absolute;
+    left: 18%;
+    top: 32%;
+    width: clamp(90px, 9vw, 150px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    border: 4px solid #ff6b35;
+    border-radius: 50%;
+    box-shadow: 0 0 25px rgba(255, 107, 53, 0.6);
+}
+
+.dialogue-phone img {
+    width: 55%;
+    image-rendering: pixelated;
+}
+
+/* Le téléphone vibre tant que la réplique s'écrit */
+.dialogue.typing .dialogue-phone img {
+    animation: phone-ring 0.6s ease-in-out infinite;
+}
+
+/* Bulle de dialogue, avec une pointe vers le téléphone */
+.dialogue-bubble {
+    position: absolute;
+    left: calc(18% + clamp(90px, 9vw, 150px) + 30px);
+    top: 28%;
+    width: min(520px, 45%);
+    box-sizing: border-box;
+    padding: 18px 24px;
+    color: #1a1a2e;
+    background: #fff;
+    border: 3px solid #1a1a2e;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.dialogue-bubble::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 30px;
+    border: 10px solid transparent;
+    border-right: 12px solid #1a1a2e;
+    border-left: 0;
+}
+
+.dialogue-caller {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ff6b35;
+}
+
+#dialogueText {
+    min-height: 3em;  /* Évite que la bulle change de taille pendant l'écriture */
+    margin: 8px 0 10px;
+    font-size: 19px;
+    line-height: 1.4;
+}
+
+.dialogue-hint {
+    text-align: right;
+    font-size: 13px;
+    font-weight: bold;
+    color: #888;
+    animation: hint-blink 1.2s ease-in-out infinite;
+}
+
+/* Indication masquée tant que la réplique s'écrit */
+.dialogue.typing .dialogue-hint {
+    visibility: hidden;
+}
+
+@keyframes hint-blink {
+    50% { opacity: 0.4; }
+}
+
+.dialogue-skip {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    padding: 6px 14px;
+    font-size: 14px;
+    color: #fff;
+    background: rgba(20, 20, 40, 0.85);
+    border: 2px solid #ff6b35;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.dialogue-skip:hover {
+    background: #ff6b35;
+}
