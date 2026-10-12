@@ -63,6 +63,19 @@ export default {
                 'Quelle chance vous avez vraiment ! Et ça ne s\'arrête pas là, le département marketing offre même un éventail à l\'employé le plus pauvre : VOUS. Quelle chance vraiment, on vous chouchoute',
                 'Allez, au travail ! Et n\'oubliez pas : pas de rendement, pas de salaire.'
             ]
+        },
+        firstday: {
+            caller: 'Le patron',
+            lines: [
+                'HEY HEY HEY notre étoile montante. Alors pas trop fatigué après votre première journée ?',
+                'Bien sûr que non, votre seule tâche de la journée était d\'écrire votre nom (et vous avez réussi à faire une faute !)',
+                'Quoi qu\'il en soit, on s\'est rendu compte après une centaine d\'appels manqués et 2 messageries pleines que votre collègue qui s\'est pris pour un pigeon s\'occupait du standard téléphonique',
+                'Vraiment, il aurait pu nous le dire. Bon il est intubé, mais au moins l\'écrire ! Ah, je vous jure, plus personne n\'a de conscience professionnelle de nos jours',
+                'J\'entends dans votre silence que vous êtes ému. Puisque vous me paraissez fort sympathique et que vous êtes en période d\'essai, c\'est vous qui avez la chance de reprendre son travail.',
+                'Tout ce que vous avez à faire, c\'est de répondre au téléphone.',
+                'Votre famille compte sur vous !'
+            ]
         }
+
     }
 };

@@ -54,6 +54,7 @@ export const LEVELS = [
     {
         name: 'Niveau 2',
         description: 'Des tâches urgentes apparaissent : cliquez-les avant qu\'elles n\'éclatent !',
+        intro: 'firstday',
         startHour: 8,
         endHour: 18,
         workDecay: 2,

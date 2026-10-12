@@ -62,6 +62,18 @@ export default {
                 'How lucky you are! And it doesn\'t stop there: the marketing department is even giving a hand fan to the poorest employee: YOU. Lucky you, we really spoil you.',
                 'Now get to work! And remember: no output, no paycheck.'
             ]
+        },
+        firstday: {
+            caller: 'The boss',
+            lines: [
+                'HEY HEY HEY, our rising star! So, not too tired after your first day?',
+                'Of course not, your only task of the day was to write your name (and you still managed to make a typo!)',
+                'Anyway, after about a hundred missed calls and two full voicemail boxes, we realized that your colleague who thought he was a pigeon was the one handling the switchboard.',
+                'Honestly, he could have told us. Sure, he\'s intubated, but he could have written it down! I swear, nobody has any work ethic these days.',
+                'I can hear in your silence that you\'re moved. Since you seem very nice and you\'re still on probation, you get the chance to take over his job.',
+                'All you have to do is answer the phone.',
+                'Your family is counting on you!'
+            ]
         }
     }
 };
