@@ -34,15 +34,19 @@ export default {
             items: {
                 fan: {
                     name: 'Ventilateur',
-                    description: 'Un vrai ventilateur, branché sur secteur. La chaleur monte 25 % moins vite.'
+                    description: 'Grâce au génie humain, vos petits bras seront moins fatigués à la fin de la journée. La chaleur monte 25 % moins vite.'
                 },
                 ai: {
                     name: 'Abonnement IA',
-                    description: 'Elle fait une partie du travail à votre place. Le travail baisse 30 % moins vite.'
+                    description: 'Ne vous inquiétez pas des terminaux qu\'elle ouvre, ça a sûrement une utilité. Le travail baisse 30 % moins vite.'
+                },
+                plant: {
+                    name: 'Plante verte',
+                    description: 'Toujours plus utile que vous. Le seuil de surchauffe augmente de 10 points.'
                 },
                 voicemail: {
                     name: 'Messagerie vocale',
-                    description: 'Les appels urgents patientent sur répondeur : 3 secondes de plus pour décrocher.'
+                    description: 'Grâce à l\'extrait de votre dernier concert sous la douche, les appels urgents patientent sur répondeur : 3 secondes de plus pour décrocher.'
                 }
             }
         }

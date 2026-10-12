@@ -40,6 +40,14 @@ export const SHOP_ITEMS = [
         ]
     },
     {
+        id: 'plant',
+        icon: '🪴',
+        price: 30,
+        effects: [
+            { stat: 'overheatThreshold', add: 10 }
+        ]
+    },
+    {
         id: 'voicemail',
         icon: '📼',
         price: 40,

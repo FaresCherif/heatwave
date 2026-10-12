@@ -34,15 +34,19 @@ export default {
             items: {
                 fan: {
                     name: 'Electric fan',
-                    description: 'A real fan, plugged into the wall. Heat rises 25% slower.'
+                    description: 'Thanks to human genius, your little arms will be less tired at the end of the day. Heat rises 25% slower.'
                 },
                 ai: {
                     name: 'AI subscription',
-                    description: 'It does part of the job for you. Work drops 30% slower.'
+                    description: 'Don\'t worry about the terminals it keeps opening, they\'re probably useful. Work drops 30% slower.'
+                },
+                plant: {
+                    name: 'Potted plant',
+                    description: 'Still more useful than you\'ll ever be. The overheat threshold goes up by 10 points.'
                 },
                 voicemail: {
                     name: 'Voicemail',
-                    description: 'Urgent calls wait on the answering machine: 3 more seconds to pick up.'
+                    description: 'Thanks to a clip of your latest shower concert, urgent calls wait on the answering machine: 3 more seconds to pick up.'
                 }
             }
         }
