@@ -25,6 +25,11 @@ export default {
             submit: 'Sign',
             timeout: 'HR form not handed in before {time}. HR escorted you to the exit.'
         },
+        levelSelect: {
+            title: 'Secret code',
+            subtitle: 'Choose your level',
+            back: 'Back'
+        },
         shop: {
             title: 'Shop',
             money: 'Your money: {money} €',

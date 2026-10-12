@@ -155,3 +155,24 @@
     color: #7cff6b;
     background: none;
 }
+
+/* Écran secret de choix du niveau */
+.menu-content.level-select h1 {
+    text-transform: uppercase;
+}
+
+.level-select-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.menu-content .level-select-back {
+    padding: 8px 24px;
+    font-size: 15px;
+    background: none;
+    border: 2px solid #ff6b35;
+    box-shadow: none;
+}

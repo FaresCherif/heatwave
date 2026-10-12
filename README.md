@@ -27,6 +27,8 @@ Tenez jusqu'à 18h pour toucher votre salaire, puis dépensez-le dans la **bouti
 | Ouvrir / fermer la fiche RH | Bouton « 📋 Fiche RH » en bas à gauche |
 | Pause | `Échap` |
 
+Un code bien connu, tapé sur le menu de démarrage, permet de choisir son niveau…
+
 Le premier niveau commence par un appel du patron et un tutoriel interactif. Pendant la journée, il faut aussi remplir et signer la **fiche RH** du nouvel employé avant 16h, sinon c'est le game over.
 
 ## Points techniques
@@ -57,6 +59,7 @@ src/
 │   ├── game.js         Boucle de jeu, début et fin de journée, pause
 │   ├── employee.js     Validation de la fiche employé (fonction pure, testée)
 │   ├── upgrades.js     Effets des objets achetés (fonctions pures, testées)
+│   ├── sequence.js     Détection d'un code secret au clavier (testée)
 │   └── events.js       Bus d'événements
 ├── i18n/
 │   ├── index.js        Choix de la langue, accès aux textes
@@ -65,6 +68,7 @@ src/
 │   ├── dialogue.js     Appels téléphoniques de l'histoire
 │   ├── employeeForm.js Fiche du nouvel employé
 │   ├── shop.js         Boutique entre deux niveaux
+│   ├── levelSelect.js  Easter egg : choix du niveau par code secret
 │   ├── tutorial.js     Tutoriel guidé
 │   ├── bubbles.js      Appels urgents
 │   └── money.js        Salaire
@@ -78,6 +82,7 @@ tests/
 ├── rules.test.js       Tests unitaires des règles
 ├── employee.test.js    Validation de la fiche employé
 ├── upgrades.test.js    Effets et achat des objets de la boutique
+├── sequence.test.js    Détection du code secret
 └── i18n.test.js        Complétude des traductions
 ```
 

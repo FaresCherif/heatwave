@@ -2,6 +2,7 @@
 
 const screens = {
     start: document.getElementById('startMenu'),
+    levelSelect: document.getElementById('levelSelect'),
     pause: document.getElementById('pauseMenu'),
     level: document.getElementById('levelMenu'),
     shop: document.getElementById('shopScreen'),

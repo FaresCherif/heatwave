@@ -2,6 +2,7 @@
 import { startGame, nextLevel, restartLevel, resumeGame } from './core/game.js';
 import { nextTutorialStep, endTutorial } from './systems/tutorial.js';
 import { initInput } from './input.js';
+import { initLevelSelect } from './systems/levelSelect.js';
 
 // Le focus est retiré après le clic : sinon la touche Espace (travail)
 // réactiverait le bouton
@@ -22,3 +23,4 @@ bindButton('tutorialNext', nextTutorialStep);
 bindButton('tutorialSkip', endTutorial);
 
 initInput();
+initLevelSelect();

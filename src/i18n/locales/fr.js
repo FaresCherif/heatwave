@@ -25,6 +25,11 @@ export default {
             submit: 'Signer',
             timeout: 'Fiche RH non rendue avant {time}. Les RH vous ont raccompagné vers la sortie.'
         },
+        levelSelect: {
+            title: 'Code secret',
+            subtitle: 'Choisissez votre niveau',
+            back: 'Retour'
+        },
         shop: {
             title: 'Boutique',
             money: 'Votre argent : {money} €',

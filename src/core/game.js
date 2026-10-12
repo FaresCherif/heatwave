@@ -16,9 +16,10 @@ const TICK_MS = 1000;  // Un tick = 5 minutes de jeu
 let loopId = null;
 let currentDayId = 0;  // Change à chaque (re)lancement de niveau
 
-// Nouvelle partie depuis le menu de démarrage
-export function startGame() {
+// Nouvelle partie depuis le menu de démarrage (ou un autre niveau via le code secret)
+export function startGame(levelIndex = 0) {
     resetProgress();
+    state.levelIndex = levelIndex;
     restartLevel();
 }
 
