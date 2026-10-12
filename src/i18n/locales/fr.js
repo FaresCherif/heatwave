@@ -24,6 +24,27 @@ export default {
             toilets: 'Risque de boucher les toilettes au travail',
             submit: 'Signer',
             timeout: 'Fiche RH non rendue avant {time}. Les RH vous ont raccompagné vers la sortie.'
+        },
+        shop: {
+            title: 'Boutique',
+            money: 'Votre argent : {money} €',
+            buy: 'Acheter — {price} €',
+            owned: 'Acheté ✓',
+            continue: 'Niveau suivant',
+            items: {
+                fan: {
+                    name: 'Ventilateur',
+                    description: 'Un vrai ventilateur, branché sur secteur. La chaleur monte 25 % moins vite.'
+                },
+                ai: {
+                    name: 'Abonnement IA',
+                    description: 'Elle fait une partie du travail à votre place. Le travail baisse 30 % moins vite.'
+                },
+                voicemail: {
+                    name: 'Messagerie vocale',
+                    description: 'Les appels urgents patientent sur répondeur : 3 secondes de plus pour décrocher.'
+                }
+            }
         }
     },
 

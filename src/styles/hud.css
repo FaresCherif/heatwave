@@ -176,3 +176,13 @@
 #alternateIndicator.right {
     color: #ffff00;
 }
+
+/* Objets achetés en boutique */
+.hud-items {
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.hud-items:empty {
+    display: none;
+}

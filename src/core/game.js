@@ -8,6 +8,7 @@ import { trackPay, collectDayPay } from '../systems/money.js';
 import { startBubbles, stopBubbles, updateBubbles } from '../systems/bubbles.js';
 import { shouldShowTutorial, startTutorial, hideTutorial } from '../systems/tutorial.js';
 import { playDialogue } from '../systems/dialogue.js';
+import { openShop } from '../systems/shop.js';
 import { startEmployeeForm, stopEmployeeForm, updateFormDeadline, isFormOverdue } from '../systems/employeeForm.js';
 import { getDialogue, t } from '../i18n/index.js';
 
@@ -17,20 +18,29 @@ let currentDayId = 0;  // Change à chaque (re)lancement de niveau
 
 // Nouvelle partie depuis le menu de démarrage
 export function startGame() {
-    state.levelIndex = 0;
-    state.totalMoney = 0;
+    resetProgress();
     restartLevel();
 }
 
-// Bouton de l'écran de fin de niveau
-export function nextLevel() {
+// Argent et objets achetés repartent de zéro
+function resetProgress() {
+    state.levelIndex = 0;
+    state.totalMoney = 0;
+    state.ownedItems = [];
+}
+
+// Bouton de l'écran de fin de niveau : boutique, puis niveau suivant
+export async function nextLevel() {
     // Après la victoire, REJOUER relance une partie complète
     if (isLastLevel()) {
-        state.levelIndex = 0;
-        state.totalMoney = 0;
-    } else {
-        state.levelIndex++;
+        resetProgress();
+        restartLevel();
+        return;
     }
+
+    hideScreen('level');
+    await openShop();
+    state.levelIndex++;
     restartLevel();
 }
 
@@ -157,7 +167,7 @@ function completeLevel() {
             title: `${level.name.toUpperCase()} TERMINÉ`,
             pay: payText,
             text: `Prochain : ${next.name}. ${next.description}`,
-            button: 'NIVEAU SUIVANT'
+            button: 'CONTINUER'
         });
     }
 }

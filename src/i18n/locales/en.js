@@ -24,6 +24,27 @@ export default {
             toilets: 'Risk of clogging the office toilets',
             submit: 'Sign',
             timeout: 'HR form not handed in before {time}. HR escorted you to the exit.'
+        },
+        shop: {
+            title: 'Shop',
+            money: 'Your money: {money} €',
+            buy: 'Buy — {price} €',
+            owned: 'Owned ✓',
+            continue: 'Next level',
+            items: {
+                fan: {
+                    name: 'Electric fan',
+                    description: 'A real fan, plugged into the wall. Heat rises 25% slower.'
+                },
+                ai: {
+                    name: 'AI subscription',
+                    description: 'It does part of the job for you. Work drops 30% slower.'
+                },
+                voicemail: {
+                    name: 'Voicemail',
+                    description: 'Urgent calls wait on the answering machine: 3 more seconds to pick up.'
+                }
+            }
         }
     },
 

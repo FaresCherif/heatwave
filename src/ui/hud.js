@@ -1,5 +1,6 @@
 // Interface du haut de l'écran : horloge, salaire, mode actif et barres
-import { state, getLevel } from '../core/state.js';
+import { state, getLevel, getOwnedItems } from '../core/state.js';
+import { t } from '../i18n/index.js';
 import { isOverheated, workBarColor, heatBarColor, computeDayPay, formatTime } from '../core/rules.js';
 import { playEffect, highlightZones } from './effects.js';
 
@@ -8,6 +9,7 @@ const els = {
     clock: document.querySelector('.clock'),
     dayPay: document.querySelector('.day-pay'),
     totalMoney: document.querySelector('.total-money'),
+    items: document.querySelector('.hud-items'),
     modeIndicator: document.getElementById('workModeIndicator'),
     modeLabel: document.getElementById('modeLabel'),
     alternate: document.getElementById('alternateIndicator'),
@@ -49,6 +51,16 @@ export function renderMoney({ lostPay = false } = {}) {
     if (lostPay) playEffect(els.dayPay, 'pay-loss');
 }
 
+// Objets achetés en boutique : une icône par objet, son nom au survol
+export function renderItems() {
+    els.items.replaceChildren(...getOwnedItems().map(item => {
+        const icon = document.createElement('span');
+        icon.textContent = item.icon;
+        icon.title = t(`shop.items.${item.id}.name`);
+        return icon;
+    }));
+}
+
 export function renderMode() {
     els.modeIndicator.dataset.mode = state.mode;
     els.modeLabel.textContent = `MODE ${MODE_NAMES[state.mode]}`;
@@ -74,5 +86,6 @@ export function renderHud() {
     renderClock();
     renderBars();
     renderMoney();
+    renderItems();
     renderMode();
 }

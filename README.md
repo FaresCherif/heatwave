@@ -13,7 +13,7 @@ Chaque niveau est une journée de travail. Deux jauges évoluent en permanence :
 - 💼 **Travail** : baisse toute seule. À 0, vous êtes renvoyé. Sous 50 %, votre salaire du jour diminue.
 - 🌡️ **Chaleur** : monte toute la journée, encore plus vite l'après-midi. Au-delà du seuil, c'est la surchauffe et le travail rapporte moitié moins. À 100 %, c'est perdu.
 
-Tenez jusqu'à 18h pour toucher votre salaire. Au niveau 2, des appels urgents apparaissent : répondez avant qu'ils n'éclatent.
+Tenez jusqu'à 18h pour toucher votre salaire, puis dépensez-le dans la **boutique** entre deux niveaux : ventilateur, abonnement IA, messagerie vocale… Au niveau 2, des appels urgents apparaissent : répondez avant qu'ils n'éclatent.
 
 ### Commandes
 
@@ -35,6 +35,7 @@ Le premier niveau commence par un appel du patron et un tutoriel interactif. Pen
 - **Règles du jeu isolées et testées** : toute la logique (chaleur, surchauffe, alternance des flèches, salaire, fin de partie) est faite de fonctions pures dans [`src/core/rules.js`](src/core/rules.js), sans accès au DOM ni à l'état global. Elles sont couvertes par des tests unitaires avec le test runner natif de Node (`node:test`).
 - **État centralisé** : un seul objet [`state`](src/core/state.js) avec une phase explicite (`menu` → `dialogue` → `tutorial` → `playing` → `ended`) et un indicateur de pause indépendant.
 - **Découplage par événements** : un [bus d'événements](src/core/events.js) minimal permet au tutoriel de réagir aux actions du joueur sans que le code des contrôles le connaisse.
+- **Boutique pilotée par la configuration** : chaque objet décrit ses effets sur les paramètres du niveau (`multiply`, `add`) dans [`src/config/shop.js`](src/config/shop.js). Une fonction pure applique ces effets à une copie du niveau, sans toucher au code des systèmes de jeu.
 - **Niveaux pilotés par la configuration** : durée de la journée, vitesses, seuils et salaire sont réglés dans [`src/config/levels.js`](src/config/levels.js) (documenté en JSDoc).
 - **Traductions** : les dialogues de l'histoire et les textes de la fiche employé (attributs `data-i18n`) sont dans un fichier par langue ([`src/i18n/locales`](src/i18n/locales)), avec repli sur le français. Un test vérifie que chaque langue contient tous les textes. La langue se choisit avec `?lang=en` dans l'URL.
 - **CI/CD** : à chaque push sur `main`, GitHub Actions lance les tests, puis publie le jeu sur itch.io avec [butler](https://itch.io/docs/butler/).
@@ -48,12 +49,14 @@ src/
 ├── main.js             Point d'entrée : branche les boutons et les contrôles
 ├── input.js            Clavier et clics sur la scène
 ├── config/
-│   └── levels.js       Paramètres de chaque niveau
+│   ├── levels.js       Paramètres de chaque niveau
+│   └── shop.js         Objets de la boutique et leurs effets
 ├── core/
 │   ├── state.js        État de la partie
 │   ├── rules.js        Règles du jeu (fonctions pures, testées)
 │   ├── game.js         Boucle de jeu, début et fin de journée, pause
 │   ├── employee.js     Validation de la fiche employé (fonction pure, testée)
+│   ├── upgrades.js     Effets des objets achetés (fonctions pures, testées)
 │   └── events.js       Bus d'événements
 ├── i18n/
 │   ├── index.js        Choix de la langue, accès aux textes
@@ -61,6 +64,7 @@ src/
 ├── systems/
 │   ├── dialogue.js     Appels téléphoniques de l'histoire
 │   ├── employeeForm.js Fiche du nouvel employé
+│   ├── shop.js         Boutique entre deux niveaux
 │   ├── tutorial.js     Tutoriel guidé
 │   ├── bubbles.js      Appels urgents
 │   └── money.js        Salaire
@@ -73,6 +77,7 @@ src/
 tests/
 ├── rules.test.js       Tests unitaires des règles
 ├── employee.test.js    Validation de la fiche employé
+├── upgrades.test.js    Effets et achat des objets de la boutique
 └── i18n.test.js        Complétude des traductions
 ```
 

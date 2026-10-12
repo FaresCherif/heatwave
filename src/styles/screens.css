@@ -86,3 +86,72 @@
     color: #ff3b3b;
     text-shadow: 0 0 10px rgba(255, 59, 59, 0.8);
 }
+
+/* Boutique : une carte par objet */
+.menu-content.shop {
+    max-width: 640px;
+    padding: 40px 48px;
+}
+
+.menu-content.shop h1 {
+    font-size: 48px;
+    text-transform: uppercase;
+}
+
+.shop-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+    text-align: left;
+}
+
+.shop-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid rgba(255, 107, 53, 0.4);
+    border-radius: 10px;
+}
+
+.shop-item.owned {
+    border-color: #7cff6b;
+}
+
+.shop-icon {
+    font-size: 40px;
+}
+
+.shop-info {
+    flex: 1;
+}
+
+.shop-info strong {
+    font-size: 18px;
+}
+
+.menu-content .shop-info p {
+    margin: 4px 0 0;
+    font-size: 14px;
+}
+
+.menu-content .shop-buy {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    font-size: 15px;
+    text-transform: none;
+}
+
+.menu-content .shop-buy:disabled {
+    background: #555;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.shop-item.owned .shop-buy:disabled {
+    color: #7cff6b;
+    background: none;
+}

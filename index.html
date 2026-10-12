@@ -25,6 +25,7 @@
             <div class="clock">08:00</div>
             <div class="day-pay"></div>
             <div class="total-money"></div>
+            <div class="hud-items"></div>
         </div>
 
         <div id="workModeIndicator" data-mode="idle">
@@ -131,6 +132,16 @@
                     <p id="levelMenuPay" class="menu-highlight"></p>
                     <p id="levelMenuText"></p>
                     <button id="levelMenuButton"></button>
+                </div>
+            </div>
+
+            <!-- Boutique entre deux niveaux (objets : src/config/shop.js) -->
+            <div class="overlay hidden" id="shopScreen">
+                <div class="menu-content shop">
+                    <h1 data-i18n="shop.title"></h1>
+                    <p id="shopMoney" class="menu-highlight"></p>
+                    <div class="shop-items" id="shopItems"></div>
+                    <button id="shopContinue" data-i18n="shop.continue"></button>
                 </div>
             </div>
 

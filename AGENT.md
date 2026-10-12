@@ -23,6 +23,7 @@ La structure complète est décrite dans [README.md](README.md).
 - [index.html](index.html) : structure de la page, HUD et écrans.
 - [src/main.js](src/main.js) : point d'entrée (modules ES).
 - [src/config/levels.js](src/config/levels.js) : paramètres des niveaux.
+- [src/config/shop.js](src/config/shop.js) : objets de la boutique. Un objet modifie les paramètres du niveau via `effects` ; `getLevel()` renvoie toujours le niveau avec les effets des objets achetés appliqués.
 - [src/core/rules.js](src/core/rules.js) : règles du jeu en fonctions pures, sans DOM. Toute nouvelle règle de calcul va ici, avec son test dans [tests/rules.test.js](tests/rules.test.js).
 - [src/core/state.js](src/core/state.js) : état unique de la partie (`state.phase` : menu, dialogue, tutorial, playing, ended).
 - [src/core/game.js](src/core/game.js) : boucle de jeu, début et fin de journée, pause.

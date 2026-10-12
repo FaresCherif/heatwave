@@ -1,4 +1,6 @@
 import { LEVELS } from '../config/levels.js';
+import { SHOP_ITEMS } from '../config/shop.js';
+import { applyUpgrades } from './upgrades.js';
 
 /**
  * État unique de la partie, partagé par tous les modules.
@@ -29,11 +31,19 @@ export const state = {
     tutorialDone: false,        // Le tutoriel ne s'affiche qu'une fois par session
     seenDialogues: new Set(),   // Idem pour chaque appel de l'histoire
     /** @type {import('./employee.js').Employee|null} */
-    employee: null              // Fiche du nouvel employé, une fois remplie
+    employee: null,             // Fiche du nouvel employé, une fois remplie
+    /** @type {string[]} */
+    ownedItems: []              // Objets achetés en boutique (identifiants), pour toute la partie
 };
 
+/** Objets possédés, dans l'ordre de la boutique */
+export function getOwnedItems() {
+    return SHOP_ITEMS.filter(item => state.ownedItems.includes(item.id));
+}
+
+/** Paramètres du niveau en cours, effets des objets achetés compris */
 export function getLevel() {
-    return LEVELS[state.levelIndex];
+    return applyUpgrades(LEVELS[state.levelIndex], getOwnedItems());
 }
 
 export function isLastLevel() {
