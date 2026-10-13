@@ -26,7 +26,7 @@
  * @property {number} lowWorkThreshold    Sous ce niveau de travail, le salaire diminue
  * @property {string} [intro]            Appel joué avant la journée : nom d'un dialogue (src/i18n/locales)
  * @property {{deadlineHour: number}} [employeeForm]  Fiche du nouvel employé à signer pendant la journée avant deadlineHour, sinon game over
- * @property {boolean} [tutorial]         Tutoriel guidé avant la journée (une fois par session)
+ * @property {boolean} [tutorial]         Tutoriel guidé avant la journée
  * @property {BubbleConfig|null} bubbles  null désactive les appels urgents
  */
 

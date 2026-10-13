@@ -16,7 +16,8 @@ function bindButton(id, handler) {
 
 bindButton('startButton', startGame);
 bindButton('resumeButton', resumeGame);
-bindButton('restartButton', restartLevel);
+bindButton('restartLevelButton', restartLevel);
+bindButton('restartButton', () => startGame());
 bindButton('levelMenuButton', nextLevel);
 bindButton('retryButton', restartLevel);
 bindButton('tutorialNext', nextTutorialStep);

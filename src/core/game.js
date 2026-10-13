@@ -6,7 +6,7 @@ import { renderHud, renderBars, renderClock } from '../ui/hud.js';
 import { hideAllScreens, showScreen, hideScreen, showLevelComplete, showGameOver } from '../ui/screens.js';
 import { trackPay, collectDayPay } from '../systems/money.js';
 import { startBubbles, stopBubbles, updateBubbles } from '../systems/bubbles.js';
-import { shouldShowTutorial, startTutorial, hideTutorial } from '../systems/tutorial.js';
+import { startTutorial, hideTutorial } from '../systems/tutorial.js';
 import { playDialogue } from '../systems/dialogue.js';
 import { openShop } from '../systems/shop.js';
 import { startEmployeeForm, stopEmployeeForm, updateFormDeadline, isFormOverdue } from '../systems/employeeForm.js';
@@ -16,9 +16,9 @@ const TICK_MS = 1000;  // Un tick = 5 minutes de jeu
 let loopId = null;
 let currentDayId = 0;  // Change à chaque (re)lancement de niveau
 
-// Nouvelle partie depuis le menu de démarrage (ou un autre niveau via le code secret)
+// Nouvelle partie depuis le menu de démarrage ou « Redémarrer » (ou un autre niveau via le code secret)
 export function startGame(levelIndex = 0) {
-    resetProgress();
+    resetSession();
     state.levelIndex = levelIndex;
     restartLevel();
 }
@@ -28,6 +28,12 @@ function resetProgress() {
     state.levelIndex = 0;
     state.totalMoney = 0;
     state.ownedItems = [];
+}
+
+// Nouvelle partie : la fiche employé est aussi à remplir de nouveau
+function resetSession() {
+    resetProgress();
+    state.employee = null;
 }
 
 // Bouton de l'écran de fin de niveau : boutique, puis niveau suivant
@@ -45,7 +51,7 @@ export async function nextLevel() {
     restartLevel();
 }
 
-// (Re)lance le niveau en cours depuis le début de la journée
+// (Re)lance le niveau en cours, remis dans l'état du début de la journée
 export function restartLevel() {
     const level = getLevel();
     Object.assign(state, {
@@ -59,6 +65,8 @@ export function restartLevel() {
         lastArrow: null,
         lowWorkTicks: 0
     });
+    // La fiche signée pendant cette journée est à remplir de nouveau
+    if (level.employeeForm) state.employee = null;
 
     stopBubbles();
     hideTutorial();
@@ -71,20 +79,19 @@ export function restartLevel() {
     playPrelude(level);
 }
 
-// Début de journée : appel de l'histoire et tutoriel (une fois par session chacun),
+// Début de journée : appel de l'histoire et tutoriel, rejoués à chaque (re)lancement,
 // puis la fiche employé devient disponible tant qu'elle n'est pas signée
 async function playPrelude(level) {
     const dayId = ++currentDayId;
     // Niveau relancé pendant une étape : la suite de l'ancien lancement est périmée
     const isStale = () => dayId !== currentDayId;
 
-    if (level.intro && !state.seenDialogues.has(level.intro)) {
-        state.seenDialogues.add(level.intro);
+    if (level.intro) {
         await playDialogue(getDialogue(level.intro));
         if (isStale()) return;
     }
 
-    if (shouldShowTutorial()) {
+    if (level.tutorial) {
         await startTutorial();
         if (isStale()) return;
     }

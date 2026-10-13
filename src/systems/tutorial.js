@@ -51,10 +51,6 @@ let stepIndex = 0;
 let actionCount = 0;
 let resolveEnd = null;  // Résout la promesse de startTutorial()
 
-export function shouldShowTutorial() {
-    return Boolean(getLevel().tutorial) && !state.tutorialDone;
-}
-
 /** @returns {Promise<void>} Résolue à la fin du tutoriel (terminé ou passé) */
 export function startTutorial() {
     state.phase = 'tutorial';
@@ -129,7 +125,6 @@ export function endTutorial() {
     if (state.phase !== 'tutorial') return;
 
     state.phase = 'playing';
-    state.tutorialDone = true;
     state.work = 100;
     state.heat = 0;
     renderBars();

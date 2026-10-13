@@ -68,6 +68,28 @@
     transform: scale(0.95);
 }
 
+/* Plusieurs boutons empilés (pause) : même largeur, espacés */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: max-content;
+    margin: 0 auto;
+}
+
+/* Action secondaire : contour seul, le bouton plein reste l'action principale */
+.menu-content button.secondary {
+    background: none;
+    border: 2px solid #ff6b35;
+    padding: 13px 48px;  /* Compense le contour : même taille que le bouton plein */
+    box-shadow: none;
+}
+
+.menu-content button.secondary:hover {
+    background: rgba(255, 107, 53, 0.15);
+    box-shadow: none;
+}
+
 /* Ligne mise en avant, ex : salaire de la journée */
 .menu-content .menu-highlight {
     margin: 0 0 20px 0;
