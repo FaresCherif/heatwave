@@ -27,7 +27,7 @@ Tenez jusqu'à 18h pour toucher votre salaire, puis dépensez-le dans la **bouti
 | Ouvrir / fermer la fiche RH | Bouton « 📋 Fiche RH » en bas à gauche |
 | Pause | `Échap` |
 
-Un code bien connu, tapé sur le menu de démarrage, permet de choisir son niveau…
+Un code bien connu, tapé sur le menu de démarrage ou de pause, permet de choisir son niveau…
 
 Le premier niveau commence par un appel du patron et un tutoriel interactif. Pendant la journée, il faut aussi remplir et signer la **fiche RH** du nouvel employé avant 16h, sinon c'est le game over.
 
