@@ -80,6 +80,19 @@ export default {
                 'Tout ce que vous avez à faire, c\'est de répondre au téléphone.',
                 'Votre famille compte sur vous !'
             ]
+        },
+        lunch: {
+            caller: 'Le patron',
+            lines: [
+                'Allô ? Je vous dérange pendant votre pause déjeuner ? Ah non, c\'est vrai, vous n\'en avez pas.',
+                'Vous n\'allez pas le croire mais un membre du syndic est venu se plaindre pour son pauvre chef bien aimé.',
+                'J\'ai cru qu\'il parlait de moi, qui sacrifie et vous offre tant. Vous avez même une corbeille de fruits tous les mois dans la salle commune. Si ça c\'est pas de l\'avantage !',
+                'Mais non, il parlait du bricognole en soin intensif. J\'adore faire plaisir, alors je l\'ai envoyé le rejoindre en express.',
+                'Et maintenant comme vous vous tourniez les pouces jusque là, c\'est vous qui allez reprendre ses tâches',
+                'C\'est un gratte papier, il ne fait que réécrire du texte, rien de sorcier. Même un enfant pourrait le faire. Je le sais, c\'était sous-traité avant qu\'ils ne veuillent plus être payés en billes.',
+                'Mais vous, faites du bon travail et vous aurez 10% de gratitude supplémentaire !',
+                'Au charbon !'
+            ]
         }
 
     }

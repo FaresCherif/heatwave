@@ -25,6 +25,7 @@
  * @property {number} dailyPay            Salaire maximum de la journée (€)
  * @property {number} lowWorkThreshold    Sous ce niveau de travail, le salaire diminue
  * @property {string} [intro]            Appel joué avant la journée : nom d'un dialogue (src/i18n/locales)
+ * @property {{hour: number, dialogue: string}[]} [calls]  Appels joués pendant la journée quand l'horloge atteint `hour`
  * @property {{deadlineHour: number}} [employeeForm]  Fiche du nouvel employé à signer pendant la journée avant deadlineHour, sinon game over
  * @property {boolean} [tutorial]         Tutoriel guidé avant la journée
  * @property {BubbleConfig|null} bubbles  null désactive les appels urgents
@@ -55,6 +56,7 @@ export const LEVELS = [
         name: 'Niveau 2',
         description: 'Des tâches urgentes apparaissent : cliquez-les avant qu\'elles n\'éclatent !',
         intro: 'firstday',
+        calls: [{ hour: 13, dialogue: 'lunch' }],
         startHour: 8,
         endHour: 18,
         workDecay: 2,

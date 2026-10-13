@@ -131,7 +131,24 @@ function tick() {
         return;
     }
 
-    if (state.hour >= level.endHour) completeLevel();
+    if (state.hour >= level.endHour) {
+        completeLevel();
+        return;
+    }
+
+    playScheduledCall(level);
+}
+
+// Appel de l'histoire prévu à l'heure qui vient de sonner : le temps est figé pendant l'appel
+async function playScheduledCall(level) {
+    const call = level.calls?.find(c => c.hour === state.hour && state.minute === 0);
+    if (!call) return;
+
+    const dayId = currentDayId;
+    await playDialogue(getDialogue(call.dialogue));
+    // Niveau relancé pendant l'appel : ne pas écraser la phase du nouveau lancement
+    if (dayId !== currentDayId) return;
+    state.phase = 'playing';
 }
 
 function checkGameOver() {

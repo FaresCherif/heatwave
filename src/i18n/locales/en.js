@@ -79,6 +79,19 @@ export default {
                 'All you have to do is answer the phone.',
                 'Your family is counting on you!'
             ]
+        },
+        lunch: {
+            caller: 'The boss',
+            lines: [
+                'Hello? Am I interrupting your lunch break? Oh no, that\'s right, you don\'t have one.',
+                'You won\'t believe it, but a union member came to complain about his poor beloved leader.',
+                'I thought he was talking about me, who sacrifices so much and gives you so much. You even get a fruit basket every month in the break room. Now if that\'s not a perk!',
+                'But no, he was talking about that weirdo in intensive care. I love making people happy, so I sent him express to join him.',
+                'And now, since you\'ve been twiddling your thumbs until now, you\'ll be taking over his tasks.',
+                'He\'s a pen-pusher, all he does is rewrite text, nothing to it. Even a child could do it. I know, it was outsourced before they stopped wanting to be paid in marbles.',
+                'But you, do a good job and you\'ll get 10% extra gratitude!',
+                'Back to the grind!'
+            ]
         }
     }
 };
