@@ -113,6 +113,22 @@ export default {
                 'But you, do a good job and you\'ll get 10% extra gratitude!',
                 'Back to the grind!'
             ]
+        },
+        secondday: {
+            caller: 'The boss',
+            lines: [
+                'Good morning, good morning! The weather service says today is the peak of the heatwave. Great news: heat is motivating.',
+                'The switchboard has never rung this much. Customers who wait too long hang up on their own, and that comes out of your salary.',
+                'Stay hydrated. In moderation, water is billed to your salary.'
+            ]
+        },
+        afternoon: {
+            caller: 'The boss',
+            lines: [
+                'Quick news: management has written new memos from its swimming pool.',
+                'They need to be copied before tonight. By hand, it\'s more authentic.',
+                'I\'m counting on you!'
+            ]
         }
     }
 };

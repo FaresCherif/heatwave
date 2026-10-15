@@ -115,6 +115,22 @@ export default {
                 'Mais vous, faites du bon travail et vous aurez 10% de gratitude supplémentaire !',
                 'Au charbon !'
             ]
+        },
+        secondday: {
+            caller: 'Le patron',
+            lines: [
+                'Bonjour bonjour ! Météo France annonce le pic de la canicule pour aujourd\'hui. Excellente nouvelle : la chaleur, ça motive.',
+                'Le standard n\'a jamais autant sonné. Les clients qui attendent trop longtemps raccrochent d\'eux-mêmes, et ça, c\'est sur votre salaire.',
+                'Restez hydraté. Avec modération, l\'eau est facturée sur votre salaire.'
+            ]
+        },
+        afternoon: {
+            caller: 'Le patron',
+            lines: [
+                'Petite nouvelle : la direction a rédigé de nouvelles notes de service depuis sa piscine.',
+                'Il faut les recopier avant ce soir. À la main, c\'est plus authentique.',
+                'Je compte sur vous !'
+            ]
         }
 
     }

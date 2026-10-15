@@ -8,6 +8,10 @@
  * - add      : ajoute à la valeur
  * Un paramètre imbriqué s'écrit avec un point : 'bubbles.lifetime'.
  *
+ * requires : fonctionnalité de niveau améliorée par l'objet (clé de levels.js, ex : 'bubbles').
+ * L'objet n'est proposé qu'une fois cette fonctionnalité rencontrée dans un niveau déjà joué :
+ * le joueur doit l'avoir testée naturellement avant de pouvoir l'améliorer.
+ *
  * @typedef {Object} Effect
  * @property {string} stat
  * @property {number} [multiply]
@@ -18,6 +22,7 @@
  * @property {string} icon
  * @property {number} price  En euros
  * @property {Effect[]} effects
+ * @property {string} [requires]  Fonctionnalité à avoir rencontrée (sans : toujours proposé)
  */
 
 /** @type {ShopItem[]} */
@@ -51,6 +56,7 @@ export const SHOP_ITEMS = [
         id: 'voicemail',
         icon: '📼',
         price: 40,
+        requires: 'bubbles',
         effects: [
             { stat: 'bubbles.lifetime', add: 3 }
         ]

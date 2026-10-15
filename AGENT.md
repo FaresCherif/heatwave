@@ -18,6 +18,11 @@ Lorsque tu modifies ce projet, tu dois préserver le gameplay, la cohérence vis
 - Vérifier que les fichiers HTML, CSS et JavaScript restent cohérents entre eux.
 - Si tu ajoutes une fonctionnalité, garder le style du jeu déjà présent.
 
+## Règles de game design
+- Une amélioration de la boutique n'est achetable qu'une fois la fonctionnalité qu'elle améliore testée naturellement par le joueur, dans un niveau déjà joué. Le joueur doit d'abord en ressentir la difficulté avant de pouvoir l'acheter.
+- Concrètement : tout objet de [src/config/shop.js](src/config/shop.js) qui améliore une fonctionnalité absente du premier niveau déclare `requires: '<clé du niveau>'` (ex : `requires: 'bubbles'` pour la messagerie vocale). Un test vérifie que cette fonctionnalité apparaît dans un niveau suivi d'une boutique.
+- Un dialogue ne doit pas supposer qu'un objet a été acheté.
+
 ## Fichiers importants à connaître
 La structure complète est décrite dans [README.md](README.md).
 - [index.html](index.html) : structure de la page, HUD et écrans.

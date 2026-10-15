@@ -86,5 +86,30 @@ export const LEVELS = [
             penalty: 15,
             reward: 5
         }
+    },
+    {
+        name: 'Niveau 3',
+        description: 'Pic de la canicule : plus chaud, plus d\'appels, et toujours des textes à recopier.',
+        intro: 'secondday',
+        calls: [{ hour: 14, dialogue: 'afternoon', copyTask: { count: 3, deadlineHour: 17, reward: 20 } }],
+        startHour: 8,
+        endHour: 18,
+        workDecay: 2,
+        workPerPress: 1,
+        heatMorning: 1.5,
+        heatAfternoon: 5,
+        fanCooling: 1.5,
+        overheatThreshold: 70,
+        overheatWorkFactor: 0.5,
+        dailyPay: 120,
+        lowWorkThreshold: 50,
+        bubbles: {
+            maxCount: 3,
+            minDelay: 2500,
+            maxDelay: 6000,
+            lifetime: 5,
+            penalty: 15,
+            reward: 5
+        }
     }
 ];

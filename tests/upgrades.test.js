@@ -1,8 +1,9 @@
 // Tests de la boutique : effets des objets et conditions d'achat
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { applyUpgrades, canBuy } from '../src/core/upgrades.js';
+import { applyUpgrades, canBuy, isUnlocked } from '../src/core/upgrades.js';
 import { SHOP_ITEMS } from '../src/config/shop.js';
+import { LEVELS } from '../src/config/levels.js';
 import { LOCALES, DEFAULT_LANGUAGE } from '../src/i18n/index.js';
 
 const level = {
@@ -62,6 +63,24 @@ describe('achat', () => {
     });
 });
 
+describe('déblocage', () => {
+    const calm = { bubbles: null };
+    const busy = { bubbles: { lifetime: 5 } };
+    const voicemail = { ...item('voicemail', []), requires: 'bubbles' };
+
+    test('un objet sans prérequis est toujours proposé', () => {
+        assert.equal(isUnlocked(item('fan', []), [calm]), true);
+    });
+
+    test('caché tant que la fonctionnalité n\'a pas été jouée', () => {
+        assert.equal(isUnlocked(voicemail, [calm]), false);
+    });
+
+    test('proposé une fois la fonctionnalité jouée', () => {
+        assert.equal(isUnlocked(voicemail, [calm, busy]), true);
+    });
+});
+
 describe('catalogue', () => {
     test('chaque objet a un identifiant unique, un prix et des effets', () => {
         const ids = SHOP_ITEMS.map(({ id }) => id);
@@ -69,6 +88,14 @@ describe('catalogue', () => {
         for (const { id, price, effects } of SHOP_ITEMS) {
             assert.ok(price > 0, `${id} : prix`);
             assert.ok(effects.length > 0, `${id} : effets`);
+        }
+    });
+
+    test('chaque objet à prérequis devient achetable dans une boutique de la partie', () => {
+        // Pas de boutique après le dernier niveau
+        const shopLevels = LEVELS.slice(0, -1);
+        for (const { id, requires } of SHOP_ITEMS.filter(i => i.requires)) {
+            assert.ok(shopLevels.some(level => level[requires]), `${id} : « ${requires} » jamais joué avant une boutique`);
         }
     });
 

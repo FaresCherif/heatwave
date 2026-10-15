@@ -1,8 +1,9 @@
 // Boutique entre deux niveaux : l'argent gagné achète des objets actifs jusqu'à la fin de la partie.
 // openShop() renvoie une promesse résolue quand le joueur passe au niveau suivant.
 import { state } from '../core/state.js';
-import { canBuy } from '../core/upgrades.js';
+import { canBuy, isUnlocked } from '../core/upgrades.js';
 import { SHOP_ITEMS } from '../config/shop.js';
+import { LEVELS } from '../config/levels.js';
 import { applyTranslations, t } from '../i18n/index.js';
 import { showScreen, hideScreen } from '../ui/screens.js';
 import { renderMoney, renderItems } from '../ui/hud.js';
@@ -36,7 +37,10 @@ function buy(item) {
 
 function render() {
     els.money.textContent = t('shop.money', { money: state.totalMoney });
-    els.items.replaceChildren(...SHOP_ITEMS.map(renderItem));
+    // La boutique s'ouvre à la fin du niveau en cours : il compte parmi les niveaux joués
+    const playedLevels = LEVELS.slice(0, state.levelIndex + 1);
+    const items = SHOP_ITEMS.filter(item => isUnlocked(item, playedLevels));
+    els.items.replaceChildren(...items.map(renderItem));
 }
 
 function renderItem(item) {

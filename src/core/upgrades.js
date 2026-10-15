@@ -28,6 +28,16 @@ export function applyUpgrades(level, items) {
     return result;
 }
 
+/**
+ * L'objet est-il proposé en boutique ? Sa fonctionnalité requise doit avoir été
+ * rencontrée dans un niveau déjà joué.
+ * @param {ShopItem} item
+ * @param {Level[]} playedLevels
+ */
+export function isUnlocked(item, playedLevels) {
+    return !item.requires || playedLevels.some(level => level[item.requires]);
+}
+
 /** L'objet peut-il être acheté ? */
 export function canBuy(item, money, ownedIds) {
     return !ownedIds.includes(item.id) && money >= item.price;
