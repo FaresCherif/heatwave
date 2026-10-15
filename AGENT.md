@@ -22,6 +22,7 @@ Lorsque tu modifies ce projet, tu dois préserver le gameplay, la cohérence vis
 - Une amélioration de la boutique n'est achetable qu'une fois la fonctionnalité qu'elle améliore testée naturellement par le joueur, dans un niveau déjà joué. Le joueur doit d'abord en ressentir la difficulté avant de pouvoir l'acheter.
 - Concrètement : tout objet de [src/config/shop.js](src/config/shop.js) qui améliore une fonctionnalité absente du premier niveau déclare `requires: '<clé du niveau>'` (ex : `requires: 'bubbles'` pour la messagerie vocale). Un test vérifie que cette fonctionnalité apparaît dans un niveau suivi d'une boutique.
 - Un dialogue ne doit pas supposer qu'un objet a été acheté.
+- Objets d'histoire (ex : enregistreur, don pour l'hôpital) : `effects: []`, aucun effet de jeu. Ils sont vendus seulement certains jours (`days`) et leur achat (`state.ownedItems`) servira à débloquer des fins. La règle du test naturel ne les concerne pas, puisqu'ils n'améliorent aucune fonctionnalité.
 
 ## Fichiers importants à connaître
 La structure complète est décrite dans [README.md](README.md).

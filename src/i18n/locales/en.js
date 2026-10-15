@@ -100,6 +100,14 @@ export default {
                 background: {
                     name: 'Virtual background',
                     description: 'A picture of you working, taken on a rainy day. Fanning yourself on camera annoys the boss much less.'
+                },
+                recorder: {
+                    name: 'Call recorder',
+                    description: 'Discreetly plugged into the phone. The boss says a lot of things… No immediate effect, but you never know.'
+                },
+                donation: {
+                    name: 'Hospital donation',
+                    description: 'The hospital\'s generator is held together with duct tape, and your colleague is still intubated there. No immediate effect, but it\'s a kind gesture.'
                 }
             }
         }

@@ -79,15 +79,34 @@ describe('déblocage', () => {
     test('proposé une fois la fonctionnalité jouée', () => {
         assert.equal(isUnlocked(voicemail, [calm, busy]), true);
     });
+
+    test('proposé seulement dans ses jours de vente', () => {
+        const recorder = { ...item('recorder', []), days: [1, 2] };
+        assert.equal(isUnlocked(recorder, [calm]), true);
+        assert.equal(isUnlocked(recorder, [calm, busy]), true);
+        assert.equal(isUnlocked(recorder, [calm, busy, busy]), false);
+    });
+
+    test('un objet sans effet ne change pas le niveau', () => {
+        assert.deepEqual(applyUpgrades(level, [item('donation', [])]), level);
+    });
 });
 
 describe('catalogue', () => {
-    test('chaque objet a un identifiant unique, un prix et des effets', () => {
+    test('chaque objet a un identifiant unique, un prix et une liste d\'effets', () => {
         const ids = SHOP_ITEMS.map(({ id }) => id);
         assert.equal(new Set(ids).size, ids.length);
         for (const { id, price, effects } of SHOP_ITEMS) {
             assert.ok(price > 0, `${id} : prix`);
-            assert.ok(effects.length > 0, `${id} : effets`);
+            assert.ok(Array.isArray(effects), `${id} : effets (vide pour un objet d'histoire)`);
+        }
+    });
+
+    test('chaque jour de vente correspond à une boutique de la partie', () => {
+        // Une boutique après chaque niveau, sauf le dernier
+        const shopDays = LEVELS.slice(0, -1).map((level, index) => index + 1);
+        for (const { id, days } of SHOP_ITEMS.filter(i => i.days)) {
+            assert.ok(days.length > 0 && days.every(day => shopDays.includes(day)), `${id} : jours ${days}`);
         }
     });
 

@@ -12,6 +12,12 @@
  * L'objet n'est proposé qu'une fois cette fonctionnalité rencontrée dans un niveau déjà joué :
  * le joueur doit l'avoir testée naturellement avant de pouvoir l'améliorer.
  *
+ * days : boutiques où l'objet est proposé, par numéro du jour qui vient de se terminer
+ * (ex : [1, 2] = après les jours 1 et 2). Sans : proposé dans toutes les boutiques.
+ *
+ * Objets d'histoire : effects vide, aucun effet de jeu. Leur achat (state.ownedItems)
+ * servira à débloquer des fins.
+ *
  * @typedef {Object} Effect
  * @property {string} stat
  * @property {number} [multiply]
@@ -21,8 +27,9 @@
  * @property {string} id
  * @property {string} icon
  * @property {number} price  En euros
- * @property {Effect[]} effects
+ * @property {Effect[]} effects   Vide pour un objet d'histoire
  * @property {string} [requires]  Fonctionnalité à avoir rencontrée (sans : toujours proposé)
+ * @property {number[]} [days]    Jours après lesquels l'objet est proposé (sans : tous)
  */
 
 /** @type {ShopItem[]} */
@@ -111,5 +118,21 @@ export const SHOP_ITEMS = [
         effects: [
             { stat: 'meetings.moodPenalty', add: -2 }
         ]
+    },
+
+    // Objets d'histoire : sans effet de jeu, ils débloqueront des fins
+    {
+        id: 'recorder',
+        icon: '🎙️',
+        price: 35,
+        days: [1, 2],
+        effects: []
+    },
+    {
+        id: 'donation',
+        icon: '🏥',
+        price: 50,
+        days: [3],
+        effects: []
     }
 ];

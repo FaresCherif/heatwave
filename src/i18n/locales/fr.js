@@ -100,6 +100,14 @@ export default {
                 background: {
                     name: 'Fond virtuel',
                     description: 'Une photo de vous en train de travailler, prise un jour de pluie. S\'éventer en visio agace beaucoup moins le patron.'
+                },
+                recorder: {
+                    name: 'Enregistreur de conversation',
+                    description: 'Branché discrètement sur le téléphone. Le patron dit beaucoup de choses… Aucun effet immédiat, mais on ne sait jamais.'
+                },
+                donation: {
+                    name: 'Don pour l\'hôpital',
+                    description: 'Le groupe électrogène de l\'hôpital tient avec du scotch, et votre collègue y est toujours intubé. Aucun effet immédiat, mais c\'est un beau geste.'
                 }
             }
         }
@@ -202,7 +210,7 @@ export default {
                 'Réparez un disjoncteur n\'a rien de compliquer, vous faite BIP BAP BOUP et tada ça marche !',
                 'Et pas d\'excuse, une coupure n\'est pas une pause. Pour vous remonter le moral, une bonne nouvelle. Même l\'hopital as du mal avec l\'electricite, avec de la chance le chef du syndic aura un problème de surchauffe.',
                 'Un peu de karma dans ce monde, s\'en prendre au pauvre patron que je suis. Il y a quand meme des monstres sans scrupules, votre compassion silencieuse est toujours aussi touchante.',
-                'Allez on garde le rythme'
+                'Allez on garde le rythme !'
             ]
         },
         // Réservés au jour 5 (final)

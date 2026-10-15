@@ -39,7 +39,8 @@ function render() {
     els.money.textContent = t('shop.money', { money: state.totalMoney });
     // La boutique s'ouvre à la fin du niveau en cours : il compte parmi les niveaux joués
     const playedLevels = LEVELS.slice(0, state.levelIndex + 1);
-    const items = SHOP_ITEMS.filter(item => isUnlocked(item, playedLevels));
+    // Un objet acheté reste affiché, même hors de ses jours de vente
+    const items = SHOP_ITEMS.filter(item => isUnlocked(item, playedLevels) || state.ownedItems.includes(item.id));
     els.items.replaceChildren(...items.map(renderItem));
 }
 

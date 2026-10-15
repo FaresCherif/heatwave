@@ -30,11 +30,12 @@ export function applyUpgrades(level, items) {
 
 /**
  * L'objet est-il proposé en boutique ? Sa fonctionnalité requise doit avoir été
- * rencontrée dans un niveau déjà joué.
+ * rencontrée dans un niveau déjà joué, et la boutique doit faire partie de ses jours de vente.
  * @param {ShopItem} item
- * @param {Level[]} playedLevels
+ * @param {Level[]} playedLevels  Niveaux joués : la boutique suit le dernier (jour playedLevels.length)
  */
 export function isUnlocked(item, playedLevels) {
+    if (item.days && !item.days.includes(playedLevels.length)) return false;
     return !item.requires || playedLevels.some(level => level[item.requires]);
 }
 
