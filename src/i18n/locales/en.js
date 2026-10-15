@@ -71,6 +71,22 @@ export default {
                 voicemail: {
                     name: 'Voicemail',
                     description: 'Thanks to a clip of your latest shower concert, urgent calls wait on the answering machine: 3 more seconds to pick up.'
+                },
+                coffee: {
+                    name: 'Triple espresso',
+                    description: 'Your heart beats in 7/8 and your fingers type on their own. Each Space press brings 50% more work.'
+                },
+                mister: {
+                    name: 'Water mister',
+                    description: 'Tap water, sold at the price of mineral water. Each fan stroke cools 40% more.'
+                },
+                chair: {
+                    name: 'Ergonomic chair',
+                    description: 'Reclaimed from the CEO\'s office after his 3rd replacement this week. Overheating slows your work down less.'
+                },
+                headset: {
+                    name: 'Noise-cancelling headset',
+                    description: 'You can no longer hear the boss yelling. Missed urgent calls cost 40% less work.'
                 }
             }
         }

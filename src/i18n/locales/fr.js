@@ -71,6 +71,22 @@ export default {
                 voicemail: {
                     name: 'Messagerie vocale',
                     description: 'Grâce à l\'extrait de votre dernier concert sous la douche, les appels urgents patientent sur répondeur : 3 secondes de plus pour décrocher.'
+                },
+                coffee: {
+                    name: 'Triple expresso',
+                    description: 'Votre cœur bat en 7/8 et vos doigts tapent tout seuls. Chaque appui sur Espace rapporte 50 % de travail en plus.'
+                },
+                mister: {
+                    name: 'Brumisateur',
+                    description: 'De l\'eau du robinet, vendue au prix de l\'eau minérale. Chaque coup d\'éventail rafraîchit 40 % de plus.'
+                },
+                chair: {
+                    name: 'Chaise ergonomique',
+                    description: 'Récupérée dans le bureau du PDG après son 3e remplacement de la semaine. La surchauffe ralentit moins votre travail.'
+                },
+                headset: {
+                    name: 'Casque antibruit',
+                    description: 'Vous n\'entendez plus le patron hurler. Les appels urgents manqués coûtent 40 % de travail en moins.'
                 }
             }
         }

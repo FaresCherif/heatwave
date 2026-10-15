@@ -60,5 +60,38 @@ export const SHOP_ITEMS = [
         effects: [
             { stat: 'bubbles.lifetime', add: 3 }
         ]
+    },
+    {
+        id: 'coffee',
+        icon: '☕',
+        price: 50,
+        effects: [
+            { stat: 'workPerPress', multiply: 1.5 }
+        ]
+    },
+    {
+        id: 'mister',
+        icon: '💦',
+        price: 45,
+        effects: [
+            { stat: 'fanCooling', multiply: 1.4 }
+        ]
+    },
+    {
+        id: 'chair',
+        icon: '🪑',
+        price: 70,
+        effects: [
+            { stat: 'overheatWorkFactor', add: 0.25 }
+        ]
+    },
+    {
+        id: 'headset',
+        icon: '🎧',
+        price: 50,
+        requires: 'bubbles',
+        effects: [
+            { stat: 'bubbles.penalty', multiply: 0.6 }
+        ]
     }
 ];
