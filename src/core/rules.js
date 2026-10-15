@@ -82,3 +82,22 @@ export function workBarColor(work, /** @type {Level} */ level) {
 export function heatBarColor(heat) {
     return `hsl(${50 - heat * 0.5}, 100%, 50%)`;
 }
+
+/** Texte simplifié pour la recopie : accents, majuscules et ponctuation ne comptent pas. */
+export function normalizeCopy(text) {
+    return text
+        .normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trimStart();
+}
+
+/** La saisie est-elle le début exact du modèle ? (sinon, faute de frappe) */
+export function isCopyOnTrack(model, typed) {
+    return normalizeCopy(model).startsWith(normalizeCopy(typed));
+}
+
+/** La phrase est-elle entièrement recopiée ? */
+export function isCopyComplete(model, typed) {
+    return normalizeCopy(typed).trimEnd() === normalizeCopy(model).trimEnd();
+}

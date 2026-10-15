@@ -10,6 +10,16 @@
  * @property {number} penalty   Travail perdu quand une bulle éclate
  * @property {number} reward    Travail gagné quand on clique une bulle
  *
+ * @typedef {Object} CopyTask
+ * @property {number} count         Phrases à recopier
+ * @property {number} deadlineHour  Heure limite, sinon game over
+ * @property {number} reward        Travail gagné par phrase recopiée
+ *
+ * @typedef {Object} ScheduledCall
+ * @property {number} hour          Heure de l'appel
+ * @property {string} dialogue      Nom du dialogue (src/i18n/locales)
+ * @property {CopyTask} [copyTask]  Textes à recopier, donnés à la fin de l'appel
+ *
  * @typedef {Object} Level
  * @property {string} name
  * @property {string} description
@@ -25,7 +35,7 @@
  * @property {number} dailyPay            Salaire maximum de la journée (€)
  * @property {number} lowWorkThreshold    Sous ce niveau de travail, le salaire diminue
  * @property {string} [intro]            Appel joué avant la journée : nom d'un dialogue (src/i18n/locales)
- * @property {{hour: number, dialogue: string}[]} [calls]  Appels joués pendant la journée quand l'horloge atteint `hour`
+ * @property {ScheduledCall[]} [calls]    Appels joués pendant la journée
  * @property {{deadlineHour: number}} [employeeForm]  Fiche du nouvel employé à signer pendant la journée avant deadlineHour, sinon game over
  * @property {boolean} [tutorial]         Tutoriel guidé avant la journée
  * @property {BubbleConfig|null} bubbles  null désactive les appels urgents
@@ -56,7 +66,7 @@ export const LEVELS = [
         name: 'Niveau 2',
         description: 'Des tâches urgentes apparaissent : cliquez-les avant qu\'elles n\'éclatent !',
         intro: 'firstday',
-        calls: [{ hour: 13, dialogue: 'lunch' }],
+        calls: [{ hour: 11, dialogue: 'lunch', copyTask: { count: 2, deadlineHour: 18, reward: 50 } }],
         startHour: 8,
         endHour: 18,
         workDecay: 2,

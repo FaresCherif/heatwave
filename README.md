@@ -67,6 +67,7 @@ src/
 ├── systems/
 │   ├── dialogue.js     Appels téléphoniques de l'histoire
 │   ├── employeeForm.js Fiche du nouvel employé
+│   ├── copyTask.js     Gratte-papier : phrases à recopier
 │   ├── shop.js         Boutique entre deux niveaux
 │   ├── levelSelect.js  Easter egg : choix du niveau par code secret
 │   ├── tutorial.js     Tutoriel guidé

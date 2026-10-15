@@ -1,0 +1,71 @@
+/* Gratte-papier : bandeau en bas au centre, entre les zones des appels urgents
+   (ils apparaissent à gauche et à droite du poste de travail, voir bubbles.js) */
+.copy-task {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    z-index: 10;    /* Au-dessus des sprites, sous les appels urgents (12) et le HUD (50) */
+    width: min(560px, 42vw);
+    transform: translateX(-50%);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.copy-task.hidden {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+    pointer-events: none;
+}
+
+.copy-paper {
+    padding: 14px 18px;
+    transform: rotate(0.4deg);
+}
+
+.copy-paper .form-header {
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+}
+
+.copy-progress {
+    float: right;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Phrase modèle, « tapée à la machine » */
+.copy-model {
+    margin: 0 0 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.copy-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4px 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px dashed #2b2b2b;
+    outline: none;
+}
+
+.copy-input:focus {
+    border-bottom-style: solid;
+    border-bottom-color: #ff6b35;
+}
+
+/* Faute de frappe : la saisie ne correspond plus au début de la phrase */
+.copy-input.error {
+    color: #d62828;
+    border-bottom-color: #d62828;
+}
+
+/* Bouton d'ouverture : en bas à droite, symétrique de la fiche RH */
+.copy-toggle {
+    left: auto;
+    right: 16px;
+    align-items: flex-end;
+}

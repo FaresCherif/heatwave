@@ -10,6 +10,7 @@ import { startTutorial, hideTutorial } from '../systems/tutorial.js';
 import { playDialogue } from '../systems/dialogue.js';
 import { openShop } from '../systems/shop.js';
 import { startEmployeeForm, stopEmployeeForm, updateFormDeadline, isFormOverdue } from '../systems/employeeForm.js';
+import { startCopyTask, stopCopyTask, updateCopyDeadline, isCopyOverdue, getCopyDeadline } from '../systems/copyTask.js';
 import { getDialogue, t } from '../i18n/index.js';
 
 const TICK_MS = 1000;  // Un tick = 5 minutes de jeu
@@ -71,6 +72,7 @@ export function restartLevel() {
     stopBubbles();
     hideTutorial();
     stopEmployeeForm();
+    stopCopyTask();
     hideAllScreens();
     renderHud();
 
@@ -131,6 +133,12 @@ function tick() {
         return;
     }
 
+    updateCopyDeadline();
+    if (isCopyOverdue()) {
+        loseDay(t('copy.timeout', { time: formatTime(getCopyDeadline()) }));
+        return;
+    }
+
     if (state.hour >= level.endHour) {
         completeLevel();
         return;
@@ -139,7 +147,8 @@ function tick() {
     playScheduledCall(level);
 }
 
-// Appel de l'histoire prévu à l'heure qui vient de sonner : le temps est figé pendant l'appel
+// Appel de l'histoire prévu à l'heure qui vient de sonner : le temps est figé pendant l'appel,
+// puis les textes à recopier éventuels sont donnés
 async function playScheduledCall(level) {
     const call = level.calls?.find(c => c.hour === state.hour && state.minute === 0);
     if (!call) return;
@@ -149,6 +158,7 @@ async function playScheduledCall(level) {
     // Niveau relancé pendant l'appel : ne pas écraser la phase du nouveau lancement
     if (dayId !== currentDayId) return;
     state.phase = 'playing';
+    if (call.copyTask) startCopyTask(call.copyTask);
 }
 
 function checkGameOver() {
@@ -170,6 +180,7 @@ function endDay() {
     clearInterval(loopId);
     stopBubbles();
     stopEmployeeForm();
+    stopCopyTask();
 }
 
 function completeLevel() {

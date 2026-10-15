@@ -29,11 +29,28 @@ describe('langues', () => {
                 assert.ok(dialogue.lines.every(line => line.trim()), `« ${id} » : réplique vide`);
             }
         });
+
+        test(`${code} : assez de phrases à recopier`, () => {
+            assert.equal(locale.copyTexts.length, reference.copyTexts.length);
+            for (const { calls = [] } of LEVELS) {
+                for (const { copyTask } of calls.filter(call => call.copyTask)) {
+                    assert.ok(locale.copyTexts.length >= copyTask.count, `${copyTask.count} phrases demandées`);
+                }
+            }
+        });
     }
 
     test('chaque appel d\'introduction de niveau existe', () => {
         for (const { name, intro } of LEVELS.filter(level => level.intro)) {
             assert.ok(reference.dialogues[intro], `${name} : dialogue « ${intro} » introuvable`);
+        }
+    });
+
+    test('chaque appel pendant la journée existe', () => {
+        for (const { name, calls = [] } of LEVELS) {
+            for (const { dialogue } of calls) {
+                assert.ok(reference.dialogues[dialogue], `${name} : dialogue « ${dialogue} » introuvable`);
+            }
         }
     });
 });

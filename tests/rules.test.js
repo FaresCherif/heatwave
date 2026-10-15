@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {
     clampGauge, heatGainAt, isOverheated, workGain, isValidAlternation,
     advanceTime, getGameOverReason, getDayTicks, computeDayPay, workBarColor,
-    formatTime, minutesUntil
+    formatTime, minutesUntil, normalizeCopy, isCopyOnTrack, isCopyComplete
 } from '../src/core/rules.js';
 import { LEVELS } from '../src/config/levels.js';
 
@@ -132,6 +132,36 @@ describe('configuration des niveaux', () => {
         for (const { name, startHour, endHour, employeeForm } of LEVELS.filter(l => l.employeeForm)) {
             const { deadlineHour } = employeeForm;
             assert.ok(deadlineHour > startHour && deadlineHour <= endHour, `${name} : échéance ${deadlineHour}h`);
+        }
+    });
+});
+
+describe('recopie de texte', () => {
+    const model = 'Le café est payant.';
+
+    test('ignore accents, majuscules et ponctuation', () => {
+        assert.equal(normalizeCopy('  Le CAFÉ, est payant !'), 'le cafe est payant ');
+        assert.ok(isCopyComplete(model, 'le cafe est payant'));
+        assert.ok(isCopyComplete(model, 'LE CAFÉ EST PAYANT.  '));
+    });
+
+    test('accepte un début de phrase correct', () => {
+        assert.ok(isCopyOnTrack(model, ''));
+        assert.ok(isCopyOnTrack(model, 'Le caf'));
+        assert.ok(isCopyOnTrack(model, 'le cafe '));
+        assert.ok(!isCopyComplete(model, 'Le café'));
+    });
+
+    test('repère une faute de frappe', () => {
+        assert.ok(!isCopyOnTrack(model, 'Le cage'));
+        assert.ok(!isCopyComplete(model, 'Le café est payants'));
+    });
+
+    test('la tâche de recopie tombe pendant la journée', () => {
+        for (const { name, endHour, calls = [] } of LEVELS) {
+            for (const { hour, copyTask } of calls.filter(call => call.copyTask)) {
+                assert.ok(copyTask.deadlineHour > hour && copyTask.deadlineHour <= endHour, `${name} : échéance ${copyTask.deadlineHour}h`);
+            }
         }
     });
 });

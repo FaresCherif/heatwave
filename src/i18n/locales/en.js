@@ -25,6 +25,16 @@ export default {
             submit: 'Sign',
             timeout: 'HR form not handed in before {time}. HR escorted you to the exit.'
         },
+        copy: {
+            title: 'Pen-pusher',
+            subtitle: 'Copy each sentence (punctuation optional)',
+            deadline: 'Due before {time}',
+            progress: 'Sentence {current}/{total}',
+            placeholder: 'Type the sentence here…',
+            open: '📝 Copying',
+            close: 'Close',
+            timeout: 'Texts not copied before {time}. The boss outsourced your job to a kindergarten class.'
+        },
         levelSelect: {
             title: 'Secret code',
             subtitle: 'Choose your level',
@@ -56,6 +66,17 @@ export default {
             }
         }
     },
+
+    copyTexts: [
+        'The coffee in the break room is reserved for those who take no breaks.',
+        'Any complaint must be filed in triplicate, then incinerated.',
+        'Air conditioning is reserved for off-site management.',
+        'Bathroom breaks are limited to two per day.',
+        'Smiling is mandatory during office hours.',
+        'Windows stay closed for safety reasons.',
+        'The year-end bonus has been postponed to next year.',
+        'Any employee who breathes is asked to be discreet about it.'
+    ],
 
     dialogues: {
         welcome: {

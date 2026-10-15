@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="src/styles/tutorial.css">
     <link rel="stylesheet" href="src/styles/dialogue.css">
     <link rel="stylesheet" href="src/styles/form.css">
+    <link rel="stylesheet" href="src/styles/copy.css">
 
     <script type="module" src="src/main.js"></script>
 </head>
@@ -104,6 +105,26 @@
 
             <button type="submit" id="formSubmit" data-i18n="form.submit"></button>
         </form>
+    </div>
+
+    <!-- Gratte-papier : phrases à recopier, entre les deux zones d'appels urgents -->
+    <button class="form-toggle copy-toggle hidden" id="copyToggle" aria-controls="copyTask" aria-expanded="false">
+        <span data-i18n="copy.open"></span>
+        <small id="copyToggleDeadline"></small>
+    </button>
+
+    <div class="copy-task hidden" id="copyTask">
+        <div class="form-paper copy-paper">
+            <header class="form-header">
+                <button type="button" class="form-close" id="copyClose" data-i18n="copy.close"></button>
+                <h2 data-i18n="copy.title"></h2>
+                <p data-i18n="copy.subtitle"></p>
+                <strong class="form-deadline" id="copyDeadline"></strong>
+                <span class="copy-progress" id="copyProgress"></span>
+            </header>
+            <p class="copy-model" id="copyModel"></p>
+            <input class="copy-input" id="copyInput" autocomplete="off" spellcheck="false">
+        </div>
     </div>
 
     <div class="room">

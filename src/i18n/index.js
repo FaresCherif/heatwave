@@ -83,3 +83,8 @@ export function applyTranslations(root = document) {
 export function getDialogue(id) {
     return LOCALES[language].dialogues[id] ?? LOCALES[DEFAULT_LANGUAGE].dialogues[id];
 }
+
+/** Phrases à recopier du gratte-papier, dans la langue active */
+export function getCopyTexts() {
+    return LOCALES[language].copyTexts ?? LOCALES[DEFAULT_LANGUAGE].copyTexts;
+}

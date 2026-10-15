@@ -25,6 +25,16 @@ export default {
             submit: 'Signer',
             timeout: 'Fiche RH non rendue avant {time}. Les RH vous ont raccompagné vers la sortie.'
         },
+        copy: {
+            title: 'Gratte-papier',
+            subtitle: 'Recopiez chaque phrase (accents et ponctuation facultatifs)',
+            deadline: 'À rendre avant {time}',
+            progress: 'Phrase {current}/{total}',
+            placeholder: 'Tapez la phrase ici…',
+            open: '📝 Recopie',
+            close: 'Fermer',
+            timeout: 'Textes non recopiés avant {time}. Le patron a sous-traité votre poste à une classe de maternelle.'
+        },
         levelSelect: {
             title: 'Code secret',
             subtitle: 'Choisissez votre niveau',
@@ -56,6 +66,18 @@ export default {
             }
         }
     },
+
+    // Phrases du gratte-papier, tirées au hasard (CopyTask dans src/config/levels.js)
+    copyTexts: [
+        'Le café de la salle de pause est destiné à ceux ne prenant pas de pause.',
+        'Toute réclamation doit être déposée en trois exemplaires puis incinérés.',
+        'La climatisation est réservée à la direction hors site.',
+        'Les pauses toilettes sont limitées à deux par jour.',
+        'Le sourire est obligatoire pendant les heures de bureau.',
+        'Les fenêtres restent fermées pour des raisons de sécurité.',
+        'La prime de fin d\'année est reportée à l\'année prochaine.',
+        'Tout employé qui respire est prié de rester discret.'
+    ],
 
     // Appels de l'histoire, joués avant un niveau avec `intro: '<nom>'`
     dialogues: {
