@@ -93,5 +93,23 @@ export const SHOP_ITEMS = [
         effects: [
             { stat: 'bubbles.penalty', multiply: 0.6 }
         ]
+    },
+    {
+        id: 'mug',
+        icon: '🏆',
+        price: 55,
+        requires: 'bossMood',
+        effects: [
+            { stat: 'bossMood.start', add: 20 }
+        ]
+    },
+    {
+        id: 'background',
+        icon: '🖼️',
+        price: 60,
+        requires: 'meetings',
+        effects: [
+            { stat: 'meetings.moodPenalty', add: -2 }
+        ]
     }
 ];

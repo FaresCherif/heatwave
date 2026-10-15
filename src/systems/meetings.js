@@ -38,6 +38,7 @@ export function stopMeetings() {
     document.body.classList.remove('meeting-live');
 }
 
+// Pendant une coupure de courant, la caméra est éteinte : le patron ne voit rien
 on('action', type => {
-    if (live && type === 'cool') changeMood(-getConfig().moodPenalty, handfan);
+    if (live && type === 'cool' && !state.powerOut) changeMood(-getConfig().moodPenalty, handfan);
 });

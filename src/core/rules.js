@@ -137,3 +137,16 @@ export function isBossFurious(mood) {
 export function moodBarColor(mood) {
     return `hsl(${mood * 1.2}, 80%, 45%)`;
 }
+
+/**
+ * Saisie du code du disjoncteur, touche par touche.
+ * @param {string[]} code       Touches attendues
+ * @param {number} progress     Touches déjà justes
+ * @param {string} key          Touche tapée
+ * @returns {number}  Nouvelle progression : +1 si juste, sinon retour au début
+ *                    (1 si la touche fausse est le début du code)
+ */
+export function nextCodeProgress(code, progress, key) {
+    if (key === code[progress]) return progress + 1;
+    return key === code[0] ? 1 : 0;
+}

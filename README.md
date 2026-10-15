@@ -17,6 +17,8 @@ Tenez jusqu'à 18h pour toucher votre salaire, puis dépensez-le dans la **bouti
 
 Au niveau 3, une troisième jauge apparaît : 😊 **l'humeur du patron**. Il vous envoie des messages dans la journée, auxquels il faut répondre en choisissant une des trois réponses proposées (sans réponse, il s'agace). Il organise aussi des **visios** : s'éventer caméra allumée l'agace. À 0, vous êtes licencié.
 
+Au niveau 4, le réseau électrique sature : à chaque **coupure de courant**, l'ordinateur s'éteint et le travail ne monte plus. Il faut ouvrir le disjoncteur et taper la combinaison de flèches affichée pour relancer le courant, pendant que le patron continue d'écrire.
+
 ### Commandes
 
 | Action | Commande |
@@ -29,6 +31,7 @@ Au niveau 3, une troisième jauge apparaît : 😊 **l'humeur du patron**. Il vo
 | Ouvrir / fermer la fiche RH | Bouton « 📋 Fiche RH » en bas à gauche |
 | Ouvrir / fermer la recopie | Bouton « 📝 Recopie » en bas à droite |
 | Répondre au patron | Clic sur une des réponses de son message |
+| Relancer le courant | Clic sur le disjoncteur, puis taper la combinaison de flèches |
 | Pause | `Échap` |
 
 Un code bien connu, tapé sur le menu de démarrage ou de pause, permet de choisir son niveau…
@@ -42,7 +45,7 @@ Le premier niveau commence par un appel du patron et un tutoriel interactif. Pen
 - **État centralisé** : un seul objet [`state`](src/core/state.js) avec une phase explicite (`menu` → `dialogue` → `tutorial` → `playing` → `ended`) et un indicateur de pause indépendant.
 - **Découplage par événements** : un [bus d'événements](src/core/events.js) minimal permet au tutoriel et aux visios de réagir aux actions du joueur sans que le code des contrôles les connaisse.
 - **Boutique pilotée par la configuration** : chaque objet décrit ses effets sur les paramètres du niveau (`multiply`, `add`) dans [`src/config/shop.js`](src/config/shop.js). Une fonction pure applique ces effets à une copie du niveau, sans toucher au code des systèmes de jeu. Un objet qui améliore une fonctionnalité (`requires`, ex : les appels urgents) n'est proposé qu'après un niveau où le joueur l'a rencontrée.
-- **Niveaux pilotés par la configuration** : durée de la journée, vitesses, seuils, salaire, appel d'introduction, appels pendant la journée, humeur du patron, visios et tâches à rendre avant une heure limite (fiche RH, gratte-papier) sont réglés dans [`src/config/levels.js`](src/config/levels.js) (documenté en JSDoc).
+- **Niveaux pilotés par la configuration** : durée de la journée, vitesses, seuils, salaire, appel d'introduction, appels pendant la journée, humeur du patron, visios, coupures de courant et tâches à rendre avant une heure limite (fiche RH, gratte-papier) sont réglés dans [`src/config/levels.js`](src/config/levels.js) (documenté en JSDoc).
 - **Traductions** : les dialogues de l'histoire, les phrases à recopier et les textes de l'interface (attributs `data-i18n`) sont dans un fichier par langue ([`src/i18n/locales`](src/i18n/locales)), avec repli sur le français. Un test vérifie que chaque langue contient tous les textes. La langue se choisit avec `?lang=en` dans l'URL.
 - **CI/CD** : à chaque push sur `main`, GitHub Actions lance les tests, puis publie le jeu sur itch.io avec [butler](https://itch.io/docs/butler/).
 - **Rendu** : scène en 16:9 qui couvre tout l'écran, sprites en pixel art, animations et retours visuels en CSS.
@@ -78,6 +81,7 @@ src/
 │   ├── bubbles.js      Appels urgents
 │   ├── bossMood.js     Humeur et messages du patron
 │   ├── meetings.js     Visios
+│   ├── outages.js      Coupures de courant
 │   └── money.js        Salaire
 ├── ui/
 │   ├── hud.js          Horloge, jauges, salaire, mode actif

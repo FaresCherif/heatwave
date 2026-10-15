@@ -40,6 +40,11 @@ export default {
             sender: '💬 The boss',
             fired: 'The boss has had enough. You are fired, by text message, with a door emoji.'
         },
+        power: {
+            title: '⚡ Power outage',
+            open: 'Click to open the breaker',
+            hint: 'Type the combination with the arrow keys'
+        },
         meeting: {
             soon: '📹 Video call at {time}',
             live: '🔴 ON CAMERA until {time}: no fanning!'
@@ -87,6 +92,14 @@ export default {
                 headset: {
                     name: 'Noise-cancelling headset',
                     description: 'You can no longer hear the boss yelling. Missed urgent calls cost 40% less work.'
+                },
+                mug: {
+                    name: '"World\'s best boss" mug',
+                    description: 'Displayed prominently during video calls. The boss starts the day with 20 extra mood points.'
+                },
+                background: {
+                    name: 'Virtual background',
+                    description: 'A picture of you working, taken on a rainy day. Fanning yourself on camera annoys the boss much less.'
                 }
             }
         }
@@ -175,6 +188,32 @@ export default {
                 'The company also wants you to feel closer to the hierarchy. As if that wasn\'t already the case. You know you\'re my favorite employee... uh... Paul.',
                 'I\'ll send you messages between two cocktails, so answer fast, and answer well.',
                 'Move out, sorry troops!'
+            ]
+        },
+        thirdday: {
+            caller: 'The boss',
+            lines: [
+                'Bad news: with the heatwave, the whole country turned on its AC. The power grid can\'t keep up.',
+                'At my place, no problem, I have a generator for the pool. At yours, the power might go out several times today.',
+                'When it does, click the breaker and type the combination. Don\'t ask me why a breaker has a combination, it\'s for security.',
+                'Your phone runs on battery: I\'ll keep texting you. And no excuses, a power cut is not a break.'
+            ]
+        },
+        // Reserved for day 5 (finale)
+        lastday: {
+            caller: 'The boss',
+            lines: [
+                'Last day of the heatwave! Tomorrow, back to the office. Well, for you: I\'m staying by the pool.',
+                'To celebrate, I planned everything: the switchboard, two video calls, a few messages, and a little surprise this afternoon.',
+                'The shareholders are looking at this week\'s numbers. If we finish strong, there might be a bonus. For me.',
+                'Come on, one last push!'
+            ]
+        },
+        memo: {
+            caller: 'The boss',
+            lines: [
+                'Surprise! The pen-pusher is still in intensive care, and management came up with new memos.',
+                'Copy them before 5 PM. I know you already have a lot on your plate, but I believe in you. Well, I believe in your probation period.'
             ]
         }
     }

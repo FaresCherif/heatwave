@@ -1,0 +1,93 @@
+/* Coupure de courant : scène assombrie, ordinateur éteint, disjoncteur à relancer */
+body.power-out .room .decor {
+    filter: brightness(0.6);
+}
+
+body.power-out .room .computer img {
+    filter: grayscale(1) brightness(0.4);
+}
+
+/* Disjoncteur : bandeau en bas au centre, entre les zones des appels urgents */
+.breaker {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    z-index: 11;    /* Au-dessus du gratte-papier (10), sous les appels urgents (12) */
+    width: min(420px, 36vw);
+    box-sizing: border-box;
+    padding: 12px 18px;
+    text-align: center;
+    color: #fff;
+    background: rgba(20, 20, 40, 0.92);
+    border: 3px solid #ffd84a;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    transform: translateX(-50%);
+    cursor: pointer;
+    animation: breaker-pulse 1s ease-in-out infinite;
+}
+
+.breaker.hidden {
+    display: none;
+}
+
+.breaker strong {
+    font-size: 18px;
+    color: #ffd84a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.breaker p {
+    margin: 6px 0 0;
+    font-size: 14px;
+}
+
+/* Fermé : invitation à cliquer. Ouvert : la combinaison à taper */
+.breaker.open {
+    cursor: default;
+    animation: none;
+}
+
+.breaker.open .breaker-closed,
+.breaker:not(.open) .breaker-hint,
+.breaker:not(.open) .breaker-code {
+    display: none;
+}
+
+.breaker-code {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.breaker-code span {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 36px;
+    color: #2b2b2b;
+    background: #fdf8ec;
+    border-radius: 6px;
+}
+
+.breaker-code span.done {
+    color: #fff;
+    background: #2a9d4b;
+}
+
+/* Mauvaise flèche : la combinaison tremble et repart du début */
+.breaker-code.error {
+    animation: breaker-error 0.3s ease;
+}
+
+@keyframes breaker-error {
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+
+@keyframes breaker-pulse {
+    50% { box-shadow: 0 0 0 6px rgba(255, 216, 74, 0.35), 0 6px 16px rgba(0, 0, 0, 0.5); }
+}

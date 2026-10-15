@@ -4,7 +4,7 @@ import { clampGauge, workGain, isOverheated, isValidAlternation } from './core/r
 import { emit } from './core/events.js';
 import { togglePause } from './core/game.js';
 import { renderBars, renderMode, renderNextArrow } from './ui/hud.js';
-import { workEffect, coolEffect, missEffect } from './ui/effects.js';
+import { workEffect, coolEffect, missEffect, noPowerEffect } from './ui/effects.js';
 
 // Touches du jeu : leur comportement par défaut (défilement...) est bloqué,
 // les autres (F5, F12, Ctrl+R...) restent utilisables
@@ -20,6 +20,12 @@ function setMode(mode) {
 }
 
 function work() {
+    // Coupure de courant : l'ordinateur est éteint
+    if (state.powerOut) {
+        noPowerEffect();
+        return;
+    }
+
     const level = getLevel();
     // En surchauffe, chaque appui rapporte moins : il vaut mieux refroidir d'abord
     const overheated = isOverheated(state.heat, level);

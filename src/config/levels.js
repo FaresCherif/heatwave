@@ -32,6 +32,10 @@
  * @property {number} warningMinutes   Annonce de la visio, en minutes avant son début
  * @property {number} moodPenalty      Humeur perdue par coup d'éventail pendant la visio
  *
+ * @typedef {Object} OutageConfig
+ * @property {number[]} hours       Heures des coupures de courant (décimales : 10.5 = 10h30)
+ * @property {number} codeLength    Flèches à taper au disjoncteur pour relancer le courant
+ *
  * @typedef {Object} Level
  * @property {string} name
  * @property {string} description
@@ -53,6 +57,7 @@
  * @property {BubbleConfig|null} bubbles  null désactive les appels urgents
  * @property {BossMoodConfig} [bossMood]  Humeur du patron et ses messages
  * @property {MeetingConfig} [meetings]   Visios : s'éventer à l'écran agace le patron (bossMood requis)
+ * @property {OutageConfig} [outages]     Coupures de courant : plus de travail à l'ordinateur jusqu'à la relance
  */
 
 /** @type {Level[]} */
@@ -135,6 +140,41 @@ export const LEVELS = [
             slots: [{ hour: 11, duration: 60 }, { hour: 15, duration: 45 }],
             warningMinutes: 15,
             moodPenalty: 3
+        }
+    },
+    {
+        name: 'Niveau 4',
+        description: 'Avant dernier jour de la canicule.',
+        intro: 'thirdday',
+        startHour: 8,
+        endHour: 18,
+        workDecay: 2,
+        workPerPress: 1,
+        heatMorning: 1.5,
+        heatAfternoon: 5,
+        fanCooling: 1.5,
+        overheatThreshold: 70,
+        overheatWorkFactor: 0.5,
+        dailyPay: 150,
+        lowWorkThreshold: 50,
+        bubbles: {
+            maxCount: 2,
+            minDelay: 3000,
+            maxDelay: 7000,
+            lifetime: 5,
+            penalty: 15,
+            reward: 5
+        },
+        bossMood: {
+            start: 60,
+            messageHours: [9, 11.5, 12.5, 14.5, 16.5],
+            replyMinutes: 45,
+            answerMood: [15, 0, -15],
+            missPenalty: 20
+        },
+        outages: {
+            hours: [10, 13, 15.5],
+            codeLength: 5
         }
     }
 ];

@@ -5,7 +5,7 @@ import {
     clampGauge, heatGainAt, isOverheated, workGain, isValidAlternation,
     advanceTime, getGameOverReason, getDayTicks, computeDayPay, workBarColor,
     formatTime, minutesUntil, normalizeCopy, isCopyOnTrack, isCopyComplete,
-    toMinutes, formatMinutes, getMeetingStatus, isBossFurious
+    toMinutes, formatMinutes, getMeetingStatus, isBossFurious, nextCodeProgress
 } from '../src/core/rules.js';
 import { LEVELS } from '../src/config/levels.js';
 
@@ -158,6 +158,14 @@ describe('recopie de texte', () => {
         assert.ok(!isCopyComplete(model, 'Le café est payants'));
     });
 
+    test('les appels de l\'histoire tombent à l\'heure pile pendant la journée', () => {
+        for (const { name, startHour, endHour, calls = [] } of LEVELS) {
+            for (const { hour } of calls) {
+                assert.ok(Number.isInteger(hour) && hour > startHour && hour < endHour, `${name} : appel à ${hour}h`);
+            }
+        }
+    });
+
     test('la tâche de recopie tombe pendant la journée', () => {
         for (const { name, endHour, calls = [] } of LEVELS) {
             for (const { hour, copyTask } of calls.filter(call => call.copyTask)) {
@@ -201,6 +209,32 @@ describe('visio et humeur du patron', () => {
                 assert.ok(hour > startHour && hour < endHour, `${name} : ${hour}h hors de la journée`);
             }
             if (meetings) assert.ok(bossMood, `${name} : la visio pénalise l'humeur, bossMood requis`);
+        }
+    });
+});
+
+describe('coupure de courant', () => {
+    const code = ['ArrowUp', 'ArrowLeft', 'ArrowUp'];
+
+    test('avance à chaque bonne touche', () => {
+        assert.equal(nextCodeProgress(code, 0, 'ArrowUp'), 1);
+        assert.equal(nextCodeProgress(code, 2, 'ArrowUp'), 3);
+    });
+
+    test('une erreur fait recommencer', () => {
+        assert.equal(nextCodeProgress(code, 2, 'ArrowDown'), 0);
+    });
+
+    test('une erreur qui est le début du code compte comme premier pas', () => {
+        assert.equal(nextCodeProgress(code, 1, 'ArrowUp'), 1);
+    });
+
+    test('les coupures tombent pendant la journée', () => {
+        for (const { name, startHour, endHour, outages } of LEVELS.filter(l => l.outages)) {
+            for (const hour of outages.hours) {
+                assert.ok(hour > startHour && hour < endHour, `${name} : coupure à ${hour}h`);
+            }
+            assert.ok(outages.codeLength >= 2, `${name} : code trop court`);
         }
     });
 });

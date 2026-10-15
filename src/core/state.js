@@ -26,6 +26,7 @@ export const state = {
     lastArrow: null,    // Dernière flèche valide en mode ventilation : 'left' | 'right'
     /** @type {number|null} */
     bossMood: null,     // Humeur du patron, 0 à 100 (null : niveau sans humeur)
+    powerOut: false,    // Coupure de courant : l'ordinateur est éteint
 
     lowWorkTicks: 0,    // Ticks passés sous le seuil de salaire pendant la journée
     totalMoney: 0,      // Argent cumulé sur la partie

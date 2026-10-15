@@ -3,7 +3,7 @@
 // tant que la tâche n'est pas finie ; le temps continue de s'écouler.
 import { state, isTimeRunning } from '../core/state.js';
 import { clampGauge, formatTime, minutesUntil, isCopyOnTrack, isCopyComplete } from '../core/rules.js';
-import { emit } from '../core/events.js';
+import { emit, on } from '../core/events.js';
 import { showFloatingText } from '../ui/effects.js';
 import { applyTranslations, getCopyTexts, t } from '../i18n/index.js';
 
@@ -119,16 +119,21 @@ function onInput() {
     }
 }
 
-// Pas de saisie quand le temps est figé (pause, appel) ni de copier-coller
+// Pas de saisie quand le temps est figé (pause, appel), sans courant, ni de copier-coller
 els.input.addEventListener('beforeinput', event => {
-    if (!isTimeRunning() || event.inputType.startsWith('insertFromPaste') || event.inputType === 'insertFromDrop') {
+    if (!isTimeRunning() || state.powerOut || event.inputType.startsWith('insertFromPaste') || event.inputType === 'insertFromDrop') {
         event.preventDefault();
     }
+});
+
+// Coupure de courant : l'ordinateur est éteint, la feuille se referme (le disjoncteur prend sa place)
+on('power-changed', () => {
+    if (state.powerOut) setOpen(false);
 });
 els.input.addEventListener('input', onInput);
 
 els.toggle.addEventListener('click', () => {
     els.toggle.blur();
-    if (task) setOpen(els.panel.classList.contains('hidden'));
+    if (task && !state.powerOut) setOpen(els.panel.classList.contains('hidden'));
 });
 els.close.addEventListener('click', () => setOpen(false));

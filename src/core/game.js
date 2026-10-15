@@ -12,6 +12,7 @@ import { openShop } from '../systems/shop.js';
 import { startEmployeeForm, stopEmployeeForm, updateFormDeadline, isFormOverdue } from '../systems/employeeForm.js';
 import { startBossMood, stopBossMood, updateBossMood } from '../systems/bossMood.js';
 import { updateMeetings, stopMeetings } from '../systems/meetings.js';
+import { startOutages, stopOutages, updateOutages } from '../systems/outages.js';
 import { startCopyTask, stopCopyTask, updateCopyDeadline, isCopyOverdue, getCopyDeadline } from '../systems/copyTask.js';
 import { getDialogue, t } from '../i18n/index.js';
 
@@ -76,6 +77,7 @@ export function restartLevel() {
     stopEmployeeForm();
     stopCopyTask();
     stopMeetings();
+    startOutages();
     startBossMood();
     hideAllScreens();
     renderHud();
@@ -150,6 +152,7 @@ function tick() {
     }
 
     updateMeetings();
+    updateOutages();
     updateBossMood();
     if (!isTimeRunning()) return;  // Licencié par le patron
 
@@ -191,6 +194,7 @@ function endDay() {
     stopEmployeeForm();
     stopCopyTask();
     stopMeetings();
+    stopOutages();
     stopBossMood();
 }
 

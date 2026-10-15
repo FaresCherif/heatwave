@@ -40,6 +40,11 @@ export default {
             sender: '💬 Le patron',
             fired: 'Le patron est à bout. Vous êtes licencié, par message, avec un emoji porte.'
         },
+        power: {
+            title: '⚡ Coupure de courant',
+            open: 'Cliquez pour ouvrir le disjoncteur',
+            hint: 'Tapez la combinaison avec les flèches'
+        },
         meeting: {
             soon: '📹 Visio à {time}',
             live: '🔴 EN VISIO jusqu\'à {time} : pas d\'éventail !'
@@ -87,6 +92,14 @@ export default {
                 headset: {
                     name: 'Casque antibruit',
                     description: 'Vous n\'entendez plus le patron hurler. Les appels urgents manqués coûtent 40 % de travail en moins.'
+                },
+                mug: {
+                    name: 'Mug « Meilleur patron du monde »',
+                    description: 'Offert en visio, bien en vue. Le patron commence la journée avec 20 points d\'humeur en plus.'
+                },
+                background: {
+                    name: 'Fond virtuel',
+                    description: 'Une photo de vous en train de travailler, prise un jour de pluie. S\'éventer en visio agace beaucoup moins le patron.'
                 }
             }
         }
@@ -179,6 +192,34 @@ export default {
                 'L\'entreprise veut également que vous vous sentiez plus proche de la hiérarchie. Comme si ce n\'était pas déjà le cas. Vous savez que vous êtes mon employé préféré… euh… Paul',
                 'Je vous enverrai des messages entre 2 cocktails, alors répondez vite, et bien.',
                 'En route mauvaises troupes'
+            ]
+        },
+        thirdday: {
+            caller: 'Le patron',
+            lines: [
+                'Mauvaise nouvelle ma petite abeille bucheuse : avec la canicule, tout le pays a allumé sa clim. Le réseau électrique ne tient plus.',
+                'Chez moi, aucun souci, j\'ai un groupe électrogène pour la piscine et un autre pour le mini bar. Chez vous, ça risque de couper plusieurs fois dans la journée, on avait un groupe de rechange mais il me sert de repose pied.',
+                'Réparez un disjoncteur n\'a rien de compliquer, vous faite BIP BAP BOUP et tada ça marche !',
+                'Et pas d\'excuse, une coupure n\'est pas une pause. Pour vous remonter le moral, une bonne nouvelle. Même l\'hopital as du mal avec l\'electricite, avec de la chance le chef du syndic aura un problème de surchauffe.',
+                'Un peu de karma dans ce monde, s\'en prendre au pauvre patron que je suis. Il y a quand meme des monstres sans scrupules, votre compassion silencieuse est toujours aussi touchante.',
+                'Allez on garde le rythme'
+            ]
+        },
+        // Réservés au jour 5 (final)
+        lastday: {
+            caller: 'Le patron',
+            lines: [
+                'Dernier jour de canicule ! Demain, retour au bureau. Enfin, pour vous : moi, je reste au bord de la piscine.',
+                'Pour fêter ça, j\'ai tout prévu : le standard, deux visios, quelques messages, et une petite surprise cet après-midi.',
+                'Les actionnaires regardent les chiffres de la semaine. Si on finit en beauté, il y aura peut-être une prime. Pour moi.',
+                'Allez, un dernier effort !'
+            ]
+        },
+        memo: {
+            caller: 'Le patron',
+            lines: [
+                'La surprise ! Le gratte-papier est toujours en soins intensifs, et la direction a pondu de nouvelles notes de service.',
+                'Recopiez-les avant 17h. Je sais que vous avez déjà beaucoup à faire, mais je crois en vous. Enfin, je crois en votre période d\'essai.'
             ]
         }
 

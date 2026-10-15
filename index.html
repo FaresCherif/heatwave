@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="src/styles/form.css">
     <link rel="stylesheet" href="src/styles/copy.css">
     <link rel="stylesheet" href="src/styles/boss.css">
+    <link rel="stylesheet" href="src/styles/power.css">
 
     <script type="module" src="src/main.js"></script>
 </head>
@@ -140,6 +141,14 @@
             <p class="copy-model" id="copyModel"></p>
             <input class="copy-input" id="copyInput" autocomplete="off" spellcheck="false">
         </div>
+    </div>
+
+    <!-- Coupure de courant : disjoncteur à relancer, à la place du gratte-papier -->
+    <div class="breaker hidden" id="breaker" role="button">
+        <strong data-i18n="power.title"></strong>
+        <p class="breaker-closed" data-i18n="power.open"></p>
+        <p class="breaker-hint" data-i18n="power.hint"></p>
+        <div class="breaker-code" id="breakerCode"></div>
     </div>
 
     <div class="room">

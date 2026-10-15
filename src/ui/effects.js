@@ -3,6 +3,7 @@
 const background = document.querySelector('.background');
 const player = document.querySelector('.joueur');
 const handfan = document.querySelector('.handfan');
+const computer = document.querySelector('.computer');
 const workZones = document.querySelectorAll('.bureau, .joueur, .computer');
 
 // Texte flottant ("+1", "-1.5°"...) qui monte et disparaît au-dessus d'un élément
@@ -60,4 +61,9 @@ export function coolEffect(amount, direction) {
 // Mauvaise flèche : l'alternance n'est pas respectée
 export function missEffect() {
     showFloatingText('✗', handfan, 'miss');
+}
+
+// Travail impossible : coupure de courant
+export function noPowerEffect() {
+    showFloatingText('⚡✗', computer, 'miss');
 }
