@@ -24,6 +24,8 @@ export const state = {
     heat: 0,            // 0 à 100
     mode: 'idle',       // 'idle' | 'work' | 'cool'
     lastArrow: null,    // Dernière flèche valide en mode ventilation : 'left' | 'right'
+    /** @type {number|null} */
+    bossMood: null,     // Humeur du patron, 0 à 100 (null : niveau sans humeur)
 
     lowWorkTicks: 0,    // Ticks passés sous le seuil de salaire pendant la journée
     totalMoney: 0,      // Argent cumulé sur la partie

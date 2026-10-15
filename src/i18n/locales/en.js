@@ -35,6 +35,15 @@ export default {
             close: 'Close',
             timeout: 'Texts not copied before {time}. The boss outsourced your job to a kindergarten class.'
         },
+        mood: {
+            label: 'Boss',
+            sender: '💬 The boss',
+            fired: 'The boss has had enough. You are fired, by text message, with a door emoji.'
+        },
+        meeting: {
+            soon: '📹 Video call at {time}',
+            live: '🔴 ON CAMERA until {time}: no fanning!'
+        },
         levelSelect: {
             title: 'Secret code',
             subtitle: 'Choose your level',
@@ -78,6 +87,33 @@ export default {
         'Any employee who breathes is asked to be discreet about it.'
     ],
 
+    bossMessages: [
+        {
+            text: 'Are you at your desk? Your status has been orange for 4 minutes.',
+            answers: ['Always, boss! I don\'t even blink anymore.', 'Yes, yes, I\'m here.', 'I was in the bathroom.']
+        },
+        {
+            text: 'Quick question: are you free this weekend? It\'s for a non-urgent emergency.',
+            answers: ['Gladly, weekends are overrated.', 'I\'ll see what I can do.', 'No.']
+        },
+        {
+            text: 'I had a brilliant idea: what if we cut the lunch break to be more agile?',
+            answers: ['Visionary, as always!', 'That\'s an option.', 'We already don\'t have one.']
+        },
+        {
+            text: 'This is the company union. I hacked the boss\'s phone to recruit you.',
+            answers: ['Never, vile heretic! May the will of the almighty shareholder be done.', 'Is that legal?', 'Down with capitalism!']
+        },
+        {
+            text: 'Have you seen my new profile picture? Taken from the yacht.',
+            answers: ['Gorgeous, it looks like a magazine cover!', 'Nice.', 'Was it paid for with our bonuses?']
+        },
+        {
+            text: 'I heard you asked for a fan. Is that true?',
+            answers: ['Never! Heat builds character.', 'It was just a question.', 'Yes, and air conditioning too.']
+        }
+    ],
+
     dialogues: {
         welcome: {
             caller: 'The boss',
@@ -117,17 +153,12 @@ export default {
         secondday: {
             caller: 'The boss',
             lines: [
-                'Good morning, good morning! The weather service says today is the peak of the heatwave. Great news: heat is motivating.',
-                'The switchboard has never rung this much. Customers who wait too long hang up on their own, and that comes out of your salary.',
-                'Stay hydrated. In moderation, water is billed to your salary.'
-            ]
-        },
-        afternoon: {
-            caller: 'The boss',
-            lines: [
-                'Quick news: management has written new memos from its swimming pool.',
-                'They need to be copied before tonight. By hand, it\'s more authentic.',
-                'I\'m counting on you!'
+                'Good morning, good morning, my little worker ant! The weather service says today is the peak of the heatwave. Great news: heat is motivating.',
+                'Today, I invited you to two video calls. Camera on, of course: I want to see your eyes sparkle with motivation.',
+                'And if I see you waving that fan on screen, I\'ll shove it right up your... (what, I can\'t say that to an employee? Fine). Avoid the fan, nobody sweats in front of management.',
+                'The company also wants you to feel closer to the hierarchy. As if that wasn\'t already the case. You know you\'re my favorite employee... uh... Paul.',
+                'I\'ll send you messages between two cocktails, so answer fast, and answer well.',
+                'Move out, sorry troops!'
             ]
         }
     }

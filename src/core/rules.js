@@ -101,3 +101,39 @@ export function isCopyOnTrack(model, typed) {
 export function isCopyComplete(model, typed) {
     return normalizeCopy(typed).trimEnd() === normalizeCopy(model).trimEnd();
 }
+
+/** Heure (décimale : 10.5 = 10h30) convertie en minutes depuis minuit. */
+export function toMinutes(hour, minute = 0) {
+    return Math.round(hour * 60) + minute;
+}
+
+/** Heure au format 10:30, depuis des minutes depuis minuit. */
+export function formatMinutes(total) {
+    return formatTime(Math.floor(total / 60), total % 60);
+}
+
+/**
+ * Visio en cours ('live') ou annoncée ('soon', dans les warningMinutes qui précèdent).
+ * @param {{hour: number, duration: number}[]} slots  Visios : heure de début et durée en minutes
+ * @returns {{status: 'live'|'soon', start: number, end: number}|null}  start / end en minutes depuis minuit
+ */
+export function getMeetingStatus(hour, minute, slots, warningMinutes) {
+    const now = toMinutes(hour, minute);
+    for (const slot of slots) {
+        const start = toMinutes(slot.hour);
+        const end = start + slot.duration;
+        if (now >= start && now < end) return { status: 'live', start, end };
+        if (now >= start - warningMinutes && now < start) return { status: 'soon', start, end };
+    }
+    return null;
+}
+
+/** Le patron est à bout : licenciement. */
+export function isBossFurious(mood) {
+    return mood !== null && mood <= 0;
+}
+
+/** Rouge (0) à vert (100). */
+export function moodBarColor(mood) {
+    return `hsl(${mood * 1.2}, 80%, 45%)`;
+}

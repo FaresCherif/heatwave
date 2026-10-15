@@ -1,7 +1,7 @@
 // Interface du haut de l'écran : horloge, salaire, mode actif et barres
 import { state, getLevel, getOwnedItems } from '../core/state.js';
-import { t } from '../i18n/index.js';
-import { isOverheated, workBarColor, heatBarColor, computeDayPay, formatTime } from '../core/rules.js';
+import { t, applyTranslations } from '../i18n/index.js';
+import { isOverheated, workBarColor, heatBarColor, moodBarColor, computeDayPay, formatTime } from '../core/rules.js';
 import { playEffect, highlightZones } from './effects.js';
 
 const els = {
@@ -16,7 +16,10 @@ const els = {
     workBar: document.querySelector('.work-bar-fill'),
     heatBar: document.querySelector('.heat-bar-fill'),
     workThreshold: document.querySelector('.work-threshold'),
-    heatThreshold: document.querySelector('.heat-threshold')
+    heatThreshold: document.querySelector('.heat-threshold'),
+    moodRow: document.querySelector('.mood-bar'),
+    moodBar: document.querySelector('.mood-bar-fill'),
+    moodEmoji: document.getElementById('moodEmoji')
 };
 
 const MODE_NAMES = { idle: 'REPOS', work: 'TRAVAIL', cool: 'VENTILATION' };
@@ -43,6 +46,19 @@ export function renderBars() {
 
     // Signaler la surchauffe sur la ligne Chaleur
     els.heatBar.closest('.stat-bar').classList.toggle('overheat', isOverheated(state.heat, level));
+
+    renderMood();
+}
+
+// Humeur du patron : visible seulement dans les niveaux qui l'activent
+function renderMood() {
+    const mood = state.bossMood;
+    els.moodRow.classList.toggle('hidden', mood === null);
+    if (mood === null) return;
+
+    els.moodBar.style.width = mood + '%';
+    els.moodBar.style.backgroundColor = moodBarColor(mood);
+    els.moodEmoji.textContent = mood >= 60 ? '😊' : mood >= 30 ? '😐' : '😠';
 }
 
 export function renderMoney({ lostPay = false } = {}) {
@@ -82,6 +98,7 @@ export function renderNextArrow(lastArrow) {
 
 // Redessine tout le HUD (début de journée)
 export function renderHud() {
+    applyTranslations(els.moodRow);
     renderLevelLabel();
     renderClock();
     renderBars();

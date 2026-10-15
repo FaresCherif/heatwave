@@ -4,7 +4,8 @@ import assert from 'node:assert/strict';
 import {
     clampGauge, heatGainAt, isOverheated, workGain, isValidAlternation,
     advanceTime, getGameOverReason, getDayTicks, computeDayPay, workBarColor,
-    formatTime, minutesUntil, normalizeCopy, isCopyOnTrack, isCopyComplete
+    formatTime, minutesUntil, normalizeCopy, isCopyOnTrack, isCopyComplete,
+    toMinutes, formatMinutes, getMeetingStatus, isBossFurious
 } from '../src/core/rules.js';
 import { LEVELS } from '../src/config/levels.js';
 
@@ -162,6 +163,44 @@ describe('recopie de texte', () => {
             for (const { hour, copyTask } of calls.filter(call => call.copyTask)) {
                 assert.ok(copyTask.deadlineHour > hour && copyTask.deadlineHour <= endHour, `${name} : échéance ${copyTask.deadlineHour}h`);
             }
+        }
+    });
+});
+
+describe('visio et humeur du patron', () => {
+    const slots = [{ hour: 11, duration: 60 }, { hour: 15.5, duration: 30 }];
+
+    test('convertit les heures décimales', () => {
+        assert.equal(toMinutes(10.5), 630);
+        assert.equal(toMinutes(9, 15), 555);
+        assert.equal(formatMinutes(630), '10:30');
+    });
+
+    test('annonce la visio avant son début', () => {
+        assert.equal(getMeetingStatus(10, 40, slots, 15), null);
+        assert.equal(getMeetingStatus(10, 45, slots, 15).status, 'soon');
+        assert.equal(getMeetingStatus(15, 20, slots, 15).start, 930);
+    });
+
+    test('visio en cours jusqu\'à sa fin exclue', () => {
+        assert.equal(getMeetingStatus(11, 0, slots, 15).status, 'live');
+        assert.equal(getMeetingStatus(11, 55, slots, 15).status, 'live');
+        assert.equal(getMeetingStatus(12, 0, slots, 15), null);
+    });
+
+    test('licencié quand l\'humeur tombe à 0', () => {
+        assert.equal(isBossFurious(0), true);
+        assert.equal(isBossFurious(5), false);
+        assert.equal(isBossFurious(null), false);  // Niveau sans humeur du patron
+    });
+
+    test('les visios et messages tombent pendant la journée', () => {
+        for (const { name, startHour, endHour, meetings, bossMood } of LEVELS) {
+            const hours = [...(meetings?.slots.map(slot => slot.hour) ?? []), ...(bossMood?.messageHours ?? [])];
+            for (const hour of hours) {
+                assert.ok(hour > startHour && hour < endHour, `${name} : ${hour}h hors de la journée`);
+            }
+            if (meetings) assert.ok(bossMood, `${name} : la visio pénalise l'humeur, bossMood requis`);
         }
     });
 });

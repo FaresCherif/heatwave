@@ -20,6 +20,18 @@
  * @property {string} dialogue      Nom du dialogue (src/i18n/locales)
  * @property {CopyTask} [copyTask]  Textes à recopier, donnés à la fin de l'appel
  *
+ * @typedef {Object} BossMoodConfig
+ * @property {number} start            Humeur en début de journée (0 à 100 ; à 0, licenciement)
+ * @property {number[]} messageHours   Heures des messages du patron (décimales : 10.5 = 10h30)
+ * @property {number} replyMinutes     Minutes de jeu pour répondre à un message
+ * @property {number[]} answerMood     Humeur gagnée par réponse : [bonne, neutre, mauvaise]
+ * @property {number} missPenalty      Humeur perdue pour un message sans réponse
+ *
+ * @typedef {Object} MeetingConfig
+ * @property {{hour: number, duration: number}[]} slots  Visios : heure de début et durée en minutes
+ * @property {number} warningMinutes   Annonce de la visio, en minutes avant son début
+ * @property {number} moodPenalty      Humeur perdue par coup d'éventail pendant la visio
+ *
  * @typedef {Object} Level
  * @property {string} name
  * @property {string} description
@@ -39,6 +51,8 @@
  * @property {{deadlineHour: number}} [employeeForm]  Fiche du nouvel employé à signer pendant la journée avant deadlineHour, sinon game over
  * @property {boolean} [tutorial]         Tutoriel guidé avant la journée
  * @property {BubbleConfig|null} bubbles  null désactive les appels urgents
+ * @property {BossMoodConfig} [bossMood]  Humeur du patron et ses messages
+ * @property {MeetingConfig} [meetings]   Visios : s'éventer à l'écran agace le patron (bossMood requis)
  */
 
 /** @type {Level[]} */
@@ -89,9 +103,8 @@ export const LEVELS = [
     },
     {
         name: 'Niveau 3',
-        description: 'Pic de la canicule : plus chaud, plus d\'appels, et toujours des textes à recopier.',
+        description: 'Pic de la canicule : gardez le patron de bonne humeur et ne vous éventez pas en visio !',
         intro: 'secondday',
-        calls: [{ hour: 14, dialogue: 'afternoon', copyTask: { count: 3, deadlineHour: 17, reward: 20 } }],
         startHour: 8,
         endHour: 18,
         workDecay: 2,
@@ -104,12 +117,24 @@ export const LEVELS = [
         dailyPay: 120,
         lowWorkThreshold: 50,
         bubbles: {
-            maxCount: 3,
-            minDelay: 2500,
-            maxDelay: 6000,
+            maxCount: 2,
+            minDelay: 3000,
+            maxDelay: 7000,
             lifetime: 5,
             penalty: 15,
             reward: 5
+        },
+        bossMood: {
+            start: 60,
+            messageHours: [9, 10.5, 12.5, 14, 16.5],
+            replyMinutes: 45,
+            answerMood: [15, 0, -15],
+            missPenalty: 20
+        },
+        meetings: {
+            slots: [{ hour: 11, duration: 60 }, { hour: 15, duration: 45 }],
+            warningMinutes: 15,
+            moodPenalty: 3
         }
     }
 ];

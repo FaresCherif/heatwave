@@ -1,6 +1,6 @@
 // Déroulement de la partie : boucle de jeu, début et fin de journée, pause
 import { state, getLevel, getNextLevel, isLastLevel, isTimeRunning } from './state.js';
-import { clampGauge, heatGainAt, advanceTime, getGameOverReason, formatTime } from './rules.js';
+import { clampGauge, heatGainAt, advanceTime, getGameOverReason, isBossFurious, formatTime } from './rules.js';
 import { on } from './events.js';
 import { renderHud, renderBars, renderClock } from '../ui/hud.js';
 import { hideAllScreens, showScreen, hideScreen, showLevelComplete, showGameOver } from '../ui/screens.js';
@@ -10,6 +10,8 @@ import { startTutorial, hideTutorial } from '../systems/tutorial.js';
 import { playDialogue } from '../systems/dialogue.js';
 import { openShop } from '../systems/shop.js';
 import { startEmployeeForm, stopEmployeeForm, updateFormDeadline, isFormOverdue } from '../systems/employeeForm.js';
+import { startBossMood, stopBossMood, updateBossMood } from '../systems/bossMood.js';
+import { updateMeetings, stopMeetings } from '../systems/meetings.js';
 import { startCopyTask, stopCopyTask, updateCopyDeadline, isCopyOverdue, getCopyDeadline } from '../systems/copyTask.js';
 import { getDialogue, t } from '../i18n/index.js';
 
@@ -73,8 +75,11 @@ export function restartLevel() {
     hideTutorial();
     stopEmployeeForm();
     stopCopyTask();
+    stopMeetings();
+    startBossMood();
     hideAllScreens();
     renderHud();
+    updateMeetings();
 
     startBubbles();
     startLoop();
@@ -144,6 +149,10 @@ function tick() {
         return;
     }
 
+    updateMeetings();
+    updateBossMood();
+    if (!isTimeRunning()) return;  // Licencié par le patron
+
     playScheduledCall(level);
 }
 
@@ -162,7 +171,7 @@ async function playScheduledCall(level) {
 }
 
 function checkGameOver() {
-    const reason = getGameOverReason(state.work, state.heat);
+    const reason = getGameOverReason(state.work, state.heat) ?? (isBossFurious(state.bossMood) ? t('mood.fired') : null);
     if (!reason) return false;
 
     loseDay(reason);
@@ -181,6 +190,8 @@ function endDay() {
     stopBubbles();
     stopEmployeeForm();
     stopCopyTask();
+    stopMeetings();
+    stopBossMood();
 }
 
 function completeLevel() {

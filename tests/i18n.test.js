@@ -30,6 +30,18 @@ describe('langues', () => {
             }
         });
 
+        test(`${code} : assez de messages du patron, chacun avec 3 réponses`, () => {
+            assert.equal(locale.bossMessages.length, reference.bossMessages.length);
+            for (const { text, answers } of locale.bossMessages) {
+                assert.ok(text.trim(), 'message vide');
+                assert.equal(answers.length, 3, `« ${text} » : 3 réponses attendues`);
+            }
+            for (const { name, bossMood } of LEVELS.filter(level => level.bossMood)) {
+                assert.ok(locale.bossMessages.length >= bossMood.messageHours.length, `${name} : pas assez de messages`);
+                assert.equal(bossMood.answerMood.length, 3, `${name} : answerMood attend 3 valeurs`);
+            }
+        });
+
         test(`${code} : assez de phrases à recopier`, () => {
             assert.equal(locale.copyTexts.length, reference.copyTexts.length);
             for (const { calls = [] } of LEVELS) {

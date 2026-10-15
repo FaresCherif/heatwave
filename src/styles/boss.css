@@ -1,0 +1,145 @@
+/* Patron : humeur (HUD), visios et messages */
+
+/* Centre du HUD : mode actif, puis visio annoncée ou en cours */
+.hud-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.mood-bar.hidden {
+    display: none;
+}
+
+.mood-bar-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* Visio : annonce discrète, puis bandeau rouge qui clignote */
+.meeting-badge {
+    padding: 4px 14px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(20, 20, 40, 0.85);
+    border: 2px solid #ff6b35;
+    border-radius: 8px;
+}
+
+.meeting-badge.hidden {
+    display: none;
+}
+
+.meeting-badge.live {
+    background: #d62828;
+    border-color: #fff;
+    animation: deadline-blink 1.2s ease-in-out infinite;
+}
+
+/* Caméra allumée : cadre rouge autour de l'écran */
+body.meeting-live::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 40;  /* Sous le HUD (50) */
+    border: 6px solid #d62828;
+    pointer-events: none;
+}
+
+/* L'éventail est à éviter pendant la visio */
+body.meeting-live .room .handfan img {
+    filter: drop-shadow(0 0 10px #d62828) drop-shadow(0 0 4px #d62828);
+}
+
+/* Messages du patron : colonne en haut au centre, sous le HUD,
+   entre les zones des appels urgents (gauche et droite du poste de travail) */
+.boss-messages {
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    z-index: 45;  /* Sous le HUD (50) */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: min(420px, 36vw);
+    transform: translateX(-50%);
+    pointer-events: none;  /* Seuls les messages sont cliquables */
+}
+
+.boss-message {
+    padding: 10px 12px;
+    color: #fff;
+    background: rgba(20, 20, 40, 0.92);
+    border: 2px solid #ff6b35;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    pointer-events: auto;
+    animation: message-in 0.3s ease-out;
+}
+
+@keyframes message-in {
+    from { opacity: 0; transform: translateY(-12px); }
+}
+
+.boss-message-sender {
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffb38a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.boss-message p {
+    margin: 4px 0 8px;
+    font-size: 14px;
+}
+
+.boss-message-answers {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.boss-message-answers button {
+    padding: 5px 10px;
+    font-size: 13px;
+    text-align: left;
+    color: #2b2b2b;
+    background: #fdf8ec;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.boss-message-answers button:hover {
+    color: #fff;
+    background: #ff6b35;
+}
+
+/* Temps restant pour répondre */
+.boss-message-timer {
+    height: 4px;
+    margin-top: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.boss-message-timer div {
+    height: 100%;
+    background: #ff6b35;
+    transition: width 1s linear;
+}
+
+.boss-message.urgent {
+    border-color: #d62828;
+}
+
+.boss-message.urgent .boss-message-timer div {
+    background: #d62828;
+}

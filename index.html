@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="src/styles/dialogue.css">
     <link rel="stylesheet" href="src/styles/form.css">
     <link rel="stylesheet" href="src/styles/copy.css">
+    <link rel="stylesheet" href="src/styles/boss.css">
 
     <script type="module" src="src/main.js"></script>
 </head>
@@ -29,9 +30,13 @@
             <div class="hud-items"></div>
         </div>
 
-        <div id="workModeIndicator" data-mode="idle">
-            <span id="modeLabel">MODE REPOS</span>
-            <div id="alternateIndicator"></div>
+        <div class="hud-center">
+            <div id="workModeIndicator" data-mode="idle">
+                <span id="modeLabel">MODE REPOS</span>
+                <div id="alternateIndicator"></div>
+            </div>
+            <!-- Visio annoncée ou en cours -->
+            <div class="meeting-badge hidden" id="meetingBadge"></div>
         </div>
 
         <div class="bars-container">
@@ -49,8 +54,18 @@
                     <div class="heat-threshold"></div>
                 </div>
             </div>
+            <!-- Humeur du patron : seulement dans les niveaux qui l'activent -->
+            <div class="stat-bar mood-bar hidden">
+                <label><span id="moodEmoji"></span> <span data-i18n="mood.label"></span></label>
+                <div class="bar-bg">
+                    <div class="mood-bar-fill"></div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Messages du patron, non bloquants : entre les deux zones d'appels urgents -->
+    <div class="boss-messages" id="bossMessages"></div>
 
     <!-- Tutoriel guidé du niveau 1 -->
     <div class="tutorial hidden" id="tutorial">

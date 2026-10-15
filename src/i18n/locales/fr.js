@@ -35,6 +35,15 @@ export default {
             close: 'Fermer',
             timeout: 'Textes non recopiés avant {time}. Le patron a sous-traité votre poste à une classe de maternelle.'
         },
+        mood: {
+            label: 'Patron',
+            sender: '💬 Le patron',
+            fired: 'Le patron est à bout. Vous êtes licencié, par message, avec un emoji porte.'
+        },
+        meeting: {
+            soon: '📹 Visio à {time}',
+            live: '🔴 EN VISIO jusqu\'à {time} : pas d\'éventail !'
+        },
         levelSelect: {
             title: 'Code secret',
             subtitle: 'Choisissez votre niveau',
@@ -79,6 +88,35 @@ export default {
         'Tout employé qui respire est prié de rester discret.'
     ],
 
+    // Messages du patron (BossMoodConfig dans src/config/levels.js), tirés au hasard.
+    // Réponses dans l'ordre : bonne, neutre, mauvaise (affichées mélangées)
+    bossMessages: [
+        {
+            text: 'Vous êtes bien à votre poste ? Votre pastille est orange depuis 4 minutes.',
+            answers: ['Toujours, patron ! Je ne cligne même plus des yeux.', 'Oui oui, je suis là.', 'J\'étais aux toilettes.']
+        },
+        {
+            text: 'Petite question : vous seriez dispo ce week-end ? C\'est pour une urgence pas urgente.',
+            answers: ['Avec plaisir, le week-end c\'est surfait.', 'Je vais voir ce que je peux faire.', 'Non.']
+        },
+        {
+            text: 'J\'ai eu une idée géniale : et si on supprimait la pause déjeuner pour gagner en agilité ?',
+            answers: ['Visionnaire, comme toujours !', 'C\'est une piste.', 'On n\'en a déjà pas.']
+        },
+        {
+            text: 'C\'est le syndic de l\'entreprise, j\'ai piraté le téléphone du patron pour vous recruter',
+            answers: ['Jamais, vil mécréant, que la volonté du tout-puissant actionnaire soit faite.', 'C\'est légal ?', 'À bas le capitalisme !']
+        },
+        {
+            text: 'Vous avez vu ma nouvelle photo de profil ? Prise depuis le yacht.',
+            answers: ['Magnifique, on dirait un magazine !', 'Sympa.', 'C\'est payé avec nos primes ?']
+        },
+        {
+            text: 'On m\'a dit que vous aviez demandé un ventilateur. C\'est vrai ?',
+            answers: ['Jamais ! La chaleur forge le caractère.', 'C\'était une simple question.', 'Oui, et une climatisation aussi.']
+        }
+    ],
+
     // Appels de l'histoire, joués avant un niveau avec `intro: '<nom>'`
     dialogues: {
         welcome: {
@@ -119,17 +157,12 @@ export default {
         secondday: {
             caller: 'Le patron',
             lines: [
-                'Bonjour bonjour ! Météo France annonce le pic de la canicule pour aujourd\'hui. Excellente nouvelle : la chaleur, ça motive.',
-                'Le standard n\'a jamais autant sonné. Les clients qui attendent trop longtemps raccrochent d\'eux-mêmes, et ça, c\'est sur votre salaire.',
-                'Restez hydraté. Avec modération, l\'eau est facturée sur votre salaire.'
-            ]
-        },
-        afternoon: {
-            caller: 'Le patron',
-            lines: [
-                'Petite nouvelle : la direction a rédigé de nouvelles notes de service depuis sa piscine.',
-                'Il faut les recopier avant ce soir. À la main, c\'est plus authentique.',
-                'Je compte sur vous !'
+                'Bonjour bonjour ma petite fourmi ouvrière ! Météo France annonce le pic de la canicule pour aujourd\'hui. Excellente nouvelle : la chaleur, ça motive.',
+                'Aujourd\'hui, je vous ai invité à deux visios. Caméra allumée, évidemment : je veux voir vos yeux briller de motivation.',
+                'Et si je vous vois agiter cet éventail à l\'écran, je vous le fous dans le... (quoi, je ne peux pas dire ça à un employé ? Bon). Évitez l\'éventail, on ne transpire pas devant la direction.',
+                'L\'entreprise veut également que vous vous sentiez plus proche de la hiérarchie. Comme si ce n\'était pas déjà le cas. Vous savez que vous êtes mon employé préféré… euh… Paul',
+                'Je vous enverrai des messages entre 2 cocktails, alors répondez vite, et bien.',
+                'En route mauvaises troupes'
             ]
         }
 
