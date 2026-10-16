@@ -85,6 +85,8 @@ function sendMessage({ text, answers }) {
         const button = document.createElement('button');
         button.type = 'button';
         button.textContent = answer;
+        // Le clic ne prend pas le focus : une saisie en cours (recopie, fiche RH) continue
+        button.addEventListener('mousedown', event => event.preventDefault());
         button.addEventListener('click', () => {
             button.blur();
             if (!isTimeRunning()) return;

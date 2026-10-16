@@ -58,6 +58,8 @@ function spawnBubble() {
     bubble.style.left = `${left}%`;
     bubble.style.top = `${top}%`;
 
+    // Le clic ne prend pas le focus : une saisie en cours (recopie, fiche RH) continue
+    bubble.addEventListener('mousedown', event => event.preventDefault());
     bubble.addEventListener('click', event => {
         event.stopPropagation();  // Ne pas repasser en mode repos
         // Une bulle déjà éclatée ne rapporte rien
