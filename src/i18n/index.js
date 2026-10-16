@@ -69,6 +69,14 @@ export function t(key, params = {}) {
     return text.replace(/\{(\w+)\}/g, (match, name) => params[name] ?? match);
 }
 
+/**
+ * Nombre affiché : au plus une décimale, séparateur de la langue (2,1 en français).
+ * Les objets de la boutique multiplient les paramètres : sans arrondi, 1.5 × 1.4 s'afficherait 2.0999999999999996.
+ */
+export function formatNumber(value) {
+    return new Intl.NumberFormat(language, { maximumFractionDigits: 1 }).format(value);
+}
+
 /** Traduit les éléments HTML marqués data-i18n="clé" (texte) et data-i18n-alt="clé" (images) */
 export function applyTranslations(root = document) {
     root.querySelectorAll('[data-i18n]').forEach(element => {
@@ -91,10 +99,21 @@ export function getLevelDescription(/** @type {{id: string}} */ level) {
 
 /**
  * Dialogue de l'histoire dans la langue active.
+ * Une réplique peut dépendre d'un objet acheté en boutique :
+ * { ifOwned: '<id>', lines: [...], otherwise: [...] } est remplacé par les répliques qui conviennent.
+ * @param {string} id
+ * @param {string[]} [ownedItems]  Objets possédés (state.ownedItems)
  * @returns {Dialogue|undefined}
  */
-export function getDialogue(id) {
-    return LOCALES[language].dialogues[id] ?? LOCALES[DEFAULT_LANGUAGE].dialogues[id];
+export function getDialogue(id, ownedItems = []) {
+    const dialogue = LOCALES[language].dialogues[id] ?? LOCALES[DEFAULT_LANGUAGE].dialogues[id];
+    if (!dialogue) return undefined;
+
+    const lines = dialogue.lines.flatMap(line => {
+        if (typeof line === 'string') return [line];
+        return ownedItems.includes(line.ifOwned) ? line.lines : line.otherwise ?? [];
+    });
+    return { ...dialogue, lines };
 }
 
 /**

@@ -304,8 +304,19 @@ export default {
                 'Mauvaise nouvelle ma petite abeille bucheuse : avec la canicule, tout le pays a allumé sa clim. Le réseau électrique ne tient plus.',
                 'Chez moi, aucun souci, j\'ai un groupe électrogène pour la piscine et un autre pour le mini bar. Chez vous, ça risque de couper plusieurs fois dans la journée, on avait un groupe de rechange mais il me sert de repose pied.',
                 'Réparez un disjoncteur n\'a rien de compliquer, vous faite BIP BAP BOUP et tada ça marche !',
-                'Et pas d\'excuse, une coupure n\'est pas une pause. Pour vous remonter le moral, une bonne nouvelle. Même l\'hopital as du mal avec l\'electricite, avec de la chance le chef du syndic aura un problème de surchauffe.',
-                'Un peu de karma dans ce monde, s\'en prendre au pauvre patron que je suis. Il y a quand meme des monstres sans scrupules, votre compassion silencieuse est toujours aussi touchante.',
+                'Et pas d\'excuse, une coupure n\'est pas une pause.',
+                // Don pour l'hôpital acheté au jour 3 : l'hôpital a un groupe électrogène neuf
+                {
+                    ifOwned: 'donation',
+                    lines: [
+                        'Et en plus, une mauvaise nouvelle : un généreux anonyme a offert un groupe électrogène tout neuf à l\'hôpital. Il y a vraiment des gens qui ne savent pas quoi faire de leur argent. Heureusement vu ce qu\'on vous paye, vous n\'avez pas ce problème',
+                        'Résultat, le chef du syndic est soigné aux petits oignons et les médecins disent qu\'il sera vite sur pied. Vous ne seriez pas au courant, vous ? Non, j\'ai du flair pour les gens, je sais que vous ne trahiriez pas votre famille.'
+                    ],
+                    otherwise: [
+                        'Pour vous remonter le moral, une bonne nouvelle. Même l\'hopital as du mal avec l\'electricite, avec de la chance le chef du syndic aura un problème de surchauffe.',
+                        'Un peu de karma dans ce monde, s\'en prendre au pauvre patron que je suis. Il y a quand meme des monstres sans scrupules, votre compassion silencieuse est toujours aussi touchante.'
+                    ]
+                },
                 'Allez on garde le rythme !'
             ]
         },

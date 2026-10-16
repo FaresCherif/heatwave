@@ -5,7 +5,7 @@ import { state, isTimeRunning } from '../core/state.js';
 import { clampGauge, formatTime, minutesUntil, isCopyOnTrack, isCopyComplete } from '../core/rules.js';
 import { emit, on } from '../core/events.js';
 import { showFloatingText } from '../ui/effects.js';
-import { applyTranslations, getCopyTexts, t } from '../i18n/index.js';
+import { applyTranslations, getCopyTexts, t, formatNumber } from '../i18n/index.js';
 
 const URGENT_MINUTES = 30;  // Échéance signalée en rouge dans les 30 dernières minutes de jeu
 
@@ -109,7 +109,7 @@ function onInput() {
     state.work = clampGauge(state.work + task.reward);
     emit('stats-changed');
     if (!task) return;  // Journée terminée entre-temps
-    showFloatingText(`+${task.reward}`, els.input, 'gain');
+    showFloatingText(`+${formatNumber(task.reward)}`, els.input, 'gain');
 
     task.index++;
     if (task.index < task.texts.length) {

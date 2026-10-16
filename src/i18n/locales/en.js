@@ -297,7 +297,18 @@ export default {
                 'Bad news: with the heatwave, the whole country turned on its AC. The power grid can\'t keep up.',
                 'At my place, no problem, I have a generator for the pool. At yours, the power might go out several times today.',
                 'When it does, click the breaker and type the combination. Don\'t ask me why a breaker has a combination, it\'s for security.',
-                'Your phone runs on battery: I\'ll keep texting you. And no excuses, a power cut is not a break.'
+                'Your phone runs on battery: I\'ll keep texting you. And no excuses, a power cut is not a break.',
+                {
+                    ifOwned: 'donation',
+                    lines: [
+                        'And on top of that, some bad news: a generous anonymous donor gave the hospital a brand new generator. Some people really don\'t know what to do with their money.',
+                        'As a result, the union leader is getting the royal treatment and the doctors say he\'ll be back on his feet in no time. You wouldn\'t know anything about that, would you? No, not on your salary.'
+                    ],
+                    otherwise: [
+                        'To cheer you up, some good news: even the hospital is struggling with electricity. With any luck, the union leader will overheat.',
+                        'A little karma in this world, going after a poor boss like me. Some people really are heartless monsters. Your silent compassion is as touching as ever.'
+                    ]
+                }
             ]
         },
         // Reserved for day 5 (finale)

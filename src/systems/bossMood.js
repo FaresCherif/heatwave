@@ -5,7 +5,7 @@ import { state, getLevel, isTimeRunning } from '../core/state.js';
 import { clampGauge, toMinutes, MINUTES_PER_TICK } from '../core/rules.js';
 import { emit } from '../core/events.js';
 import { showFloatingText } from '../ui/effects.js';
-import { getBossMessages, t } from '../i18n/index.js';
+import { getBossMessages, t, formatNumber } from '../i18n/index.js';
 
 const container = document.getElementById('bossMessages');
 
@@ -121,7 +121,7 @@ export function changeMood(amount, anchor) {
     if (state.bossMood === null) return;
     state.bossMood = clampGauge(state.bossMood + amount);
 
-    const text = amount === 0 ? '😐' : `${amount > 0 ? '+' : ''}${amount} ${amount > 0 ? '😊' : '😠'}`;
+    const text = amount === 0 ? '😐' : `${amount > 0 ? '+' : ''}${formatNumber(amount)} ${amount > 0 ? '😊' : '😠'}`;
     showFloatingText(text, anchor, amount < 0 ? 'loss' : 'gain');
     emit('stats-changed');
 }

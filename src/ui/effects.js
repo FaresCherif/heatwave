@@ -1,4 +1,5 @@
 // Effets visuels : zones interactives et retours d'action
+import { formatNumber } from '../i18n/index.js';
 
 const background = document.querySelector('.background');
 const player = document.querySelector('.joueur');
@@ -46,13 +47,13 @@ function bumpStatBar(fillSelector) {
 
 export function workEffect(amount, overheated) {
     // Texte orange en surchauffe pour montrer que le gain est réduit
-    showFloatingText(`+${amount}`, player, overheated ? 'slow' : 'gain');
+    showFloatingText(`+${formatNumber(amount)}`, player, overheated ? 'slow' : 'gain');
     playEffect(player, 'typing');
     bumpStatBar('.work-bar-fill');
 }
 
 export function coolEffect(amount, direction) {
-    showFloatingText(`-${amount}°`, handfan, 'cool');
+    showFloatingText(`-${formatNumber(amount)}°`, handfan, 'cool');
     handfan.classList.remove('fan-left', 'fan-right');
     playEffect(handfan, direction === 'left' ? 'fan-left' : 'fan-right');
     bumpStatBar('.heat-bar-fill');

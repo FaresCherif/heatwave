@@ -1,8 +1,9 @@
 // Tests des traductions : complétude des langues et repli sur le français
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { LOCALES, DEFAULT_LANGUAGE, t, getDialogue, setLanguage, getLanguage } from '../src/i18n/index.js';
+import { LOCALES, DEFAULT_LANGUAGE, t, getDialogue, setLanguage, getLanguage, formatNumber } from '../src/i18n/index.js';
 import { LEVELS } from '../src/config/levels.js';
+import { SHOP_ITEMS } from '../src/config/shop.js';
 
 const reference = LOCALES[DEFAULT_LANGUAGE];
 
@@ -11,6 +12,16 @@ function leafKeys(node, prefix = '') {
     return Object.entries(node).flatMap(([key, value]) =>
         typeof value === 'object' ? leafKeys(value, `${prefix}${key}.`) : [`${prefix}${key}`]
     );
+}
+
+// Toutes les répliques d'un dialogue, variantes comprises
+function dialogueTexts(dialogue) {
+    return dialogue.lines.flatMap(line => typeof line === 'string' ? [line] : [...line.lines, ...(line.otherwise ?? [])]);
+}
+
+// Objets dont dépend chaque variante, dans l'ordre
+function variants(dialogue) {
+    return dialogue.lines.filter(line => typeof line !== 'string').map(line => line.ifOwned);
 }
 
 describe('langues', () => {
@@ -26,7 +37,9 @@ describe('langues', () => {
                 assert.ok(dialogue, `dialogue « ${id} » manquant`);
                 assert.ok(dialogue.caller, `« ${id} » : interlocuteur manquant`);
                 assert.ok(dialogue.lines.length > 0, `« ${id} » : aucune réplique`);
-                assert.ok(dialogue.lines.every(line => line.trim()), `« ${id} » : réplique vide`);
+                assert.ok(dialogueTexts(dialogue).every(line => line.trim()), `« ${id} » : réplique vide`);
+                // Mêmes variantes selon les objets achetés que la langue de référence
+                assert.deepEqual(variants(dialogue), variants(reference.dialogues[id]), `« ${id} » : variantes différentes`);
             }
         });
 
@@ -87,6 +100,32 @@ describe('accès aux textes', () => {
         setLanguage('en');
         assert.equal(t('dialogue.skip'), LOCALES.en.ui.dialogue.skip);
         assert.equal(getDialogue('welcome').caller, LOCALES.en.dialogues.welcome.caller);
+        setLanguage(DEFAULT_LANGUAGE);
+    });
+
+    test('choisit les répliques selon les objets achetés', () => {
+        const [variant] = reference.dialogues.thirdday.lines.filter(line => typeof line !== 'string');
+        const withItem = getDialogue('thirdday', [variant.ifOwned]).lines;
+        const without = getDialogue('thirdday').lines;
+        assert.ok(withItem.includes(variant.lines[0]) && !withItem.includes(variant.otherwise[0]));
+        assert.ok(without.includes(variant.otherwise[0]) && !without.includes(variant.lines[0]));
+        assert.ok(withItem.every(line => typeof line === 'string'));
+    });
+
+    test('chaque variante dépend d\'un objet de la boutique', () => {
+        for (const [id, dialogue] of Object.entries(reference.dialogues)) {
+            for (const item of variants(dialogue)) {
+                assert.ok(SHOP_ITEMS.some(shopItem => shopItem.id === item), `« ${id} » : objet « ${item} » inconnu`);
+            }
+        }
+    });
+
+    test('arrondit les nombres affichés à une décimale', () => {
+        assert.equal(formatNumber(1.5 * 1.4), '2,1');  // 2.0999999999999996 en flottant
+        assert.equal(formatNumber(0.75), '0,8');
+        assert.equal(formatNumber(15), '15');
+        setLanguage('en');
+        assert.equal(formatNumber(1.5 * 1.4), '2.1');
         setLanguage(DEFAULT_LANGUAGE);
     });
 

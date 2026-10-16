@@ -3,7 +3,7 @@ import { state, getLevel, isTimeRunning } from '../core/state.js';
 import { clampGauge } from '../core/rules.js';
 import { emit } from '../core/events.js';
 import { showFloatingText } from '../ui/effects.js';
-import { t } from '../i18n/index.js';
+import { t, formatNumber } from '../i18n/index.js';
 
 const background = document.querySelector('.background');
 
@@ -65,7 +65,7 @@ function spawnBubble() {
 
         state.work = clampGauge(state.work + config.reward);
         emit('stats-changed');
-        showFloatingText(`+${config.reward}`, bubble, 'gain');
+        showFloatingText(`+${formatNumber(config.reward)}`, bubble, 'gain');
         removeBubble(bubble);
     });
 
@@ -88,7 +88,7 @@ function removeBubble(element) {
 
 function burstBubble(element) {
     const penalty = getConfig().penalty;
-    showFloatingText(`-${penalty}`, element, 'loss');
+    showFloatingText(`-${formatNumber(penalty)}`, element, 'loss');
     element.classList.add('burst');
     element.innerHTML = '<span>💥</span>';
     setTimeout(() => removeBubble(element), 180);

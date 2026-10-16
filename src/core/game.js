@@ -96,7 +96,7 @@ async function playPrelude(level) {
     const isStale = () => dayId !== currentDayId;
 
     if (level.intro) {
-        await playDialogue(getDialogue(level.intro));
+        await playDialogue(getDialogue(level.intro, state.ownedItems));
         if (isStale()) return;
     }
 
@@ -166,7 +166,7 @@ async function playScheduledCall(level) {
     if (!call) return;
 
     const dayId = currentDayId;
-    await playDialogue(getDialogue(call.dialogue));
+    await playDialogue(getDialogue(call.dialogue, state.ownedItems));
     // Niveau relancé pendant l'appel : ne pas écraser la phase du nouveau lancement
     if (dayId !== currentDayId) return;
     state.phase = 'playing';
