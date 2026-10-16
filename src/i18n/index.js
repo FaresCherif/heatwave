@@ -69,11 +69,24 @@ export function t(key, params = {}) {
     return text.replace(/\{(\w+)\}/g, (match, name) => params[name] ?? match);
 }
 
-/** Traduit les éléments HTML marqués data-i18n="clé" */
+/** Traduit les éléments HTML marqués data-i18n="clé" (texte) et data-i18n-alt="clé" (images) */
 export function applyTranslations(root = document) {
     root.querySelectorAll('[data-i18n]').forEach(element => {
         element.textContent = t(element.dataset.i18n);
     });
+    root.querySelectorAll('[data-i18n-alt]').forEach(element => {
+        element.alt = t(element.dataset.i18nAlt);
+    });
+}
+
+/** Nom affiché d'un niveau (src/config/levels.js), ex : « Niveau 1 » */
+export function getLevelName(/** @type {{id: string}} */ level) {
+    return t(`levels.${level.id}.name`);
+}
+
+/** Description d'un niveau, affichée avant de le jouer */
+export function getLevelDescription(/** @type {{id: string}} */ level) {
+    return t(`levels.${level.id}.description`);
 }
 
 /**

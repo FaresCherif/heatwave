@@ -27,7 +27,7 @@ Les règles de travail et de game design du projet sont dans AGENT.md, à respec
 
 **Communication.** Les systèmes appellent directement `ui/` pour l'affichage. Pour réagir aux actions du joueur sans dépendre de [src/input.js](src/input.js), on passe par le bus [src/core/events.js](src/core/events.js) (`mode-changed`, `action`, `stats-changed`). Un système qui modifie `state.work`, `state.heat` ou `state.bossMood` en dehors de l'horloge doit émettre `stats-changed` : c'est ce qui déclenche le rendu des jauges et la vérification du game over.
 
-**Textes.** `t('clé', { param })` et `getDialogue(nom)` ([src/i18n/index.js](src/i18n/index.js)). Les textes du HTML passent par les attributs `data-i18n` ; un écran construit dynamiquement appelle `applyTranslations(element)`. Toute clé ajoutée à `fr.js` doit aussi aller dans `en.js` (sinon `tests/i18n.test.js` échoue), et c'est valable aussi pour les noms d'objets de la boutique (`shop.items.<id>.name/description`).
+**Textes.** `t('clé', { param })` et `getDialogue(nom)` ([src/i18n/index.js](src/i18n/index.js)). Dans le HTML, les textes passent par l'attribut `data-i18n` et les `alt` des images par `data-i18n-alt`. `main.js` traduit toute la page au chargement, et un écran construit dynamiquement appelle `applyTranslations(element)`. Toute clé ajoutée à `fr.js` doit aussi aller dans `en.js` (sinon `tests/i18n.test.js` échoue), et c'est valable aussi pour les noms d'objets de la boutique (`shop.items.<id>.name/description`).
 
 ## Ajouter une fonctionnalité de niveau (checklist)
 
@@ -42,6 +42,6 @@ Les règles de travail et de game design du projet sont dans AGENT.md, à respec
 ## Pièges connus
 
 - Les boutons perdent le focus après un clic (`bindButton` dans [src/main.js](src/main.js), `blur()` dans la boutique) : sinon `Espace`, la touche de travail, les réactiverait. À reproduire sur tout nouveau bouton.
-- Les écrans de fin de `completeLevel()` dans `game.js` (« VICTOIRE », « Salaire du jour », `level.name` et `level.description`) sont encore écrits en dur en français, ils ne passent pas par l'i18n.
+- Aucun texte affiché ne doit être écrit en dur, ni dans le JS ni dans `index.html` (seule exception : le nom « HEATWAVE »). Un niveau n'a pas de nom dans `levels.js`, seulement un `id` : son nom et sa description se trouvent dans `levels.<id>` de chaque langue (`getLevelName` / `getLevelDescription`). Les règles pures renvoient une clé, pas un texte (ex : `getGameOverReason` → `'heat'`, traduit par `game.js`).
 - Les heures décimales (`10.5` = 10h30) sont acceptées dans `bossMood.messageHours` et `outages.hours`. Les `calls` se déclenchent seulement à l'heure pile.
 - Les objets d'histoire (`effects: []`, `days`) sont filtrés par numéro de jour : `isUnlocked` reçoit les niveaux joués, et la boutique qui suit le jour N a `playedLevels.length === N`.

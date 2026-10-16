@@ -1,6 +1,6 @@
 // Interface du haut de l'écran : horloge, salaire, mode actif et barres
 import { state, getLevel, getOwnedItems } from '../core/state.js';
-import { t, applyTranslations } from '../i18n/index.js';
+import { t, applyTranslations, getLevelName } from '../i18n/index.js';
 import { isOverheated, workBarColor, heatBarColor, moodBarColor, computeDayPay, formatTime } from '../core/rules.js';
 import { playEffect, highlightZones } from './effects.js';
 
@@ -22,10 +22,8 @@ const els = {
     moodEmoji: document.getElementById('moodEmoji')
 };
 
-const MODE_NAMES = { idle: 'REPOS', work: 'TRAVAIL', cool: 'VENTILATION' };
-
 export function renderLevelLabel() {
-    els.levelLabel.textContent = getLevel().name;
+    els.levelLabel.textContent = getLevelName(getLevel());
 }
 
 export function renderClock() {
@@ -62,8 +60,8 @@ function renderMood() {
 }
 
 export function renderMoney({ lostPay = false } = {}) {
-    els.dayPay.textContent = `💰 ${computeDayPay(getLevel(), state.lowWorkTicks)} €`;
-    els.totalMoney.textContent = `Total : ${state.totalMoney} €`;
+    els.dayPay.textContent = t('hud.dayPay', { pay: computeDayPay(getLevel(), state.lowWorkTicks) });
+    els.totalMoney.textContent = t('hud.total', { money: state.totalMoney });
     if (lostPay) playEffect(els.dayPay, 'pay-loss');
 }
 
@@ -79,19 +77,19 @@ export function renderItems() {
 
 export function renderMode() {
     els.modeIndicator.dataset.mode = state.mode;
-    els.modeLabel.textContent = `MODE ${MODE_NAMES[state.mode]}`;
+    els.modeLabel.textContent = t(`hud.modes.${state.mode}`);
 
     // En ventilation : rappel de l'alternance des flèches
     const cooling = state.mode === 'cool';
     els.alternate.classList.toggle('active', cooling);
     els.alternate.classList.remove('left', 'right');
-    els.alternate.textContent = 'Alterne ← →';
+    els.alternate.textContent = t('hud.alternate');
 
     highlightZones(state.mode);
 }
 
 export function renderNextArrow(lastArrow) {
-    els.alternate.textContent = lastArrow === 'left' ? 'Prochain : →' : 'Prochain : ←';
+    els.alternate.textContent = t(lastArrow === 'left' ? 'hud.nextRight' : 'hud.nextLeft');
     els.alternate.classList.toggle('left', lastArrow === 'left');
     els.alternate.classList.toggle('right', lastArrow === 'right');
 }

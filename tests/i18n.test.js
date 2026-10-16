@@ -36,9 +36,9 @@ describe('langues', () => {
                 assert.ok(text.trim(), 'message vide');
                 assert.equal(answers.length, 3, `« ${text} » : 3 réponses attendues`);
             }
-            for (const { name, bossMood } of LEVELS.filter(level => level.bossMood)) {
-                assert.ok(locale.bossMessages.length >= bossMood.messageHours.length, `${name} : pas assez de messages`);
-                assert.equal(bossMood.answerMood.length, 3, `${name} : answerMood attend 3 valeurs`);
+            for (const { id, bossMood } of LEVELS.filter(level => level.bossMood)) {
+                assert.ok(locale.bossMessages.length >= bossMood.messageHours.length, `${id} : pas assez de messages`);
+                assert.equal(bossMood.answerMood.length, 3, `${id} : answerMood attend 3 valeurs`);
             }
         });
 
@@ -53,15 +53,24 @@ describe('langues', () => {
     }
 
     test('chaque appel d\'introduction de niveau existe', () => {
-        for (const { name, intro } of LEVELS.filter(level => level.intro)) {
-            assert.ok(reference.dialogues[intro], `${name} : dialogue « ${intro} » introuvable`);
+        for (const { id, intro } of LEVELS.filter(level => level.intro)) {
+            assert.ok(reference.dialogues[intro], `${id} : dialogue « ${intro} » introuvable`);
+        }
+    });
+
+    test('chaque niveau a un identifiant unique, un nom et une description', () => {
+        const ids = LEVELS.map(level => level.id);
+        assert.equal(new Set(ids).size, ids.length, 'identifiants en double');
+        for (const id of ids) {
+            const texts = reference.ui.levels[id];
+            assert.ok(texts?.name && texts?.description, `${id} : textes manquants`);
         }
     });
 
     test('chaque appel pendant la journée existe', () => {
-        for (const { name, calls = [] } of LEVELS) {
+        for (const { id, calls = [] } of LEVELS) {
             for (const { dialogue } of calls) {
-                assert.ok(reference.dialogues[dialogue], `${name} : dialogue « ${dialogue} » introuvable`);
+                assert.ok(reference.dialogues[dialogue], `${id} : dialogue « ${dialogue} » introuvable`);
             }
         }
     });

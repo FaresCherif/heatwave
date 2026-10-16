@@ -46,7 +46,7 @@ Le premier niveau commence par un appel du patron et un tutoriel interactif. Pen
 - **Découplage par événements** : un [bus d'événements](src/core/events.js) minimal permet au tutoriel et aux visios de réagir aux actions du joueur sans que le code des contrôles les connaisse.
 - **Boutique pilotée par la configuration** : chaque objet décrit ses effets sur les paramètres du niveau (`multiply`, `add`) dans [`src/config/shop.js`](src/config/shop.js). Une fonction pure applique ces effets à une copie du niveau, sans toucher au code des systèmes de jeu. Un objet qui améliore une fonctionnalité (`requires`, ex : les appels urgents) n'est proposé qu'après un niveau où le joueur l'a rencontrée.
 - **Niveaux pilotés par la configuration** : durée de la journée, vitesses, seuils, salaire, appel d'introduction, appels pendant la journée, humeur du patron, visios, coupures de courant et tâches à rendre avant une heure limite (fiche RH, gratte-papier) sont réglés dans [`src/config/levels.js`](src/config/levels.js) (documenté en JSDoc).
-- **Traductions** : les dialogues de l'histoire, les phrases à recopier et les textes de l'interface (attributs `data-i18n`) sont dans un fichier par langue ([`src/i18n/locales`](src/i18n/locales)), avec repli sur le français. Un test vérifie que chaque langue contient tous les textes. La langue se choisit avec `?lang=en` dans l'URL.
+- **Traductions** : tous les textes du jeu (dialogues de l'histoire, phrases à recopier, noms des niveaux, tutoriel, textes de l'interface via les attributs `data-i18n`) sont dans un fichier par langue ([`src/i18n/locales`](src/i18n/locales)), avec repli sur le français. Un test vérifie que chaque langue contient tous les textes. La langue se choisit avec `?lang=en` dans l'URL.
 - **CI/CD** : à chaque push sur `main`, GitHub Actions lance les tests, puis publie le jeu sur itch.io avec [butler](https://itch.io/docs/butler/).
 - **Rendu** : scène en 16:9 qui couvre tout l'écran, sprites en pixel art, animations et retours visuels en CSS.
 
@@ -110,7 +110,7 @@ L'extension **Live Server** de VS Code fonctionne aussi.
 
 ## Ajouter un niveau
 
-Copier un bloc dans [`src/config/levels.js`](src/config/levels.js) et ajuster ses valeurs. Mettre `bubbles: null` pour désactiver les appels urgents.
+Copier un bloc dans [`src/config/levels.js`](src/config/levels.js), lui donner un nouvel `id` et ajuster ses valeurs. Mettre `bubbles: null` pour désactiver les appels urgents. Le nom et la description du niveau vont dans `levels.<id>` de chaque fichier de [`src/i18n/locales`](src/i18n/locales).
 
 Pour un appel du patron pendant la journée, ajouter une entrée dans `calls`, avec éventuellement des phrases à recopier données à la fin de l'appel :
 

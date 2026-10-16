@@ -6,35 +6,37 @@
 import { state, getLevel } from '../core/state.js';
 import { on } from '../core/events.js';
 import { renderBars } from '../ui/hud.js';
+import { t } from '../i18n/index.js';
 
+// Textes : src/i18n/locales, clés tutorial.steps.<id>
 const STEPS = [
     {
-        text: 'Cliquez sur le personnage ou l\'ordinateur pour passer en <b>mode travail</b>.',
+        id: 'mode',
         target: '.joueur',
         done: () => state.mode === 'work'
     },
     {
-        text: 'Appuyez sur <b>Espace</b> pour remplir la barre 💼 Travail. Elle baisse en continu : sous le trait blanc, votre <b>salaire du jour</b> 💰 diminue. À 0, vous êtes renvoyé !',
+        id: 'work',
         target: '.work-bar-fill',
         action: 'work',
         count: 5
     },
     {
-        text: 'La 🌡️ Chaleur monte toute la journée, encore plus vite après 12h. Cliquez sur l\'<b>éventail</b>.',
+        id: 'fan',
         target: '.handfan',
         done: () => state.mode === 'cool',
         onStart: () => { state.heat = 40; }  // Pour voir la chaleur baisser à l'étape suivante
     },
     {
-        text: 'Alternez <b>←</b> et <b>→</b> pour vous rafraîchir. Appuyer deux fois sur la même flèche ne sert à rien !',
+        id: 'cool',
         target: '.heat-bar-fill',
         action: 'cool',
         count: 6
     },
     {
-        text: () => `Au-delà du trait blanc, c'est la <b>surchauffe</b> : le travail rapporte moitié moins. À 100 %, c'est fini.<br>Tenez jusqu'à <b>${getLevel().endHour}h</b> ! (Échap = pause)`,
+        id: 'overheat',
         target: '.heat-threshold',
-        button: 'C\'EST PARTI'
+        button: 'tutorial.start'
     }
 ];
 
@@ -74,9 +76,9 @@ function showStep(index) {
     }
 
     els.step.textContent = `${index + 1}/${STEPS.length}`;
-    // Le texte peut être une fonction pour dépendre du niveau
-    els.text.innerHTML = typeof step.text === 'function' ? step.text() : step.text;
-    els.next.textContent = step.button || '';
+    // Le texte peut dépendre du niveau : {hour} = heure de fin de journée
+    els.text.innerHTML = t(`tutorial.steps.${step.id}`, { hour: getLevel().endHour });
+    els.next.textContent = step.button ? t(step.button) : '';
     els.next.classList.toggle('hidden', !step.button);
     // Dernière étape : « Passer » ferait doublon avec le bouton
     els.skip.classList.toggle('hidden', Boolean(step.button));

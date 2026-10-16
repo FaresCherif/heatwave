@@ -4,7 +4,7 @@ import { state } from '../core/state.js';
 import { createSequenceDetector, LEVEL_SELECT_CODE } from '../core/sequence.js';
 import { startGame } from '../core/game.js';
 import { LEVELS } from '../config/levels.js';
-import { applyTranslations } from '../i18n/index.js';
+import { applyTranslations, getLevelName } from '../i18n/index.js';
 import { showScreen, hideScreen } from '../ui/screens.js';
 
 const els = {
@@ -26,7 +26,7 @@ function open(from) {
     // Un bouton par niveau, dans l'ordre de levels.js
     els.levels.replaceChildren(...LEVELS.map((level, index) => {
         const button = document.createElement('button');
-        button.textContent = level.name;
+        button.textContent = getLevelName(level);
         button.addEventListener('click', () => {
             button.blur();
             hideScreen('levelSelect');

@@ -53,10 +53,13 @@ export function minutesUntil(hour, minute, deadlineHour) {
     return deadlineHour * 60 - (hour * 60 + minute);
 }
 
-/** @returns {string|null} La raison de la défaite, ou null si la partie continue. */
+/**
+ * Raison de la défaite (texte : clé gameOver.<raison> dans src/i18n/locales).
+ * @returns {'heat'|'work'|null} null si la partie continue
+ */
 export function getGameOverReason(work, heat) {
-    if (heat >= 100) return 'Trop chaud ! Vous avez fini en merguez.';
-    if (work <= 0) return 'Du balais ! Vous n\'avez pas atteint vos objectifs';
+    if (heat >= 100) return 'heat';
+    if (work <= 0) return 'work';
     return null;
 }
 

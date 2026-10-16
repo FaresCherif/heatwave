@@ -37,8 +37,7 @@
  * @property {number} codeLength    Flèches à taper au disjoncteur pour relancer le courant
  *
  * @typedef {Object} Level
- * @property {string} name
- * @property {string} description
+ * @property {string} id                 Identifiant : nom et description dans src/i18n/locales (levels.<id>)
  * @property {number} startHour           Heure de début de journée
  * @property {number} endHour             Heure de fin : niveau réussi
  * @property {number} workDecay           Travail perdu à chaque tick
@@ -63,8 +62,7 @@
 /** @type {Level[]} */
 export const LEVELS = [
     {
-        name: 'Niveau 1',
-        description: 'Travaillez et restez au frais jusqu\'à 18h.',
+        id: 'day1',
         startHour: 13,
         endHour: 18,
         workDecay: 2,
@@ -82,8 +80,7 @@ export const LEVELS = [
         bubbles: null
     },
     {
-        name: 'Niveau 2',
-        description: 'Des tâches urgentes apparaissent : cliquez-les avant qu\'elles n\'éclatent !',
+        id: 'day2',
         intro: 'firstday',
         calls: [{ hour: 11, dialogue: 'lunch', copyTask: { count: 2, deadlineHour: 18, reward: 50 } }],
         startHour: 8,
@@ -107,8 +104,7 @@ export const LEVELS = [
         }
     },
     {
-        name: 'Niveau 3',
-        description: 'Pic de la canicule : gardez le patron de bonne humeur et ne vous éventez pas en visio !',
+        id: 'day3',
         intro: 'secondday',
         startHour: 8,
         endHour: 18,
@@ -143,8 +139,7 @@ export const LEVELS = [
         }
     },
     {
-        name: 'Niveau 4',
-        description: 'Avant dernier jour de la canicule.',
+        id: 'day4',
         intro: 'thirdday',
         startHour: 8,
         endHour: 18,

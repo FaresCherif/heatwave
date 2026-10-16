@@ -33,7 +33,7 @@
 
         <div class="hud-center">
             <div id="workModeIndicator" data-mode="idle">
-                <span id="modeLabel">MODE REPOS</span>
+                <span id="modeLabel"></span>
                 <div id="alternateIndicator"></div>
             </div>
             <!-- Visio annoncée ou en cours -->
@@ -42,14 +42,14 @@
 
         <div class="bars-container">
             <div class="stat-bar">
-                <label>💼 Travail</label>
+                <label data-i18n="hud.work"></label>
                 <div class="bar-bg">
                     <div class="work-bar-fill"></div>
                     <div class="work-threshold"></div>
                 </div>
             </div>
             <div class="stat-bar">
-                <label>🌡️ Chaleur</label>
+                <label data-i18n="hud.heat"></label>
                 <div class="bar-bg">
                     <div class="heat-bar-fill"></div>
                     <div class="heat-threshold"></div>
@@ -71,14 +71,14 @@
     <!-- Tutoriel guidé du niveau 1 -->
     <div class="tutorial hidden" id="tutorial">
         <div class="tutorial-header">
-            <span>TUTORIEL</span>
+            <span data-i18n="tutorial.title"></span>
             <span id="tutorialStep"></span>
         </div>
         <p id="tutorialText"></p>
         <div id="tutorialProgress"></div>
         <div class="tutorial-buttons">
             <button id="tutorialNext"></button>
-            <button id="tutorialSkip" class="tutorial-skip">Passer le tutoriel</button>
+            <button id="tutorialSkip" class="tutorial-skip" data-i18n="tutorial.skip"></button>
         </div>
     </div>
 
@@ -157,8 +157,8 @@
             <div class="overlay" id="startMenu">
                 <div class="menu-content">
                     <h1>HEATWAVE</h1>
-                    <p>Gérez votre température et votre productivité</p>
-                    <button id="startButton">DÉMARRER</button>
+                    <p data-i18n="menu.tagline"></p>
+                    <button id="startButton" data-i18n="menu.start"></button>
                 </div>
             </div>
 
@@ -174,12 +174,12 @@
 
             <div class="overlay hidden" id="pauseMenu">
                 <div class="menu-content">
-                    <h1>PAUSE</h1>
-                    <p>Le jeu est en pause. Appuyez sur Échap ou reprendre pour continuer.</p>
+                    <h1 data-i18n="pause.title"></h1>
+                    <p data-i18n="pause.text"></p>
                     <div class="menu-buttons">
-                        <button id="resumeButton">REPRENDRE</button>
-                        <button id="restartLevelButton" class="secondary">RELANCER LE NIVEAU</button>
-                        <button id="restartButton" class="secondary">REDÉMARRER</button>
+                        <button id="resumeButton" data-i18n="pause.resume"></button>
+                        <button id="restartLevelButton" class="secondary" data-i18n="pause.restartLevel"></button>
+                        <button id="restartButton" class="secondary" data-i18n="pause.restart"></button>
                     </div>
                 </div>
             </div>
@@ -205,30 +205,30 @@
 
             <div class="overlay hidden" id="gameOverScreen">
                 <div class="menu-content game-over">
-                    <h1>GAME OVER</h1>
+                    <h1 data-i18n="gameOver.title"></h1>
                     <p id="gameOverReason"></p>
-                    <button id="retryButton">RECOMMENCER</button>
+                    <button id="retryButton" data-i18n="gameOver.retry"></button>
                 </div>
             </div>
 
             <!-- Appel téléphonique de l'histoire -->
             <div class="dialogue hidden" id="dialogue">
                 <div class="dialogue-phone">
-                    <img src="src/images/phone.png" alt="Téléphone">
+                    <img src="src/images/phone.png" alt="" data-i18n-alt="images.phone">
                 </div>
                 <div class="dialogue-bubble">
                     <div class="dialogue-caller" id="dialogueCaller"></div>
                     <p id="dialogueText"></p>
                     <div class="dialogue-hint" id="dialogueHint"></div>
                 </div>
-                <button class="dialogue-skip" id="dialogueSkip">Passer l'appel</button>
+                <button class="dialogue-skip" id="dialogueSkip" data-i18n="dialogue.skip"></button>
             </div>
 
             <img class="decor" src="src/images/background.png" alt="">
-            <div class="sprite bureau"><img src="src/images/simpledesk.png" alt="Bureau"></div>
-            <div class="sprite computer"><img src="src/images/computer.png" alt="Ordinateur"></div>
-            <div class="sprite handfan"><img src="src/images/handfan.png" alt="Éventail"></div>
-            <div class="sprite joueur"><img src="src/images/user.png" alt="Joueur"></div>
+            <div class="sprite bureau"><img src="src/images/simpledesk.png" alt="" data-i18n-alt="images.desk"></div>
+            <div class="sprite computer"><img src="src/images/computer.png" alt="" data-i18n-alt="images.computer"></div>
+            <div class="sprite handfan"><img src="src/images/handfan.png" alt="" data-i18n-alt="images.fan"></div>
+            <div class="sprite joueur"><img src="src/images/user.png" alt="" data-i18n-alt="images.player"></div>
         </div>
     </div>
 </body>

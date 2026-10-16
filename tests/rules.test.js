@@ -86,11 +86,11 @@ describe('fin de partie', () => {
     });
 
     test('perdue à 100 % de chaleur', () => {
-        assert.match(getGameOverReason(50, 100), /chaud/);
+        assert.equal(getGameOverReason(50, 100), 'heat');
     });
 
     test('perdue à 0 % de travail', () => {
-        assert.match(getGameOverReason(0, 50), /objectifs/);
+        assert.equal(getGameOverReason(0, 50), 'work');
     });
 });
 
@@ -117,22 +117,22 @@ describe('salaire', () => {
 
 describe('configuration des niveaux', () => {
     test('chaque niveau a une journée valide', () => {
-        for (const { name, startHour, endHour } of LEVELS) {
-            assert.ok(startHour < endHour, `${name} : début avant la fin`);
+        for (const { id, startHour, endHour } of LEVELS) {
+            assert.ok(startHour < endHour, `${id} : début avant la fin`);
         }
     });
 
     test('chaque niveau a ses seuils entre 0 et 100', () => {
-        for (const { name, overheatThreshold, lowWorkThreshold } of LEVELS) {
-            assert.ok(overheatThreshold > 0 && overheatThreshold < 100, `${name} : seuil de surchauffe`);
-            assert.ok(lowWorkThreshold > 0 && lowWorkThreshold < 100, `${name} : seuil de salaire`);
+        for (const { id, overheatThreshold, lowWorkThreshold } of LEVELS) {
+            assert.ok(overheatThreshold > 0 && overheatThreshold < 100, `${id} : seuil de surchauffe`);
+            assert.ok(lowWorkThreshold > 0 && lowWorkThreshold < 100, `${id} : seuil de salaire`);
         }
     });
 
     test('l\'échéance de la fiche employé tombe pendant la journée', () => {
-        for (const { name, startHour, endHour, employeeForm } of LEVELS.filter(l => l.employeeForm)) {
+        for (const { id, startHour, endHour, employeeForm } of LEVELS.filter(l => l.employeeForm)) {
             const { deadlineHour } = employeeForm;
-            assert.ok(deadlineHour > startHour && deadlineHour <= endHour, `${name} : échéance ${deadlineHour}h`);
+            assert.ok(deadlineHour > startHour && deadlineHour <= endHour, `${id} : échéance ${deadlineHour}h`);
         }
     });
 });
@@ -159,17 +159,17 @@ describe('recopie de texte', () => {
     });
 
     test('les appels de l\'histoire tombent à l\'heure pile pendant la journée', () => {
-        for (const { name, startHour, endHour, calls = [] } of LEVELS) {
+        for (const { id, startHour, endHour, calls = [] } of LEVELS) {
             for (const { hour } of calls) {
-                assert.ok(Number.isInteger(hour) && hour > startHour && hour < endHour, `${name} : appel à ${hour}h`);
+                assert.ok(Number.isInteger(hour) && hour > startHour && hour < endHour, `${id} : appel à ${hour}h`);
             }
         }
     });
 
     test('la tâche de recopie tombe pendant la journée', () => {
-        for (const { name, endHour, calls = [] } of LEVELS) {
+        for (const { id, endHour, calls = [] } of LEVELS) {
             for (const { hour, copyTask } of calls.filter(call => call.copyTask)) {
-                assert.ok(copyTask.deadlineHour > hour && copyTask.deadlineHour <= endHour, `${name} : échéance ${copyTask.deadlineHour}h`);
+                assert.ok(copyTask.deadlineHour > hour && copyTask.deadlineHour <= endHour, `${id} : échéance ${copyTask.deadlineHour}h`);
             }
         }
     });
@@ -203,12 +203,12 @@ describe('visio et humeur du patron', () => {
     });
 
     test('les visios et messages tombent pendant la journée', () => {
-        for (const { name, startHour, endHour, meetings, bossMood } of LEVELS) {
+        for (const { id, startHour, endHour, meetings, bossMood } of LEVELS) {
             const hours = [...(meetings?.slots.map(slot => slot.hour) ?? []), ...(bossMood?.messageHours ?? [])];
             for (const hour of hours) {
-                assert.ok(hour > startHour && hour < endHour, `${name} : ${hour}h hors de la journée`);
+                assert.ok(hour > startHour && hour < endHour, `${id} : ${hour}h hors de la journée`);
             }
-            if (meetings) assert.ok(bossMood, `${name} : la visio pénalise l'humeur, bossMood requis`);
+            if (meetings) assert.ok(bossMood, `${id} : la visio pénalise l'humeur, bossMood requis`);
         }
     });
 });
@@ -230,11 +230,11 @@ describe('coupure de courant', () => {
     });
 
     test('les coupures tombent pendant la journée', () => {
-        for (const { name, startHour, endHour, outages } of LEVELS.filter(l => l.outages)) {
+        for (const { id, startHour, endHour, outages } of LEVELS.filter(l => l.outages)) {
             for (const hour of outages.hours) {
-                assert.ok(hour > startHour && hour < endHour, `${name} : coupure à ${hour}h`);
+                assert.ok(hour > startHour && hour < endHour, `${id} : coupure à ${hour}h`);
             }
-            assert.ok(outages.codeLength >= 2, `${name} : code trop court`);
+            assert.ok(outages.codeLength >= 2, `${id} : code trop court`);
         }
     });
 });

@@ -1,6 +1,88 @@
 // Textes en français (langue de référence : toute clé doit exister ici)
 export default {
     ui: {
+        menu: {
+            tagline: 'Gérez votre température et votre productivité',
+            start: 'DÉMARRER'
+        },
+        pause: {
+            title: 'PAUSE',
+            text: 'Le jeu est en pause. Appuyez sur Échap ou reprendre pour continuer.',
+            resume: 'REPRENDRE',
+            restartLevel: 'RELANCER LE NIVEAU',
+            restart: 'REDÉMARRER'
+        },
+        gameOver: {
+            title: 'GAME OVER',
+            retry: 'RECOMMENCER',
+            heat: 'Trop chaud ! Vous avez fini en merguez.',
+            work: 'Du balais ! Vous n\'avez pas atteint vos objectifs'
+        },
+        levelEnd: {
+            pay: 'Salaire du jour : {pay} € — Total : {total} €',
+            complete: '{name} TERMINÉ',
+            next: 'Prochain : {name}. {description}',
+            continue: 'CONTINUER',
+            victory: 'VICTOIRE',
+            victoryText: '{name} terminé ! Vous avez survécu à la canicule.',
+            replay: 'REJOUER'
+        },
+        // Nom et description de chaque niveau, par identifiant (id dans src/config/levels.js)
+        levels: {
+            day1: {
+                name: 'Niveau 1',
+                description: 'Travaillez et restez au frais jusqu\'à 18h.'
+            },
+            day2: {
+                name: 'Niveau 2',
+                description: 'Des tâches urgentes apparaissent : cliquez-les avant qu\'elles n\'éclatent !'
+            },
+            day3: {
+                name: 'Niveau 3',
+                description: 'Pic de la canicule : gardez le patron de bonne humeur et ne vous éventez pas en visio !'
+            },
+            day4: {
+                name: 'Niveau 4',
+                description: 'Avant dernier jour de la canicule.'
+            }
+        },
+        hud: {
+            work: '💼 Travail',
+            heat: '🌡️ Chaleur',
+            dayPay: '💰 {pay} €',
+            total: 'Total : {money} €',
+            modes: {
+                idle: 'MODE REPOS',
+                work: 'MODE TRAVAIL',
+                cool: 'MODE VENTILATION'
+            },
+            alternate: 'Alterne ← →',
+            nextLeft: 'Prochain : ←',
+            nextRight: 'Prochain : →'
+        },
+        tutorial: {
+            title: 'TUTORIEL',
+            skip: 'Passer le tutoriel',
+            start: 'C\'EST PARTI',
+            steps: {
+                mode: 'Cliquez sur le personnage ou l\'ordinateur pour passer en <b>mode travail</b>.',
+                work: 'Appuyez sur <b>Espace</b> pour remplir la barre 💼 Travail. Elle baisse en continu : sous le trait blanc, votre <b>salaire du jour</b> 💰 diminue. À 0, vous êtes renvoyé !',
+                fan: 'La 🌡️ Chaleur monte toute la journée, encore plus vite après 12h. Cliquez sur l\'<b>éventail</b>.',
+                cool: 'Alternez <b>←</b> et <b>→</b> pour vous rafraîchir. Appuyer deux fois sur la même flèche ne sert à rien !',
+                overheat: 'Au-delà du trait blanc, c\'est la <b>surchauffe</b> : le travail rapporte moitié moins. À 100 %, c\'est fini.<br>Tenez jusqu\'à <b>{hour}h</b> ! (Échap = pause)'
+            }
+        },
+        bubble: {
+            title: 'Appel urgent : cliquez pour répondre'
+        },
+        // Textes alternatifs des images (attribut data-i18n-alt)
+        images: {
+            phone: 'Téléphone',
+            desk: 'Bureau',
+            computer: 'Ordinateur',
+            fan: 'Éventail',
+            player: 'Joueur'
+        },
         dialogue: {
             next: 'Cliquez pour continuer ▸',
             hangUp: 'Cliquez pour raccrocher ▸',

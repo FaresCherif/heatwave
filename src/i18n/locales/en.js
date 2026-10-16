@@ -1,6 +1,86 @@
 // English texts
 export default {
     ui: {
+        menu: {
+            tagline: 'Manage your temperature and your productivity',
+            start: 'START'
+        },
+        pause: {
+            title: 'PAUSE',
+            text: 'The game is paused. Press Esc or resume to continue.',
+            resume: 'RESUME',
+            restartLevel: 'RESTART LEVEL',
+            restart: 'NEW GAME'
+        },
+        gameOver: {
+            title: 'GAME OVER',
+            retry: 'TRY AGAIN',
+            heat: 'Too hot! You ended up grilled like a sausage.',
+            work: 'You\'re out! You didn\'t meet your targets'
+        },
+        levelEnd: {
+            pay: 'Today\'s pay: {pay} € — Total: {total} €',
+            complete: '{name} COMPLETE',
+            next: 'Next: {name}. {description}',
+            continue: 'CONTINUE',
+            victory: 'VICTORY',
+            victoryText: '{name} complete! You survived the heatwave.',
+            replay: 'PLAY AGAIN'
+        },
+        levels: {
+            day1: {
+                name: 'Level 1',
+                description: 'Work and stay cool until 6 pm.'
+            },
+            day2: {
+                name: 'Level 2',
+                description: 'Urgent tasks pop up: click them before they burst!'
+            },
+            day3: {
+                name: 'Level 3',
+                description: 'Peak of the heatwave: keep the boss happy and don\'t fan yourself on camera!'
+            },
+            day4: {
+                name: 'Level 4',
+                description: 'Second to last day of the heatwave.'
+            }
+        },
+        hud: {
+            work: '💼 Work',
+            heat: '🌡️ Heat',
+            dayPay: '💰 {pay} €',
+            total: 'Total: {money} €',
+            modes: {
+                idle: 'IDLE MODE',
+                work: 'WORK MODE',
+                cool: 'COOLING MODE'
+            },
+            alternate: 'Alternate ← →',
+            nextLeft: 'Next: ←',
+            nextRight: 'Next: →'
+        },
+        tutorial: {
+            title: 'TUTORIAL',
+            skip: 'Skip tutorial',
+            start: 'LET\'S GO',
+            steps: {
+                mode: 'Click the character or the computer to switch to <b>work mode</b>.',
+                work: 'Press <b>Space</b> to fill the 💼 Work bar. It keeps dropping: below the white line, your <b>daily pay</b> 💰 goes down. At 0, you\'re fired!',
+                fan: '🌡️ Heat rises all day long, even faster after 12 pm. Click the <b>hand fan</b>.',
+                cool: 'Alternate <b>←</b> and <b>→</b> to cool down. Pressing the same arrow twice does nothing!',
+                overheat: 'Past the white line, you <b>overheat</b>: work earns half as much. At 100%, it\'s over.<br>Hold on until <b>{hour}:00</b>! (Esc = pause)'
+            }
+        },
+        bubble: {
+            title: 'Urgent call: click to answer'
+        },
+        images: {
+            phone: 'Phone',
+            desk: 'Desk',
+            computer: 'Computer',
+            fan: 'Hand fan',
+            player: 'Player'
+        },
         dialogue: {
             next: 'Click to continue ▸',
             hangUp: 'Click to hang up ▸',

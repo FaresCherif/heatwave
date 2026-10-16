@@ -14,7 +14,7 @@ import { startBossMood, stopBossMood, updateBossMood } from '../systems/bossMood
 import { updateMeetings, stopMeetings } from '../systems/meetings.js';
 import { startOutages, stopOutages, updateOutages } from '../systems/outages.js';
 import { startCopyTask, stopCopyTask, updateCopyDeadline, isCopyOverdue, getCopyDeadline } from '../systems/copyTask.js';
-import { getDialogue, t } from '../i18n/index.js';
+import { getDialogue, getLevelName, getLevelDescription, t } from '../i18n/index.js';
 
 const TICK_MS = 1000;  // Un tick = 5 minutes de jeu
 let loopId = null;
@@ -174,7 +174,8 @@ async function playScheduledCall(level) {
 }
 
 function checkGameOver() {
-    const reason = getGameOverReason(state.work, state.heat) ?? (isBossFurious(state.bossMood) ? t('mood.fired') : null);
+    const gaugeReason = getGameOverReason(state.work, state.heat);
+    const reason = gaugeReason ? t(`gameOver.${gaugeReason}`) : isBossFurious(state.bossMood) ? t('mood.fired') : null;
     if (!reason) return false;
 
     loseDay(reason);
@@ -203,22 +204,22 @@ function completeLevel() {
 
     const level = getLevel();
     const pay = collectDayPay();
-    const payText = `Salaire du jour : ${pay} € — Total : ${state.totalMoney} €`;
+    const payText = t('levelEnd.pay', { pay, total: state.totalMoney });
 
     if (isLastLevel()) {
         showLevelComplete({
-            title: 'VICTOIRE',
+            title: t('levelEnd.victory'),
             pay: payText,
-            text: `${level.name} terminé ! Vous avez survécu à la canicule.`,
-            button: 'REJOUER'
+            text: t('levelEnd.victoryText', { name: getLevelName(level) }),
+            button: t('levelEnd.replay')
         });
     } else {
         const next = getNextLevel();
         showLevelComplete({
-            title: `${level.name.toUpperCase()} TERMINÉ`,
+            title: t('levelEnd.complete', { name: getLevelName(level).toUpperCase() }),
             pay: payText,
-            text: `Prochain : ${next.name}. ${next.description}`,
-            button: 'CONTINUER'
+            text: t('levelEnd.next', { name: getLevelName(next), description: getLevelDescription(next) }),
+            button: t('levelEnd.continue')
         });
     }
 }

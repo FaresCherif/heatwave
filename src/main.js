@@ -3,6 +3,11 @@ import { startGame, nextLevel, restartLevel, resumeGame } from './core/game.js';
 import { nextTutorialStep, endTutorial } from './systems/tutorial.js';
 import { initInput } from './input.js';
 import { initLevelSelect } from './systems/levelSelect.js';
+import { applyTranslations, getLanguage } from './i18n/index.js';
+
+// Textes fixes de la page (data-i18n) dans la langue choisie
+document.documentElement.lang = getLanguage();
+applyTranslations();
 
 // Le focus est retiré après le clic : sinon la touche Espace (travail)
 // réactiverait le bouton

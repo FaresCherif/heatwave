@@ -3,6 +3,7 @@ import { state, getLevel, isTimeRunning } from '../core/state.js';
 import { clampGauge } from '../core/rules.js';
 import { emit } from '../core/events.js';
 import { showFloatingText } from '../ui/effects.js';
+import { t } from '../i18n/index.js';
 
 const background = document.querySelector('.background');
 
@@ -49,8 +50,9 @@ function spawnBubble() {
     const bubble = document.createElement('button');
     bubble.type = 'button';
     bubble.className = 'task-bubble';
-    bubble.title = 'Appel urgent : cliquez pour répondre';
-    bubble.innerHTML = '<img class="bubble-icon" src="src/images/phone.png" alt="Téléphone">';
+    bubble.title = t('bubble.title');
+    bubble.innerHTML = '<img class="bubble-icon" src="src/images/phone.png" alt="">';
+    bubble.querySelector('img').alt = t('images.phone');
 
     const { left, top } = randomPosition();
     bubble.style.left = `${left}%`;
