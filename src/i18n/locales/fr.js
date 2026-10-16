@@ -28,6 +28,7 @@ export default {
         endings: {
             choiceTitle: 'Fin de la canicule',
             choiceSubtitle: 'Vous avez survécu. Et maintenant ?',
+            number: 'Fin {current}/{total}',
             next: 'Suite ▸',
             replay: 'REJOUER',
             list: {

@@ -14,6 +14,7 @@ const els = {
     choicePay: document.getElementById('endingChoicePay'),
     choices: document.getElementById('endingChoices'),
     story: document.getElementById('endingStory'),
+    number: document.getElementById('endingNumber'),
     title: document.getElementById('endingTitle'),
     text: document.getElementById('endingText'),
     next: document.getElementById('endingNext')
@@ -51,6 +52,8 @@ export function playEnding(payText) {
 }
 
 function showStory(ending, resolve) {
+    // Numéro dans l'ordre de src/config/endings.js : « Fin 2/3 »
+    els.number.textContent = t('endings.number', { current: ENDINGS.indexOf(ending) + 1, total: ENDINGS.length });
     els.title.textContent = t(`endings.list.${ending.id}.title`);
     els.text.replaceChildren();
     current = { paragraphs: getLocaleValue(`endings.list.${ending.id}.text`), index: -1, typingId: null, resolve };

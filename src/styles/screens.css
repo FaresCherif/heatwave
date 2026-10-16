@@ -242,3 +242,13 @@
 .menu-content.ending #endingChoices button {
     text-transform: none;
 }
+
+/* Numéro de la fin, au-dessus du titre */
+.ending-number {
+    margin-bottom: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffd84a;
+}

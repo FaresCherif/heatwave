@@ -27,6 +27,7 @@ export default {
         endings: {
             choiceTitle: 'End of the heatwave',
             choiceSubtitle: 'You survived. Now what?',
+            number: 'Ending {current}/{total}',
             next: 'Next ▸',
             replay: 'PLAY AGAIN',
             list: {
