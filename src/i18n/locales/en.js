@@ -375,38 +375,45 @@ export default {
         thirdday: {
             caller: 'The boss',
             lines: [
-                'Bad news: with the heatwave, the whole country turned on its AC. The power grid can\'t keep up.',
-                'At my place, no problem, I have a generator for the pool. At yours, the power might go out several times today.',
-                'When it does, click the breaker and type the combination. Don\'t ask me why a breaker has a combination, it\'s for security.',
-                'Your phone runs on battery: I\'ll keep texting you. And no excuses, a power cut is not a break.',
+                'Bad news, my hard-working little bee: with the heatwave, the whole country turned on its AC. The power grid can\'t keep up.',
+                'At my place, no problem, I have one generator for the pool and another for the minibar. At yours, the power might go out several times today. We had a spare generator, but I use it as a footrest.',
+                'Fixing a breaker is nothing complicated: you go BEEP BOP BOOP and ta-da, it works!',
+                'And no excuses, a power cut is not a break.',
                 {
                     ifOwned: 'donation',
                     lines: [
-                        'And on top of that, some bad news: a generous anonymous donor gave the hospital a brand new generator. Some people really don\'t know what to do with their money.',
-                        'As a result, the union leader is getting the royal treatment and the doctors say he\'ll be back on his feet in no time. You wouldn\'t know anything about that, would you? No, not on your salary.'
+                        'And on top of that, some bad news: a generous anonymous donor gave the hospital a brand new generator. Some people really don\'t know what to do with their money. Luckily, with what we pay you, you don\'t have that problem.',
+                        'As a result, the union leader is getting the royal treatment and the doctors say he\'ll be back on his feet in no time. You wouldn\'t know anything about that, would you? No, I have a nose for people, I know you would never betray your family.'
                     ],
                     otherwise: [
                         'To cheer you up, some good news: even the hospital is struggling with electricity. With any luck, the union leader will overheat.',
                         'A little karma in this world, going after a poor boss like me. Some people really are heartless monsters. Your silent compassion is as touching as ever.'
                     ]
-                }
+                },
+                'Come on, keep up the pace!'
             ]
         },
         // Reserved for day 5 (finale)
         lastday: {
             caller: 'The boss',
             lines: [
-                'Last day of the heatwave! Tomorrow, back to the office. Well, for you: I\'m staying by the pool.',
-                'To celebrate, I planned everything: the switchboard, two video calls, a few messages, and a little surprise this afternoon.',
-                'The shareholders are looking at this week\'s numbers. If we finish strong, there might be a bonus. For me.',
-                'Come on, one last push!'
+                'Hello? My little ant... no, bee... well, my favorite little productive insect! It\'s the last day of the heatwave!',
+                'Tomorrow, back to the office. Well, for you. I\'m staying by the pool to monitor the water temperature, it\'s a heavy responsibility.',
+                'Good news: the power is back. I just had to ask the provider nicely to cut another neighborhood. I don\'t remember which one, some neighborhood with no shareholders.',
+                'To celebrate, I planned everything: the switchboard, two camera-on video calls, a few messages between two cocktails and a little surprise this afternoon. Don\'t thank me.',
+                'The shareholders are going through this week\'s numbers. If we finish strong, there\'ll be a bonus. For me. You\'ll get the satisfaction of a job well done, and at least that\'s tax-free.',
+                'And if you crack today, don\'t panic: your office has a window, just like the union leader\'s.',
+                'Come on, Paul, one last push! What do you mean, your name isn\'t Paul?'
             ]
         },
         memo: {
             caller: 'The boss',
             lines: [
-                'Surprise! The pen-pusher is still in intensive care, and management came up with new memos.',
-                'Copy them before 5 PM. I know you already have a lot on your plate, but I believe in you. Well, I believe in your probation period.'
+                'SURPRIIISE! No, it\'s not a raise. Stay seated, you\'ve been sitting for six hours anyway.',
+                'The pen-pusher is still in intensive care. He claims he can\'t hold a pen with both arms in a cast. Excuses, always excuses.',
+                'Meanwhile, management came up with three new memos. Copy them before 5 PM, with no typos. Yes, I\'m thinking of your name.',
+                'I know you already have a lot on your plate, but I believe in you. Well, mostly I believe in your probation period.',
+                'And smile, it\'s the home stretch! For you, anyway.'
             ]
         }
     }

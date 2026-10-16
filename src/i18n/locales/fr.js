@@ -383,40 +383,46 @@ export default {
         thirdday: {
             caller: 'Le patron',
             lines: [
-                'Mauvaise nouvelle ma petite abeille bucheuse : avec la canicule, tout le pays a allumé sa clim. Le réseau électrique ne tient plus.',
-                'Chez moi, aucun souci, j\'ai un groupe électrogène pour la piscine et un autre pour le mini bar. Chez vous, ça risque de couper plusieurs fois dans la journée, on avait un groupe de rechange mais il me sert de repose pied.',
-                'Réparez un disjoncteur n\'a rien de compliquer, vous faite BIP BAP BOUP et tada ça marche !',
-                'Et pas d\'excuse, une coupure n\'est pas une pause.',
+                'Mauvaise nouvelle, ma petite abeille bûcheuse : avec la canicule, tout le pays a allumé sa clim. Le réseau électrique ne tient plus.',
+                'Chez moi, aucun souci, j\'ai un groupe électrogène pour la piscine et un autre pour le minibar. Chez vous, ça risque de couper plusieurs fois dans la journée. On avait bien un groupe de rechange, mais il me sert de repose-pied.',
+                'Réparer un disjoncteur n\'a rien de compliqué : vous faites BIP BAP BOUP et tada, ça marche !',
+                'Et pas d\'excuse : une coupure n\'est pas une pause.',
                 // Don pour l'hôpital acheté au jour 3 : l'hôpital a un groupe électrogène neuf
                 {
                     ifOwned: 'donation',
                     lines: [
-                        'Et en plus, une mauvaise nouvelle : un généreux anonyme a offert un groupe électrogène tout neuf à l\'hôpital. Il y a vraiment des gens qui ne savent pas quoi faire de leur argent. Heureusement vu ce qu\'on vous paye, vous n\'avez pas ce problème',
+                        'Et en plus, une mauvaise nouvelle : un généreux anonyme a offert un groupe électrogène tout neuf à l\'hôpital. Il y a vraiment des gens qui ne savent pas quoi faire de leur argent. Heureusement, vu ce qu\'on vous paye, vous n\'avez pas ce problème.',
                         'Résultat, le chef du syndic est soigné aux petits oignons et les médecins disent qu\'il sera vite sur pied. Vous ne seriez pas au courant, vous ? Non, j\'ai du flair pour les gens, je sais que vous ne trahiriez pas votre famille.'
                     ],
                     otherwise: [
-                        'Pour vous remonter le moral, une bonne nouvelle. Même l\'hopital as du mal avec l\'electricite, avec de la chance le chef du syndic aura un problème de surchauffe.',
-                        'Un peu de karma dans ce monde, s\'en prendre au pauvre patron que je suis. Il y a quand meme des monstres sans scrupules, votre compassion silencieuse est toujours aussi touchante.'
+                        'Pour vous remonter le moral, une bonne nouvelle : même l\'hôpital a du mal avec l\'électricité. Avec un peu de chance, le chef du syndic aura un problème de surchauffe.',
+                        'Un peu de karma dans ce monde : s\'en prendre au pauvre patron que je suis... Il y a quand même des monstres sans scrupules. Votre compassion silencieuse est toujours aussi touchante.'
                     ]
                 },
-                'Allez on garde le rythme !'
+                'Allez, on garde le rythme !'
             ]
         },
         // Jour 5 (final) : appel d'introduction, puis note de service à 14h
         lastday: {
             caller: 'Le patron',
             lines: [
-                'Dernier jour de canicule ! Demain, retour au bureau. Enfin, pour vous : moi, je reste au bord de la piscine.',
-                'Pour fêter ça, j\'ai tout prévu : le standard, deux visios, quelques messages, et une petite surprise cet après-midi.',
-                'Les actionnaires regardent les chiffres de la semaine. Si on finit en beauté, il y aura peut-être une prime. Pour moi.',
-                'Allez, un dernier effort !'
+                'Allô ? Ma petite fourmi... non, abeille... enfin, mon petit insecte productif préféré ! C\'est le dernier jour de canicule !',
+                'Demain, retour au bureau. Enfin, pour vous. Moi, je reste au bord de la piscine pour surveiller la température de l\'eau, c\'est une lourde responsabilité.',
+                'Bonne nouvelle : le courant est revenu. Il a suffi de demander gentiment au fournisseur de couper un autre quartier. Je ne sais plus lequel, un quartier sans actionnaires.',
+                'Pour fêter ça, j\'ai tout prévu : le standard, deux visios caméra allumée, quelques messages entre deux cocktails et une petite surprise cet après-midi. Ne me remerciez pas.',
+                'Les actionnaires épluchent les chiffres de la semaine. Si on finit en beauté, il y aura une prime. Pour moi. Vous, vous aurez la satisfaction du devoir accompli, et ça au moins, ce n\'est pas imposable.',
+                'Et si jamais vous craquez aujourd\'hui, pas de panique : votre bureau a une fenêtre, comme celui du chef du syndic.',
+                'Allez Paul, un dernier effort ! Comment ça, vous ne vous appelez pas Paul ?'
             ]
         },
         memo: {
             caller: 'Le patron',
             lines: [
-                'La surprise ! Le gratte-papier est toujours en soins intensifs, et la direction a pondu de nouvelles notes de service.',
-                'Recopiez-les avant 17h. Je sais que vous avez déjà beaucoup à faire, mais je crois en vous. Enfin, je crois en votre période d\'essai.'
+                'SURPRIIISE ! Non, ce n\'est pas une augmentation. Restez assis, de toute façon vous l\'êtes depuis six heures.',
+                'Le gratte-papier est toujours en soins intensifs. Il prétend qu\'il ne peut pas tenir un stylo avec les deux bras dans le plâtre. Des excuses, toujours des excuses.',
+                'Pendant ce temps, la direction a pondu trois nouvelles notes de service. Recopiez-les avant 17h, et sans faute. Oui, je pense à votre nom.',
+                'Je sais que vous avez déjà beaucoup à faire, mais je crois en vous. Enfin, je crois surtout en votre période d\'essai.',
+                'Et souriez, c\'est la dernière ligne droite ! Pour vous, en tout cas.'
             ]
         }
 
