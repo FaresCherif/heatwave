@@ -2,7 +2,7 @@
 
 Petit jeu web de gestion en temps réel : survivez à une journée de bureau pendant la canicule en jonglant entre **productivité** et **coups de chaud**.
 
-**[▶ Jouer sur itch.io](https://farescherif.itch.io/heatwave)**
+**[▶ Jouer sur itch.io](https://devfch.itch.io/heatwave)**
 
 ![Capture du jeu](docs/screenshot.png)
 
