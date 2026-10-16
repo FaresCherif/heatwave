@@ -239,6 +239,11 @@ export function resumeGame() {
     if (state.paused) togglePause();
 }
 
+// Pause automatique : sans effet hors journée ou tutoriel (togglePause l'ignore)
+export function pauseGame() {
+    if (!state.paused) togglePause();
+}
+
 // Travail ou chaleur modifiés hors horloge (appels urgents)
 on('stats-changed', () => {
     renderBars();

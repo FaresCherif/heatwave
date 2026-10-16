@@ -1,5 +1,5 @@
 // Point d'entrée : branche les boutons des menus et les contrôles du jeu
-import { startGame, nextLevel, restartLevel, resumeGame } from './core/game.js';
+import { startGame, nextLevel, restartLevel, resumeGame, pauseGame } from './core/game.js';
 import { nextTutorialStep, endTutorial } from './systems/tutorial.js';
 import { initInput } from './input.js';
 import { initLevelSelect } from './systems/levelSelect.js';
@@ -27,6 +27,13 @@ bindButton('levelMenuButton', nextLevel);
 bindButton('retryButton', restartLevel);
 bindButton('tutorialNext', nextTutorialStep);
 bindButton('tutorialSkip', endTutorial);
+
+// Pause automatique quand le joueur quitte le jeu (autre onglet, clic hors de l'iframe itch.io) :
+// sinon l'horloge continue sans lui. La reprise reste manuelle, depuis le menu pause.
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) pauseGame();
+});
+window.addEventListener('blur', pauseGame);
 
 initInput();
 initLevelSelect();
