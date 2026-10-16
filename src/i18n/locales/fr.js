@@ -281,6 +281,54 @@ export default {
         {
             text: 'On m\'a dit que vous aviez demandé un ventilateur. C\'est vrai ?',
             answers: ['Jamais ! La chaleur forge le caractère.', 'C\'était une simple question.', 'Oui, et une climatisation aussi.']
+        },
+        {
+            text: 'Je réfléchis à remplacer les augmentations par des tapes dans le dos. Votre avis ?',
+            answers: ['Une tape de vous vaut tous les euros du monde.', 'C\'est mieux que rien.', 'Je peux la rendre... avec mon poing ?']
+        },
+        {
+            text: 'Il fait 32° chez vous ? Ici, avec la clim à fond, il fait frisquet.',
+            answers: ['Ravi que vous soyez au frais, patron !', 'C\'est supportable.', 'Je peux venir travailler chez vous ?']
+        },
+        {
+            text: 'Rappel : le team building de samedi est obligatoire et non rémunéré. Ambiance détendue !',
+            answers: ['J\'ai hâte, je ramène les chips !', 'Noté.', 'Détendue comme une prise d\'otages.']
+        },
+        {
+            text: 'Vous avez liké mon post LinkedIn sur la bienveillance au travail ?',
+            answers: ['Liké, partagé, imprimé et encadré !', 'Je vais le lire.', 'Celui posté pendant le licenciement de Gérard ?']
+        },
+        {
+            text: 'Mon chien a mangé le rapport trimestriel. Vous pouvez le refaire pour dans 10 minutes ?',
+            answers: ['Bien sûr, et je lui prépare une gamelle.', 'Je vais essayer.', 'Je peux manger le chien ?']
+        },
+        {
+            text: 'J\'ai décidé que vous étiez désormais « Chief Happiness Officer » de vous-même. Alors si vous êtes triste, corrigez ça, c\'est votre boulot.',
+            answers: ['Quel honneur ! Je n\'en mérite pas tant.', 'D\'accord...', 'Je suis très malheureux de l\'apprendre.']
+        },
+        {
+            text: 'Petit sondage anonyme : de 1 à 10, à quel point vous m\'adorez ? Je saurai qui a répondu quoi.',
+            answers: ['11, et encore je suis modeste.', '7, c\'est bien 7 ?', '2, pour la corbeille de fruits.']
+        },
+        {
+            text: 'Votre courbe de productivité baisse quand vous respirez. Vous pourriez respirer moins ?',
+            answers: ['Je retiens mon souffle dès maintenant !', 'Je vais optimiser ça.', 'Je peux aussi arrêter de vivre.']
+        },
+        {
+            text: 'Le distributeur de la salle commune est payant maintenant. Il faut bien financer mon deuxième yacht.',
+            answers: ['Un yacht seul, c\'est triste. Il lui fallait un ami.', 'Ah, d\'accord.', 'Je l\'ai déjà vandalisé, et je vais le refaire.']
+        },
+        {
+            text: 'J\'ai vu que vous aviez éternué en visio. On parle de contagion en entreprise, là.',
+            answers: ['Je me suis désinfecté à l\'eau de Javel, patron !', 'C\'était la poussière.', 'C\'est l\'allergie au patronat.']
+        },
+        {
+            text: 'Un concurrent vous a contacté ? Sachez que la loyauté est la plus belle des primes.',
+            answers: ['Je leur ai raccroché au nez, évidemment !', 'Personne ne m\'a appelé.', 'Ils proposent une vraie prime, eux.']
+        },
+        {
+            text: 'Bonne nouvelle : j\'ai obtenu une médaille pour notre politique sociale. Je l\'ai achetée moi-même.',
+            answers: ['Elle est méritée, bravo patron !', 'Félicitations.', 'Elle a coûté combien de nos salaires ?']
         }
     ],
 

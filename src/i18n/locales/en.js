@@ -274,6 +274,54 @@ export default {
         {
             text: 'I heard you asked for a fan. Is that true?',
             answers: ['Never! Heat builds character.', 'It was just a question.', 'Yes, and air conditioning too.']
+        },
+        {
+            text: 'I\'m thinking of replacing raises with pats on the back. Thoughts?',
+            answers: ['A pat from you is worth all the money in the world.', 'Better than nothing.', 'Can I pat you back... with my fist?']
+        },
+        {
+            text: 'It\'s 32° at your place? Here, with the AC on full blast, it\'s quite chilly.',
+            answers: ['Glad you\'re keeping cool, boss!', 'It\'s bearable.', 'Can I come work at your place?']
+        },
+        {
+            text: 'Reminder: Saturday\'s team building is mandatory and unpaid. Relaxed vibes!',
+            answers: ['Can\'t wait, I\'ll bring the chips!', 'Noted.', 'Relaxed like a hostage situation.']
+        },
+        {
+            text: 'Did you like my LinkedIn post about kindness in the workplace?',
+            answers: ['Liked, shared, printed and framed!', 'I\'ll read it.', 'The one you posted while firing Gerald?']
+        },
+        {
+            text: 'My dog ate the quarterly report. Can you redo it in 10 minutes?',
+            answers: ['Of course, and I\'ll fill his bowl too.', 'I\'ll try.', 'Can I eat the dog?']
+        },
+        {
+            text: 'I\'ve decided you\'re now your own "Chief Happiness Officer". So if you\'re sad, fix it, that\'s your job.',
+            answers: ['What an honor! I don\'t deserve it.', 'Okay...', 'I\'m very unhappy to hear that.']
+        },
+        {
+            text: 'Quick anonymous survey: from 1 to 10, how much do you adore me? I\'ll know who answered what.',
+            answers: ['11, and I\'m being modest.', '7, is 7 good?', '2, for the fruit basket.']
+        },
+        {
+            text: 'Your productivity curve drops when you breathe. Could you breathe less?',
+            answers: ['Holding my breath right now!', 'I\'ll optimize that.', 'I could also stop living.']
+        },
+        {
+            text: 'The break room vending machine is paid now. My second yacht won\'t fund itself.',
+            answers: ['A yacht alone is sad. It needed a friend.', 'Oh, okay.', 'I already vandalized it, and I\'ll do it again.']
+        },
+        {
+            text: 'I saw you sneeze during the video call. That\'s workplace contagion, you know.',
+            answers: ['I disinfected myself with bleach, boss!', 'It was just dust.', 'I\'m allergic to management.']
+        },
+        {
+            text: 'A competitor contacted you? Remember, loyalty is the finest bonus of all.',
+            answers: ['I hung up on them, obviously!', 'Nobody called me.', 'They offer a real bonus, though.']
+        },
+        {
+            text: 'Good news: I got a medal for our social policy. I bought it myself.',
+            answers: ['Well deserved, bravo boss!', 'Congratulations.', 'How many of our salaries did it cost?']
         }
     ],
 
