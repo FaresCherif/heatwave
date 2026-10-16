@@ -9,6 +9,7 @@ import { startBubbles, stopBubbles, updateBubbles } from '../systems/bubbles.js'
 import { startTutorial, hideTutorial } from '../systems/tutorial.js';
 import { playDialogue } from '../systems/dialogue.js';
 import { openShop } from '../systems/shop.js';
+import { playEnding } from '../systems/endings.js';
 import { startEmployeeForm, stopEmployeeForm, updateFormDeadline, isFormOverdue } from '../systems/employeeForm.js';
 import { startBossMood, stopBossMood, updateBossMood } from '../systems/bossMood.js';
 import { updateMeetings, stopMeetings } from '../systems/meetings.js';
@@ -42,13 +43,6 @@ function resetSession() {
 
 // Bouton de l'écran de fin de niveau : boutique, puis niveau suivant
 export async function nextLevel() {
-    // Après la victoire, REJOUER relance une partie complète
-    if (isLastLevel()) {
-        resetProgress();
-        restartLevel();
-        return;
-    }
-
     hideScreen('level');
     await openShop();
     state.levelIndex++;
@@ -199,7 +193,7 @@ function endDay() {
     stopBossMood();
 }
 
-function completeLevel() {
+async function completeLevel() {
     endDay();
 
     const level = getLevel();
@@ -207,21 +201,20 @@ function completeLevel() {
     const payText = t('levelEnd.pay', { pay, total: state.totalMoney });
 
     if (isLastLevel()) {
-        showLevelComplete({
-            title: t('levelEnd.victory'),
-            pay: payText,
-            text: t('levelEnd.victoryText', { name: getLevelName(level) }),
-            button: t('levelEnd.replay')
-        });
-    } else {
-        const next = getNextLevel();
-        showLevelComplete({
-            title: t('levelEnd.complete', { name: getLevelName(level).toUpperCase() }),
-            pay: payText,
-            text: t('levelEnd.next', { name: getLevelName(next), description: getLevelDescription(next) }),
-            button: t('levelEnd.continue')
-        });
+        // Fin de la partie choisie selon les objets achetés et l'argent, puis nouvelle partie
+        await playEnding(payText);
+        resetProgress();
+        restartLevel();
+        return;
     }
+
+    const next = getNextLevel();
+    showLevelComplete({
+        title: t('levelEnd.complete', { name: getLevelName(level).toUpperCase() }),
+        pay: payText,
+        text: t('levelEnd.next', { name: getLevelName(next), description: getLevelDescription(next) }),
+        button: t('levelEnd.continue')
+    });
 }
 
 export function togglePause() {

@@ -208,3 +208,37 @@
     border: 2px solid #ff6b35;
     box-shadow: none;
 }
+
+/* Fins de la partie : écran plus large pour le récit */
+.menu-content.ending {
+    max-width: 720px;
+    padding: 40px 56px;
+}
+
+.menu-content.ending h1 {
+    font-size: 44px;
+    text-transform: uppercase;
+}
+
+/* Récit : paragraphes à gauche, affichés un par un */
+.ending-text {
+    min-height: 120px;
+    margin-bottom: 28px;
+    text-align: left;
+}
+
+.menu-content .ending-text p {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #eeeeee;
+}
+
+/* Choix de la fin : boutons sur toute la largeur, texte normal */
+.menu-content.ending #endingChoices {
+    width: 100%;
+}
+
+.menu-content.ending #endingChoices button {
+    text-transform: none;
+}

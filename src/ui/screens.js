@@ -1,4 +1,4 @@
-// Écrans superposés au jeu : démarrage, pause, fin de niveau, boutique, game over
+// Écrans superposés au jeu : démarrage, pause, fin de niveau, boutique, game over, fins de la partie
 
 const screens = {
     start: document.getElementById('startMenu'),
@@ -6,7 +6,9 @@ const screens = {
     pause: document.getElementById('pauseMenu'),
     level: document.getElementById('levelMenu'),
     shop: document.getElementById('shopScreen'),
-    gameOver: document.getElementById('gameOverScreen')
+    gameOver: document.getElementById('gameOverScreen'),
+    endingChoice: document.getElementById('endingChoice'),
+    endingStory: document.getElementById('endingStory')
 };
 
 const levelEls = {

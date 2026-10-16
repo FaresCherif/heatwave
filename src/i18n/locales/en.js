@@ -22,10 +22,42 @@ export default {
             pay: 'Today\'s pay: {pay} € — Total: {total} €',
             complete: '{name} COMPLETE',
             next: 'Next: {name}. {description}',
-            continue: 'CONTINUE',
-            victory: 'VICTORY',
-            victoryText: '{name} complete! You survived the heatwave.',
-            replay: 'PLAY AGAIN'
+            continue: 'CONTINUE'
+        },
+        endings: {
+            choiceTitle: 'End of the heatwave',
+            choiceSubtitle: 'You survived. Now what?',
+            next: 'Next ▸',
+            replay: 'PLAY AGAIN',
+            list: {
+                employee: {
+                    title: 'Model employee',
+                    choice: 'Go back to work on Monday',
+                    text: [
+                        'The heatwave is over. On Monday, you went back to the office. On Tuesday too. And every day after that.',
+                        'The years went by between memos, camera-on video calls and messages the boss sent between two cocktails. You never said a word: your silence became a legend in the company.',
+                        'After years of hard labour, management generously gave you a mug with a smile printed on it. It smiles for you. Just as well, you forgot how.'
+                    ]
+                },
+                blackmail: {
+                    title: 'Initiative',
+                    choice: 'Play the recording to the boss',
+                    text: [
+                        'You played the recording to the boss. The union leader\'s fall, the generator he uses as a footrest, the pool: it was all there.',
+                        'Against all odds, he loved it. "Finally, an employee with some initiative!" He took you under his wing, and you climbed the ladder by crushing everyone in your way.',
+                        'Until the day a disgruntled employee pushed you down the stairs. Still better than being a union rep: they get the window.'
+                    ]
+                },
+                lawsuit: {
+                    title: 'Under the rainbow',
+                    choice: 'Sue the boss with the union',
+                    text: [
+                        'Back on his feet thanks to your donation, the union leader listened to the recording three times. Then he called a lawyer, paid with your savings.',
+                        'In court, the boss lost everything: the pool, the mini bar and both generators. The one he used as a footrest was given back to the employees.',
+                        'Inspired, workers across the country followed. Capitalism fell on a Tuesday, around 3 pm, and the world lived happily under a rainbow. It is 22 degrees, forever.'
+                    ]
+                }
+            }
         },
         levels: {
             day1: {

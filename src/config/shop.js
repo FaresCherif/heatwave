@@ -16,7 +16,7 @@
  * (ex : [1, 2] = après les jours 1 et 2). Sans : proposé dans toutes les boutiques.
  *
  * Objets d'histoire : effects vide, aucun effet de jeu. Leur achat (state.ownedItems)
- * servira à débloquer des fins.
+ * débloque des fins (src/config/endings.js).
  *
  * @typedef {Object} Effect
  * @property {string} stat
@@ -120,7 +120,7 @@ export const SHOP_ITEMS = [
         ]
     },
 
-    // Objets d'histoire : sans effet de jeu, ils débloqueront des fins
+    // Objets d'histoire : sans effet de jeu, ils débloquent des fins
     {
         id: 'recorder',
         icon: '🎙️',

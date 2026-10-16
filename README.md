@@ -21,6 +21,8 @@ Au niveau 4, le réseau électrique sature : à chaque **coupure de courant**, l
 
 Au niveau 5, dernier jour de la canicule, plusieurs difficultés se cumulent : appels urgents, messages du patron, deux visios, et à 14h trois courtes notes de service à recopier avant 17h.
 
+À la fin du dernier jour, la canicule se termine sur l'une des **fins** de l'histoire. Certains objets de la boutique n'ont aucun effet de jeu mais débloquent d'autres fins, à choisir parmi celles obtenues.
+
 ### Commandes
 
 | Action | Commande |
@@ -61,13 +63,15 @@ src/
 ├── input.js            Clavier et clics sur la scène
 ├── config/
 │   ├── levels.js       Paramètres de chaque niveau
-│   └── shop.js         Objets de la boutique et leurs effets
+│   ├── shop.js         Objets de la boutique et leurs effets
+│   └── endings.js      Fins de la partie et leurs conditions
 ├── core/
 │   ├── state.js        État de la partie
 │   ├── rules.js        Règles du jeu (fonctions pures, testées)
 │   ├── game.js         Boucle de jeu, début et fin de journée, pause
 │   ├── employee.js     Validation de la fiche employé (fonction pure, testée)
 │   ├── upgrades.js     Effets des objets achetés (fonctions pures, testées)
+│   ├── endings.js      Fins débloquées (fonction pure, testée)
 │   ├── sequence.js     Détection d'un code secret au clavier (testée)
 │   └── events.js       Bus d'événements
 ├── i18n/
@@ -78,6 +82,7 @@ src/
 │   ├── employeeForm.js Fiche du nouvel employé
 │   ├── copyTask.js     Gratte-papier : phrases à recopier
 │   ├── shop.js         Boutique entre deux niveaux
+│   ├── endings.js      Choix et récit des fins après le dernier niveau
 │   ├── levelSelect.js  Easter egg : choix du niveau par code secret
 │   ├── tutorial.js     Tutoriel guidé
 │   ├── bubbles.js      Appels urgents
@@ -95,6 +100,7 @@ tests/
 ├── rules.test.js       Tests unitaires des règles
 ├── employee.test.js    Validation de la fiche employé
 ├── upgrades.test.js    Effets et achat des objets de la boutique
+├── endings.test.js     Conditions des fins et fins atteignables
 ├── sequence.test.js    Détection du code secret
 └── i18n.test.js        Complétude des traductions
 ```

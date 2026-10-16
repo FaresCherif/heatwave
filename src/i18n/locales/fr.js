@@ -22,10 +22,43 @@ export default {
             pay: 'Salaire du jour : {pay} € — Total : {total} €',
             complete: '{name} TERMINÉ',
             next: 'Prochain : {name}. {description}',
-            continue: 'CONTINUER',
-            victory: 'VICTOIRE',
-            victoryText: '{name} terminé ! Vous avez survécu à la canicule.',
-            replay: 'REJOUER'
+            continue: 'CONTINUER'
+        },
+        // Fins de la partie (conditions : src/config/endings.js). text : paragraphes affichés un par un
+        endings: {
+            choiceTitle: 'Fin de la canicule',
+            choiceSubtitle: 'Vous avez survécu. Et maintenant ?',
+            next: 'Suite ▸',
+            replay: 'REJOUER',
+            list: {
+                employee: {
+                    title: 'Employé modèle',
+                    choice: 'Reprendre le travail lundi',
+                    text: [
+                        'La canicule est passée. Lundi, vous avez repris le chemin du bureau. Mardi aussi. Et tous les jours suivants.',
+                        'Les années ont filé entre les notes de service, les visios caméra allumée et les messages du patron envoyés entre deux cocktails. Vous n\'avez jamais rien dit : votre silence est devenu une légende dans l\'entreprise.',
+                        'Après des années de durs labeurs, la direction vous a généreusement offert un mug avec un sourire imprimé dessus. Il sourit à votre place. Ça tombe bien, vous ne savez plus le faire.'
+                    ]
+                },
+                blackmail: {
+                    title: 'L\'esprit d\'initiative',
+                    choice: 'Faire écouter l\'enregistrement au patron',
+                    text: [
+                        'Vous avez fait écouter l\'enregistrement au patron. La chute du chef du syndic, le groupe électrogène qui lui sert de repose-pied, la piscine : tout y était.',
+                        'Contre toute attente, il a adoré. « Enfin un employé avec de l\'esprit d\'initiative ! » Il vous a pris sous son aile, et vous avez gravi les échelons en écrasant tous ceux qui se trouvaient sur votre route.',
+                        'Jusqu\'au jour où un employé mécontent vous a poussé dans les escaliers. C\'est toujours mieux que d\'être syndicaliste : eux, c\'est par la fenêtre.'
+                    ]
+                },
+                lawsuit: {
+                    title: 'Sous l\'arc-en-ciel',
+                    choice: 'Porter plainte avec le syndic',
+                    text: [
+                        'Remis sur pied grâce à votre don, le chef du syndic a écouté l\'enregistrement trois fois. Puis il a appelé un avocat, payé avec vos économies.',
+                        'Au tribunal, le patron a tout perdu : la piscine, le mini bar et les deux groupes électrogènes. Celui qui lui servait de repose-pied a été rendu aux employés.',
+                        'Galvanisés, les employés du pays entier ont suivi. Le capitalisme est tombé un mardi, vers 15h, et le monde a vécu heureux sous un arc-en-ciel. Il fait 22 degrés, pour toujours.'
+                    ]
+                }
+            }
         },
         // Nom et description de chaque niveau, par identifiant (id dans src/config/levels.js)
         levels: {

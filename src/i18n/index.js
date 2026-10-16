@@ -69,6 +69,11 @@ export function t(key, params = {}) {
     return text.replace(/\{(\w+)\}/g, (match, name) => params[name] ?? match);
 }
 
+/** Valeur brute de l'interface (ex : liste de paragraphes), avec repli sur le français */
+export function getLocaleValue(key) {
+    return lookup(LOCALES[language].ui, key) ?? lookup(LOCALES[DEFAULT_LANGUAGE].ui, key);
+}
+
 /**
  * Nombre affiché : au plus une décimale, séparateur de la langue (2,1 en français).
  * Les objets de la boutique multiplient les paramètres : sans arrondi, 1.5 × 1.4 s'afficherait 2.0999999999999996.

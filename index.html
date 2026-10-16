@@ -211,6 +211,24 @@
                 </div>
             </div>
 
+            <!-- Fins de la partie, après le dernier niveau (conditions : src/config/endings.js) -->
+            <div class="overlay hidden" id="endingChoice">
+                <div class="menu-content ending">
+                    <h1 data-i18n="endings.choiceTitle"></h1>
+                    <p id="endingChoicePay" class="menu-highlight"></p>
+                    <p data-i18n="endings.choiceSubtitle"></p>
+                    <div class="menu-buttons" id="endingChoices"></div>
+                </div>
+            </div>
+
+            <div class="overlay hidden" id="endingStory">
+                <div class="menu-content ending">
+                    <h1 id="endingTitle"></h1>
+                    <div class="ending-text" id="endingText"></div>
+                    <button id="endingNext"></button>
+                </div>
+            </div>
+
             <!-- Appel téléphonique de l'histoire -->
             <div class="dialogue hidden" id="dialogue">
                 <div class="dialogue-phone">
