@@ -44,6 +44,10 @@ export default {
             day4: {
                 name: 'Niveau 4',
                 description: 'Avant dernier jour de la canicule.'
+            },
+            day5: {
+                name: 'Niveau 5',
+                description: 'Dernier jour de la canicule : le standard, les visios, le patron et une surprise l\'après-midi.'
             }
         },
         hud: {
@@ -207,6 +211,16 @@ export default {
         'Tout employé qui respire est prié de rester discret.'
     ],
 
+    // Notes de service du dernier jour : phrases courtes (CopyTask avec pool: 'memoTexts')
+    memoTexts: [
+        'La canicule est annulée.',
+        'Transpirer est une faute grave.',
+        'Le ventilateur est un luxe.',
+        'Les congés sont reportés.',
+        'Le patron a toujours raison.',
+        'La sueur n\'est pas un salaire.'
+    ],
+
     // Messages du patron (BossMoodConfig dans src/config/levels.js), tirés au hasard.
     // Réponses dans l'ordre : bonne, neutre, mauvaise (affichées mélangées)
     bossMessages: [
@@ -295,7 +309,7 @@ export default {
                 'Allez on garde le rythme !'
             ]
         },
-        // Réservés au jour 5 (final)
+        // Jour 5 (final) : appel d'introduction, puis note de service à 14h
         lastday: {
             caller: 'Le patron',
             lines: [

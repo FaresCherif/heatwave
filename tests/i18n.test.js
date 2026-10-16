@@ -43,10 +43,11 @@ describe('langues', () => {
         });
 
         test(`${code} : assez de phrases à recopier`, () => {
-            assert.equal(locale.copyTexts.length, reference.copyTexts.length);
             for (const { calls = [] } of LEVELS) {
                 for (const { copyTask } of calls.filter(call => call.copyTask)) {
-                    assert.ok(locale.copyTexts.length >= copyTask.count, `${copyTask.count} phrases demandées`);
+                    const pool = copyTask.pool ?? 'copyTexts';
+                    assert.equal(locale[pool]?.length, reference[pool].length, `${pool} : nombre de phrases`);
+                    assert.ok(locale[pool].length >= copyTask.count, `${pool} : ${copyTask.count} phrases demandées`);
                 }
             }
         });

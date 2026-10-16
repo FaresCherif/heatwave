@@ -43,6 +43,10 @@ export default {
             day4: {
                 name: 'Level 4',
                 description: 'Second to last day of the heatwave.'
+            },
+            day5: {
+                name: 'Level 5',
+                description: 'Last day of the heatwave: the switchboard, video calls, the boss and an afternoon surprise.'
             }
         },
         hud: {
@@ -202,6 +206,15 @@ export default {
         'Windows stay closed for safety reasons.',
         'The year-end bonus has been postponed to next year.',
         'Any employee who breathes is asked to be discreet about it.'
+    ],
+
+    memoTexts: [
+        'The heatwave is cancelled.',
+        'Sweating is serious misconduct.',
+        'Fans are a luxury.',
+        'All holidays are postponed.',
+        'The boss is always right.',
+        'Sweat is not a salary.'
     ],
 
     bossMessages: [

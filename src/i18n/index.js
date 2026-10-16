@@ -105,7 +105,10 @@ export function getBossMessages() {
     return LOCALES[language].bossMessages ?? LOCALES[DEFAULT_LANGUAGE].bossMessages;
 }
 
-/** Phrases à recopier du gratte-papier, dans la langue active */
-export function getCopyTexts() {
-    return LOCALES[language].copyTexts ?? LOCALES[DEFAULT_LANGUAGE].copyTexts;
+/**
+ * Phrases à recopier du gratte-papier, dans la langue active
+ * @param {string} [pool]  Liste de phrases dans src/i18n/locales (CopyTask.pool)
+ */
+export function getCopyTexts(pool = 'copyTexts') {
+    return LOCALES[language][pool] ?? LOCALES[DEFAULT_LANGUAGE][pool];
 }

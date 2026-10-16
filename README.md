@@ -19,6 +19,8 @@ Au niveau 3, une troisième jauge apparaît : 😊 **l'humeur du patron**. Il vo
 
 Au niveau 4, le réseau électrique sature : à chaque **coupure de courant**, l'ordinateur s'éteint et le travail ne monte plus. Il faut ouvrir le disjoncteur et taper la combinaison de flèches affichée pour relancer le courant, pendant que le patron continue d'écrire.
 
+Au niveau 5, dernier jour de la canicule, plusieurs difficultés se cumulent : appels urgents, messages du patron, deux visios, et à 14h trois courtes notes de service à recopier avant 17h.
+
 ### Commandes
 
 | Action | Commande |

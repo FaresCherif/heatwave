@@ -14,6 +14,7 @@
  * @property {number} count         Phrases à recopier
  * @property {number} deadlineHour  Heure limite, sinon game over
  * @property {number} reward        Travail gagné par phrase recopiée
+ * @property {string} [pool]        Liste de phrases dans src/i18n/locales (par défaut : 'copyTexts')
  *
  * @typedef {Object} ScheduledCall
  * @property {number} hour          Heure de l'appel
@@ -170,6 +171,42 @@ export const LEVELS = [
         outages: {
             hours: [10, 13, 15.5],
             codeLength: 5
+        }
+    },
+    {
+        id: 'day5',
+        intro: 'lastday',
+        calls: [{ hour: 14, dialogue: 'memo', copyTask: { count: 3, deadlineHour: 17, reward: 30, pool: 'memoTexts' } }],
+        startHour: 8,
+        endHour: 18,
+        workDecay: 2,
+        workPerPress: 1,
+        heatMorning: 1.5,
+        heatAfternoon: 5,
+        fanCooling: 1.5,
+        overheatThreshold: 70,
+        overheatWorkFactor: 0.5,
+        dailyPay: 200,
+        lowWorkThreshold: 50,
+        bubbles: {
+            maxCount: 2,
+            minDelay: 3000,
+            maxDelay: 7000,
+            lifetime: 5,
+            penalty: 15,
+            reward: 5
+        },
+        bossMood: {
+            start: 60,
+            messageHours: [9, 10, 12.5, 15, 17],
+            replyMinutes: 45,
+            answerMood: [15, 0, -15],
+            missPenalty: 20
+        },
+        meetings: {
+            slots: [{ hour: 11, duration: 45 }, { hour: 16, duration: 45 }],
+            warningMinutes: 15,
+            moodPenalty: 3
         }
     }
 ];

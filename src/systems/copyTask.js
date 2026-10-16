@@ -24,8 +24,8 @@ const els = {
 let task = null;  // null : aucune tâche en cours
 
 // Phrases tirées au hasard, sans doublon
-function pickTexts(count) {
-    const texts = [...getCopyTexts()];
+function pickTexts(count, pool) {
+    const texts = [...getCopyTexts(pool)];
     for (let i = texts.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [texts[i], texts[j]] = [texts[j], texts[i]];
@@ -35,7 +35,7 @@ function pickTexts(count) {
 
 /** Donne la tâche (bouton visible) : config.count phrases à recopier avant config.deadlineHour. */
 export function startCopyTask(/** @type {import('../config/levels.js').CopyTask} */ config) {
-    task = { texts: pickTexts(config.count), index: 0, deadlineHour: config.deadlineHour, reward: config.reward };
+    task = { texts: pickTexts(config.count, config.pool), index: 0, deadlineHour: config.deadlineHour, reward: config.reward };
     applyTranslations(els.panel);
     applyTranslations(els.toggle);
     els.input.placeholder = t('copy.placeholder');
