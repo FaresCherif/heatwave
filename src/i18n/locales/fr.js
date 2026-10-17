@@ -100,7 +100,12 @@ export default {
             },
             alternate: 'Alterne ← →',
             nextLeft: 'Prochain : ←',
-            nextRight: 'Prochain : →'
+            nextRight: 'Prochain : →',
+            // Nom de l'action au survol du joueur et de l'éventail
+            hints: {
+                work: 'TRAVAILLER (Espace)',
+                cool: 'VENTILER (← →)'
+            }
         },
         tutorial: {
             title: 'TUTORIEL',

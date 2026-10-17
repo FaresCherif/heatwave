@@ -61,12 +61,10 @@
     pointer-events: none;
 }
 
-.room .joueur::after {
-    content: 'TRAVAILLER (Espace)';
-}
-
+/* Texte traduit : data-i18n-hint dans index.html */
+.room .joueur::after,
 .room .handfan::after {
-    content: 'VENTILER (← →)';
+    content: attr(data-hint);
 }
 
 .room .joueur:hover::after,

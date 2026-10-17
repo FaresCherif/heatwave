@@ -97,7 +97,11 @@ export default {
             },
             alternate: 'Alternate ← →',
             nextLeft: 'Next: ←',
-            nextRight: 'Next: →'
+            nextRight: 'Next: →',
+            hints: {
+                work: 'WORK (Space)',
+                cool: 'FAN (← →)'
+            }
         },
         tutorial: {
             title: 'TUTORIAL',

@@ -99,13 +99,19 @@ export function formatNumber(value) {
     return new Intl.NumberFormat(language, { maximumFractionDigits: 1 }).format(value);
 }
 
-/** Traduit les éléments HTML marqués data-i18n="clé" (texte) et data-i18n-alt="clé" (images) */
+/**
+ * Traduit les éléments HTML marqués data-i18n="clé" (texte), data-i18n-alt="clé" (images)
+ * et data-i18n-hint="clé" (bulle au survol, affichée en CSS par attr(data-hint))
+ */
 export function applyTranslations(root = document) {
     root.querySelectorAll('[data-i18n]').forEach(element => {
         element.textContent = t(element.dataset.i18n);
     });
     root.querySelectorAll('[data-i18n-alt]').forEach(element => {
         element.alt = t(element.dataset.i18nAlt);
+    });
+    root.querySelectorAll('[data-i18n-hint]').forEach(element => {
+        element.dataset.hint = t(element.dataset.i18nHint);
     });
 }
 
