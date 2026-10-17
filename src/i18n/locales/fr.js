@@ -1,6 +1,10 @@
 // Textes en français (langue de référence : toute clé doit exister ici)
 export default {
     ui: {
+        // Nom de la langue, écrit dans cette langue (bouton du menu de démarrage)
+        language: {
+            name: 'Français'
+        },
         menu: {
             tagline: 'Gérez votre température et votre productivité',
             start: 'DÉMARRER'

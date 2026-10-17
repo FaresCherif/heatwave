@@ -90,6 +90,32 @@
     box-shadow: none;
 }
 
+/* Choix de la langue (menu de démarrage) : petits boutons discrets, la langue active est pleine */
+.language-select {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.menu-content .language-select button {
+    padding: 6px 16px;
+    font-size: 14px;
+    text-transform: none;
+    background: none;
+    border: 2px solid #ff6b35;
+    box-shadow: none;
+}
+
+.menu-content .language-select button:hover {
+    background: rgba(255, 107, 53, 0.15);
+    box-shadow: none;
+}
+
+.menu-content .language-select button[aria-pressed="true"] {
+    background: #ff6b35;
+}
+
 /* Ligne mise en avant, ex : salaire de la journée */
 .menu-content .menu-highlight {
     margin: 0 0 20px 0;

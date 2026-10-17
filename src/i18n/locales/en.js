@@ -1,6 +1,9 @@
 // English texts
 export default {
     ui: {
+        language: {
+            name: 'English'
+        },
         menu: {
             tagline: 'Manage your temperature and your productivity',
             start: 'START'

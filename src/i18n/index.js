@@ -5,8 +5,10 @@
  *
  * Langue choisie, par ordre de priorité :
  * 1. paramètre d'URL ?lang=en (pratique pour tester)
- * 2. dernier choix enregistré dans le navigateur
- * 3. français par défaut
+ * 2. dernier choix enregistré dans le navigateur (boutons du menu de démarrage)
+ * 3. langue du navigateur, si le jeu la connaît
+ * 4. anglais sinon (public international d'itch.io)
+ * Le français reste la langue de référence : c'est lui qui complète une clé absente.
  *
  * @typedef {Object} Dialogue
  * @property {string} caller   Nom affiché de la personne qui appelle
@@ -17,12 +19,26 @@ import en from './locales/en.js';
 
 export const LOCALES = { fr, en };
 export const DEFAULT_LANGUAGE = 'fr';
+export const BROWSER_FALLBACK_LANGUAGE = 'en';
 const STORAGE_KEY = 'heatwave-language';
 
 let language = detectLanguage();
 
 function isSupported(code) {
     return Object.hasOwn(LOCALES, code);
+}
+
+/**
+ * Première langue du navigateur connue du jeu, sinon l'anglais.
+ * Les variantes régionales comptent pour leur langue : 'en-US' → 'en', 'fr-CA' → 'fr'.
+ * @param {readonly string[]} preferred  Langues du navigateur par préférence (navigator.languages)
+ * @returns {string}
+ */
+export function pickBrowserLanguage(preferred) {
+    const match = preferred
+        .map(code => code.toLowerCase().split('-')[0])
+        .find(isSupported);
+    return match ?? BROWSER_FALLBACK_LANGUAGE;
 }
 
 function detectLanguage() {
@@ -38,7 +54,8 @@ function detectLanguage() {
     } catch {
         // Stockage indisponible (navigation privée...) : on ignore
     }
-    return DEFAULT_LANGUAGE;
+    // Certains navigateurs ne renseignent que navigator.language
+    return pickBrowserLanguage(navigator.languages ?? [navigator.language ?? '']);
 }
 
 export function getLanguage() {

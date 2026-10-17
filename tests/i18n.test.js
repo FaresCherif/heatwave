@@ -1,7 +1,7 @@
 // Tests des traductions : complétude des langues et repli sur le français
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { LOCALES, DEFAULT_LANGUAGE, t, getDialogue, setLanguage, getLanguage, formatNumber } from '../src/i18n/index.js';
+import { LOCALES, DEFAULT_LANGUAGE, t, getDialogue, setLanguage, getLanguage, formatNumber, pickBrowserLanguage } from '../src/i18n/index.js';
 import { LEVELS } from '../src/config/levels.js';
 import { SHOP_ITEMS } from '../src/config/shop.js';
 
@@ -140,5 +140,18 @@ describe('accès aux textes', () => {
 
     test('renvoie la clé si le texte n\'existe nulle part', () => {
         assert.equal(t('inconnu.cle'), 'inconnu.cle');
+    });
+});
+
+describe('langue du navigateur', () => {
+    test('prend la première langue connue, variante régionale comprise', () => {
+        assert.equal(pickBrowserLanguage(['fr-FR', 'en-US']), 'fr');
+        assert.equal(pickBrowserLanguage(['en-GB', 'fr']), 'en');
+        assert.equal(pickBrowserLanguage(['de-DE', 'FR-ca']), 'fr');
+    });
+
+    test('anglais si aucune langue du navigateur n\'est traduite', () => {
+        assert.equal(pickBrowserLanguage(['es-ES', 'de']), 'en');
+        assert.equal(pickBrowserLanguage([]), 'en');
     });
 });
