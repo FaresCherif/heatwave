@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="description" content="Heatwave : survivez à une journée de bureau pendant la canicule, entre productivité et coups de chaud.">
     <title>Heatwave</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌡️</text></svg>">
@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="src/styles/copy.css">
     <link rel="stylesheet" href="src/styles/boss.css">
     <link rel="stylesheet" href="src/styles/power.css">
+    <link rel="stylesheet" href="src/styles/touch.css">
 
     <script type="module" src="src/main.js"></script>
 </head>
@@ -139,7 +140,7 @@
                 <span class="copy-progress" id="copyProgress"></span>
             </header>
             <p class="copy-model" id="copyModel"></p>
-            <input class="copy-input" id="copyInput" autocomplete="off" spellcheck="false">
+            <input class="copy-input" id="copyInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
         </div>
     </div>
 
@@ -149,6 +150,20 @@
         <p class="breaker-closed" data-i18n="power.open"></p>
         <p class="breaker-hint" data-i18n="power.hint"></p>
         <div class="breaker-code" id="breakerCode"></div>
+    </div>
+
+    <!-- Contrôles tactiles : chaque bouton envoie sa touche (src/touch.js), affichés seulement sur écran tactile.
+         ↑ ↓ n'apparaissent que pendant une coupure de courant, pour la combinaison du disjoncteur. -->
+    <div class="touch-controls" id="touchControls">
+        <button type="button" class="touch-pause" data-key="Escape" data-i18n-aria="touch.pause">❚❚</button>
+        <button type="button" data-key="ArrowLeft">←</button>
+        <button type="button" class="touch-code" data-key="ArrowUp">↑</button>
+        <button type="button" class="touch-work" data-key="Space">
+            <strong data-i18n="touch.space"></strong>
+            <small data-i18n="touch.work"></small>
+        </button>
+        <button type="button" class="touch-code" data-key="ArrowDown">↓</button>
+        <button type="button" data-key="ArrowRight">→</button>
     </div>
 
     <div class="room">

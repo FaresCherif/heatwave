@@ -3,6 +3,7 @@
     /* Fixe par rapport à la fenêtre : le décor peut être rogné sur les côtés */
     position: fixed;
     inset: 0;
+    bottom: var(--controls-height, 0px);  /* Au-dessus des contrôles tactiles (ESPACE fait avancer l'appel) */
     z-index: 500;  /* Au-dessus de la scène et du HUD, sous les écrans superposés (1000) */
     background: rgba(0, 0, 0, 0.45);
     cursor: pointer;
@@ -92,6 +93,16 @@
     visibility: hidden;
 }
 
+/* Bulle limitée en hauteur (petits écrans) : c'est le texte qui défile, pas la bulle (sa pointe resterait coupée) */
+.dialogue-bubble {
+    display: flex;
+    flex-direction: column;
+}
+
+#dialogueText {
+    overflow-y: auto;
+}
+
 @keyframes hint-blink {
     50% { opacity: 0.4; }
 }
@@ -111,4 +122,57 @@
 
 .dialogue-skip:hover {
     background: #ff6b35;
+}
+
+/* Écran étroit (téléphone en portrait) : petit téléphone en haut à gauche,
+   bulle sur toute la largeur en dessous, qui défile si la réplique est trop longue */
+@media (max-width: 600px) {
+    .dialogue-phone {
+        left: 12px;
+        top: 120px;
+        width: 64px;
+        border-width: 3px;
+    }
+
+    .dialogue-bubble {
+        left: 12px;
+        right: 12px;
+        top: 200px;
+        width: auto;
+        max-height: calc(100% - 200px - 64px);  /* Laisse la place du bouton « Passer l'appel » */
+        padding: 14px 16px;
+    }
+
+    /* Pointe vers le téléphone, au-dessus de la bulle */
+    .dialogue-bubble::before {
+        left: 26px;
+        top: -12px;
+        border: 10px solid transparent;
+        border-bottom: 12px solid #1a1a2e;
+        border-top: 0;
+    }
+
+    #dialogueText {
+        font-size: 17px;
+    }
+}
+
+/* Écran bas (téléphone en paysage) : bulle plus haute, qui défile si besoin */
+@media (max-height: 500px) {
+    .dialogue-phone {
+        top: 16px;
+        width: 72px;
+    }
+
+    .dialogue-bubble {
+        left: calc(18% + 72px + 30px);
+        top: 12px;
+        width: min(520px, 60%);
+        max-height: calc(100% - 12px - 56px);
+        padding: 12px 18px;
+    }
+
+    #dialogueText {
+        font-size: 16px;
+    }
 }

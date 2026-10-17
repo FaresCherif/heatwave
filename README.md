@@ -38,6 +38,8 @@ Au niveau 5, dernier jour de la canicule, plusieurs difficultés se cumulent : a
 | Relancer le courant | Clic sur le disjoncteur, puis taper la combinaison de flèches |
 | Pause | `Échap` |
 
+Sur téléphone ou tablette, une barre de boutons en bas de l'écran remplace le clavier : `❚❚` (pause), `←` `→` (se ventiler), `ESPACE` (travailler), et `↑` `↓` pendant une coupure de courant. `ESPACE` et les flèches choisissent aussi le mode : pas besoin de toucher le personnage ou l'éventail avant. Le jeu se joue en portrait comme en paysage.
+
 Un code bien connu, tapé sur le menu de démarrage ou de pause, permet de choisir son niveau…
 
 Le premier niveau commence par un appel du patron et un tutoriel interactif. Pendant la journée, il faut aussi remplir et signer la **fiche RH** du nouvel employé avant 16h, sinon c'est le game over.
@@ -53,6 +55,7 @@ Le premier niveau commence par un appel du patron et un tutoriel interactif. Pen
 - **Traductions** : tous les textes du jeu (dialogues de l'histoire, phrases à recopier, noms des niveaux, tutoriel, textes de l'interface via les attributs `data-i18n`) sont dans un fichier par langue ([`src/i18n/locales`](src/i18n/locales)), avec repli sur le français. Un test vérifie que chaque langue contient tous les textes. Par défaut, le jeu suit la langue du navigateur (anglais si elle n'est pas traduite) ; le joueur peut en changer sur le menu de démarrage (choix mémorisé dans le navigateur), et `?lang=en` dans l'URL force une langue.
 - **CI/CD** : à chaque push sur `main`, GitHub Actions lance les tests, puis publie le jeu sur itch.io avec [butler](https://itch.io/docs/butler/).
 - **Rendu** : scène en 16:9 qui couvre tout l'écran, sprites en pixel art, animations et retours visuels en CSS.
+- **Mobile** : sur écran tactile (`@media (hover: none) and (pointer: coarse)`), des boutons envoient les mêmes touches que le clavier ([`src/touch.js`](src/touch.js)), donc toute la logique de jeu reste unique. La variable CSS `--controls-height` réserve la place de la barre : la scène s'arrête au-dessus et les panneaux fixés en bas remontent d'autant.
 
 ## Structure
 
@@ -61,6 +64,7 @@ index.html              Structure de la page : HUD, scène, écrans
 src/
 ├── main.js             Point d'entrée : branche les boutons et les contrôles
 ├── input.js            Clavier et clics sur la scène
+├── touch.js            Boutons tactiles (téléphone) : envoient les touches du clavier
 ├── config/
 │   ├── levels.js       Paramètres de chaque niveau
 │   ├── shop.js         Objets de la boutique et leurs effets

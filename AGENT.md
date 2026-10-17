@@ -34,6 +34,7 @@ La structure complète est décrite dans [README.md](README.md).
 - [src/core/rules.js](src/core/rules.js) : règles du jeu en fonctions pures, sans DOM. Toute nouvelle règle de calcul va ici, avec son test dans [tests/rules.test.js](tests/rules.test.js).
 - [src/core/state.js](src/core/state.js) : état unique de la partie (`state.phase` : menu, dialogue, tutorial, playing, ended).
 - [src/core/game.js](src/core/game.js) : boucle de jeu, début et fin de journée, pause.
+- [src/touch.js](src/touch.js) : boutons tactiles pour téléphone, qui envoient les touches du clavier (barre affichée seulement sur écran tactile, styles dans `touch.css`).
 - [src/core/events.js](src/core/events.js) : bus d'événements (`mode-changed`, `action`, `stats-changed`).
 - [src/systems](src/systems) : appels de l'histoire, fiche employé, gratte-papier, humeur et messages du patron, visios, coupures de courant, tutoriel, appels urgents, salaire.
 - [src/systems/levelSelect.js](src/systems/levelSelect.js) : easter egg, ↑ ↑ ↓ ↓ ← → ← → Entrée sur le menu de démarrage ou de pause ouvre le choix du niveau.

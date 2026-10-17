@@ -107,6 +107,12 @@ export default {
                 cool: 'VENTILER (← →)'
             }
         },
+        // Boutons tactiles (téléphone) : mêmes noms que les touches citées par le tutoriel
+        touch: {
+            space: 'ESPACE',
+            work: 'Travailler',
+            pause: 'Pause'
+        },
         tutorial: {
             title: 'TUTORIEL',
             skip: 'Passer le tutoriel',

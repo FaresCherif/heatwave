@@ -1,10 +1,10 @@
 /* Écrans superposés au jeu : démarrage, pause, fin de niveau, game over */
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    /* Fixe : centré sur la partie visible de l'écran, pas sur le décor (rogné sur téléphone),
+       au-dessus des contrôles tactiles (touch.css) */
+    position: fixed;
+    inset: 0;
+    bottom: var(--controls-height, 0px);
     background: rgba(0, 0, 0, 0.85);
     display: flex;
     align-items: center;
@@ -149,7 +149,7 @@
 .menu-content.shop {
     max-width: 1040px;
     /* Défile si l'écran est trop bas pour tous les objets */
-    max-height: calc(100vh - 32px);
+    max-height: calc(100% - 32px);  /* Hauteur de l'écran superposé */
     overflow-y: auto;
     box-sizing: border-box;
     padding: 24px 32px;
@@ -287,4 +287,55 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #ffd84a;
+}
+
+/* Écran étroit : menus à la largeur de l'écran, boutique sur une colonne */
+@media (max-width: 600px) {
+    .menu-content {
+        max-width: calc(100vw - 24px);
+        box-sizing: border-box;
+        padding: 32px 20px;
+    }
+
+    /* Titre à la largeur de l'écran : « HEATWAVE » dépassait du cadre */
+    .menu-content h1 {
+        font-size: min(64px, 12vw);
+        overflow-wrap: anywhere;
+    }
+
+    .menu-content.shop {
+        max-width: calc(100vw - 24px);
+        padding: 20px 12px;
+    }
+
+    .shop-items {
+        grid-template-columns: 1fr;
+    }
+
+    /* Bouton d'achat sous la description, sur toute la largeur de la carte */
+    .shop-item {
+        flex-wrap: wrap;
+        gap: 8px 12px;
+        padding: 10px 12px;
+    }
+
+    .shop-info {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    .menu-content .shop-buy {
+        flex: 1 0 100%;
+        padding: 9px 12px;
+    }
+}
+
+/* Écran bas (téléphone en paysage) : les menus défilent au lieu d'être coupés */
+@media (max-height: 500px) {
+    .menu-content {
+        max-height: calc(100% - 24px);  /* Hauteur de l'écran superposé */
+        overflow-y: auto;
+        box-sizing: border-box;
+        padding: 20px 32px;
+    }
 }

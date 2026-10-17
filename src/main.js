@@ -2,6 +2,7 @@
 import { startGame, nextLevel, restartLevel, resumeGame, pauseGame } from './core/game.js';
 import { nextTutorialStep, endTutorial } from './systems/tutorial.js';
 import { initInput } from './input.js';
+import { initTouchControls } from './touch.js';
 import { initLevelSelect } from './systems/levelSelect.js';
 import { initLanguageSelect } from './systems/languageSelect.js';
 import { applyTranslations } from './i18n/index.js';
@@ -37,4 +38,5 @@ document.addEventListener('visibilitychange', () => {
 window.addEventListener('blur', pauseGame);
 
 initInput();
+initTouchControls();
 initLevelSelect();

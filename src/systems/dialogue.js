@@ -48,6 +48,8 @@ function showLine() {
     current.typingId = setInterval(() => {
         shown++;
         els.text.textContent = line.slice(0, shown);
+        // Réplique plus haute que la bulle (petit écran) : suivre la fin du texte
+        els.text.scrollTop = els.text.scrollHeight;
         if (shown >= line.length) stopTyping();
     }, TYPING_MS);
 }

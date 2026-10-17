@@ -10,7 +10,8 @@ import { workEffect, coolEffect, missEffect, noPowerEffect } from './ui/effects.
 // les autres (F5, F12, Ctrl+R...) restent utilisables
 const GAME_KEYS = ['Space', 'ArrowLeft', 'ArrowRight'];
 
-function setMode(mode) {
+/** Change le mode actif (aussi utilisé par les boutons tactiles, src/touch.js) */
+export function setMode(mode) {
     if (!acceptsInput()) return;
 
     state.mode = mode;

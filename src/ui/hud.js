@@ -22,6 +22,13 @@ const els = {
     moodEmoji: document.getElementById('moodEmoji')
 };
 
+// Bas du HUD en variable CSS (--hud-bottom) : sa hauteur varie selon l'écran, la jauge du patron
+// et le bandeau de visio. Sur téléphone, les messages du patron se placent dessous (boss.css).
+const hud = document.querySelector('.hud');
+new ResizeObserver(() => {
+    document.documentElement.style.setProperty('--hud-bottom', `${Math.ceil(hud.getBoundingClientRect().bottom)}px`);
+}).observe(hud);
+
 export function renderLevelLabel() {
     els.levelLabel.textContent = getLevelName(getLevel());
 }

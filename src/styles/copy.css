@@ -3,7 +3,7 @@
 .copy-task {
     position: fixed;
     left: 50%;
-    bottom: 16px;
+    bottom: calc(16px + var(--controls-height, 0px));  /* Au-dessus des contrôles tactiles */
     z-index: 10;    /* Au-dessus des sprites, sous les appels urgents (12) et le HUD (50) */
     width: min(560px, 42vw);
     transform: translateX(-50%);
@@ -68,4 +68,24 @@
     left: auto;
     right: 16px;
     align-items: flex-end;
+}
+
+/* Écran étroit : bandeau sur presque toute la largeur, au-dessus des boutons d'ouverture
+   (sinon le bouton « Recopie » cache la fin de la feuille et le champ de saisie) */
+@media (max-width: 600px) {
+    .copy-task {
+        width: calc(100vw - 24px);
+        bottom: calc(84px + var(--controls-height, 0px));
+    }
+}
+
+/* Écran bas (téléphone en paysage) : feuille plus compacte, au-dessus du HUD le temps de recopier */
+@media (max-height: 500px) {
+    .copy-task {
+        z-index: 55;
+    }
+
+    .copy-paper .form-header p {
+        display: none;
+    }
 }

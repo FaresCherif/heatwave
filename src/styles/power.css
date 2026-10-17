@@ -11,7 +11,7 @@ body.power-out .room .computer img {
 .breaker {
     position: fixed;
     left: 50%;
-    bottom: 16px;
+    bottom: calc(16px + var(--controls-height, 0px));  /* Au-dessus des contrôles tactiles */
     z-index: 11;    /* Au-dessus du gratte-papier (10), sous les appels urgents (12) */
     width: min(420px, 36vw);
     box-sizing: border-box;
@@ -90,4 +90,20 @@ body.power-out .room .computer img {
 
 @keyframes breaker-pulse {
     50% { box-shadow: 0 0 0 6px rgba(255, 216, 74, 0.35), 0 6px 16px rgba(0, 0, 0, 0.5); }
+}
+
+/* Écran étroit : disjoncteur sur presque toute la largeur */
+@media (max-width: 600px) {
+    .breaker {
+        width: calc(100vw - 24px);
+    }
+}
+
+/* Téléphone en paysage : disjoncteur à gauche, les messages du patron sont à droite (boss.css) */
+@media (max-height: 500px) {
+    .breaker {
+        left: 12px;
+        width: min(420px, 50vw);
+        transform: none;
+    }
 }

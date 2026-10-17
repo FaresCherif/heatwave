@@ -10,7 +10,9 @@ button {
 
 .room {
     width: 100%;
-    height: 100vh;
+    /* Au-dessus des contrôles tactiles (touch.css) ; dvh : hauteur visible, sans la barre d'adresse sur mobile */
+    height: calc(100vh - var(--controls-height, 0px));
+    height: calc(100dvh - var(--controls-height, 0px));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,7 +22,8 @@ button {
 .room .background {
     position: relative;
     /* Couvre tout l'écran en gardant le 16:9 : les bords qui dépassent sont rognés */
-    width: max(100vw, calc(100vh * (16 / 9)));
+    width: max(100vw, calc((100vh - var(--controls-height, 0px)) * (16 / 9)));
+    width: max(100vw, calc((100dvh - var(--controls-height, 0px)) * (16 / 9)));
     flex-shrink: 0;
     aspect-ratio: 16 / 9;
     overflow: hidden;

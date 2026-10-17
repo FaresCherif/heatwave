@@ -186,3 +186,48 @@
 .hud-items:empty {
     display: none;
 }
+
+/* Téléphone en portrait : HUD compact pour que les trois panneaux tiennent sur la largeur */
+@media (max-width: 600px) {
+    .hud {
+        gap: 6px;
+        padding: 8px;
+    }
+
+    .hud-info,
+    .bars-container {
+        padding: 6px 8px;
+    }
+
+    .clock {
+        font-size: 20px;
+    }
+
+    .day-pay {
+        font-size: 13px;
+    }
+
+    #workModeIndicator {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    .stat-bar {
+        gap: 6px;
+    }
+
+    .stat-bar label {
+        width: auto;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+    #alternateIndicator {
+        font-size: 115%;
+    }
+
+    .bar-bg {
+        width: clamp(48px, 18vw, 110px);
+        margin-left: auto;
+    }
+}

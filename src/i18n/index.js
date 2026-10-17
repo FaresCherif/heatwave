@@ -101,7 +101,8 @@ export function formatNumber(value) {
 
 /**
  * Traduit les éléments HTML marqués data-i18n="clé" (texte), data-i18n-alt="clé" (images)
- * et data-i18n-hint="clé" (bulle au survol, affichée en CSS par attr(data-hint))
+ * data-i18n-hint="clé" (bulle au survol, affichée en CSS par attr(data-hint))
+ * et data-i18n-aria="clé" (nom accessible d'un bouton sans texte, ex : ❚❚)
  */
 export function applyTranslations(root = document) {
     root.querySelectorAll('[data-i18n]').forEach(element => {
@@ -112,6 +113,9 @@ export function applyTranslations(root = document) {
     });
     root.querySelectorAll('[data-i18n-hint]').forEach(element => {
         element.dataset.hint = t(element.dataset.i18nHint);
+    });
+    root.querySelectorAll('[data-i18n-aria]').forEach(element => {
+        element.setAttribute('aria-label', t(element.dataset.i18nAria));
     });
 }
 

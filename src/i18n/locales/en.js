@@ -103,6 +103,11 @@ export default {
                 cool: 'FAN (← →)'
             }
         },
+        touch: {
+            space: 'SPACE',
+            work: 'Work',
+            pause: 'Pause'
+        },
         tutorial: {
             title: 'TUTORIAL',
             skip: 'Skip tutorial',

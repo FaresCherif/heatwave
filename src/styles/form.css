@@ -3,7 +3,7 @@
     position: fixed;
     left: 16px;
     top: 140px;     /* Sous le HUD */
-    bottom: 84px;   /* Au-dessus du bouton d'ouverture */
+    bottom: calc(84px + var(--controls-height, 0px));   /* Au-dessus du bouton d'ouverture */
     z-index: 10;    /* Au-dessus des sprites, sous les appels urgents (12) et le HUD (50) */
     display: flex;
     align-items: flex-start;
@@ -202,7 +202,7 @@
 .form-toggle {
     position: fixed;
     left: 16px;
-    bottom: 16px;
+    bottom: calc(16px + var(--controls-height, 0px));  /* Au-dessus des contrôles tactiles */
     z-index: 50;
     display: flex;
     flex-direction: column;
@@ -246,4 +246,13 @@
 
 @keyframes toggle-pulse {
     50% { box-shadow: 0 0 0 6px rgba(255, 107, 53, 0.35), 0 4px 15px rgba(0, 0, 0, 0.4); }
+}
+
+/* Téléphone en paysage : la fiche prend toute la hauteur, par-dessus le HUD le temps de la remplir */
+@media (max-height: 500px) {
+    .employee-form {
+        top: 8px;
+        bottom: calc(8px + var(--controls-height, 0px));
+        z-index: 55;
+    }
 }

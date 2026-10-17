@@ -41,6 +41,7 @@ Les règles de travail et de game design du projet sont dans AGENT.md, à respec
 
 ## Pièges connus
 
+- Mobile : les boutons tactiles ([src/touch.js](src/touch.js)) envoient des `keydown` synthétiques depuis `document.body`. Toute nouvelle commande clavier doit avoir son bouton dans `#touchControls`. Tout nouvel élément fixé en bas de l'écran doit ajouter `var(--controls-height, 0px)` à son `bottom`, sinon la barre tactile le recouvre. Les écrans superposés (`.overlay`) sont fixés sur la partie visible de l'écran, pas sur le décor (rogné sur téléphone). La hauteur réelle du HUD est publiée dans `--hud-bottom` (`hud.js`), pour placer un élément juste en dessous.
 - Les boutons perdent le focus après un clic (`bindButton` dans [src/main.js](src/main.js), `blur()` dans la boutique) : sinon `Espace`, la touche de travail, les réactiverait. À reproduire sur tout nouveau bouton.
 - Aucun texte affiché ne doit être écrit en dur, ni dans le JS ni dans `index.html` (seule exception : le nom « HEATWAVE »). Un niveau n'a pas de nom dans `levels.js`, seulement un `id` : son nom et sa description se trouvent dans `levels.<id>` de chaque langue (`getLevelName` / `getLevelDescription`). Les règles pures renvoient une clé, pas un texte (ex : `getGameOverReason` → `'heat'`, traduit par `game.js`).
 - Les heures décimales (`10.5` = 10h30) sont acceptées dans `bossMood.messageHours` et `outages.hours`. Les `calls` se déclenchent seulement à l'heure pile.
